@@ -11,13 +11,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.unit.dp
-import dev.anirban.charts.circular.decoration.CircularDecoration
+import dev.anirban.charts.circular.center.CircularImageCenter
+import dev.anirban.charts.circular.colorconvention.CircularDefaultColorConvention
+import dev.anirban.charts.circular.data.CircularTargetDataBuilder
+import dev.anirban.charts.circular.exceptions.CircularDecorationMismatch
+import dev.anirban.charts.circular.foreground.CircularDonutTargetForeground
 import dev.anirban.charts.circular.interfaces.CircularCenterInterface
 import dev.anirban.charts.circular.interfaces.CircularChartInterface
 import dev.anirban.charts.circular.interfaces.CircularColorConventionInterface
 import dev.anirban.charts.circular.interfaces.CircularDataInterface
 import dev.anirban.charts.circular.interfaces.CircularExceptionHandler
 import dev.anirban.charts.circular.interfaces.CircularForegroundInterface
+import dev.anirban.charts.circular.decoration.CircularDecoration
+import dev.anirban.charts.circular.foreground.CircularRingForeground
 
 /**
  * This class extends from the [CircularChartInterface] which means its the root level class and it
@@ -48,7 +54,17 @@ open class CircularChart(
      * This validates that the decoration stuffs are given correctly or not
      */
     override fun validateDecoration() {
-
+        if (circularForeground !is CircularRingForeground) {
+            if (circularDecoration.colorList.size < circularData.itemsList.size)
+                throw CircularDecorationMismatch(
+                    "Need at least ${circularData.itemsList.size} amount" +
+                            " of Colors for ${circularData.itemsList.size} number of Items in List" +
+                            " where only ${circularDecoration.colorList.size} is passed"
+                )
+        } else {
+            if (circularDecoration.colorList.isEmpty())
+                throw CircularDecorationMismatch("Need at least two color for the Ring Chart Gradients")
+        }
     }
 
     /**
@@ -139,5 +155,41 @@ open class CircularChart(
             DrawColorConventions()
         }
 
+    }
+
+    /**
+     * Builder Composable Functions which makes the objects of [CircularChart] and these are
+     * actually called by the users to make charts
+     */
+    companion object {
+
+
+        /**
+         * This function creates an object of the [CircularChart] which draws a basic
+         * donut chart with its color conventions drawn at side but the data is in the form of
+         * Target and Achieved
+         *
+         * @param modifier THis is made so that modifications can be passed from the parent function
+         * @param circularCenter This is the implementation which draws the center of the circle
+         * @param circularData This is the data class implementation which handles the data
+         * @param circularDecoration This is the decorations for the Circular Chart
+         * @param circularForeground This is the implementation which draws the foreground of the chart
+         * @param circularColorConvention This is the color Convention implementation of the chart
+         */
+        @Composable
+        fun DonutChartImage(
+            modifier: Modifier = Modifier,
+            circularCenter: CircularCenterInterface = CircularImageCenter(),
+            circularData: CircularTargetDataBuilder,
+            circularDecoration: CircularDecoration = CircularDecoration.donutChartDecorations(),
+            circularForeground: CircularForegroundInterface = CircularDonutTargetForeground(),
+            circularColorConvention: CircularColorConventionInterface = CircularDefaultColorConvention()
+        ) = CircularChart(
+            circularCenter = circularCenter,
+            circularData = circularData.toCircularDonutTargetData(),
+            circularDecoration = circularDecoration,
+            circularForeground = circularForeground,
+            circularColorConvention = circularColorConvention
+        ).Build(modifier = modifier)
     }
 }
