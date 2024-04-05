@@ -1,5 +1,6 @@
 package dev.anirban.charts.linear
 
+import android.graphics.drawable.BitmapDrawable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -25,9 +26,13 @@ import dev.anirban.charts.linear.interfaces.LinearMarginInterface
 import dev.anirban.charts.linear.interfaces.LinearPlotInterface
 import dev.anirban.charts.linear.colorconvention.LinearDefaultColorConvention
 import dev.anirban.charts.linear.data.LinearEmojiData
+import dev.anirban.charts.linear.data.LinearStringData
 import dev.anirban.charts.linear.decoration.LinearDecoration
 import dev.anirban.charts.linear.margins.LinearEmojiMargin
+import dev.anirban.charts.linear.margins.LinearStringMargin
 import dev.anirban.charts.linear.plots.LinearBarPlot
+import dev.anirban.charts.linear.plots.LinearGradientLinePlot
+import dev.anirban.charts.linear.plots.LinearLinePlot
 
 /**
  * This is the base class which directly implements the [LinearDataInterface] interfaces.
@@ -203,5 +208,195 @@ open class LinearChart(
                 DrawColorConvention()
             }
         }
+    }
+
+
+    /**
+     * Builder Composable Functions which makes the objects of [LinearChart] and these are
+     * actually called by the users to make charts
+     */
+    companion object {
+
+        /**
+         * This function creates an object of the LinearChart which draws a basic Line chart
+         * It can draw Single Line Charts as well as multiple Line Charts with String Markers
+         *
+         * @param modifier This is to be passed from the Parent Class for the modifications
+         * @param margin This is the implementation for drawing the Margins
+         * @param decoration This is the implementation for drawing the Decorations
+         * @param linearData This is the implementation for keeping the Linear Chart data and calculations
+         * @param plot This is the implementation for how shall the plotting be drawn on the graph
+         * @param colorConvention This is the implementation for how we are going to draw all the
+         * color conventions in the graph
+         */
+        @Composable
+        fun LineChart(
+            modifier: Modifier = Modifier,
+            margin: LinearStringMargin = LinearStringMargin(),
+            decoration: LinearDecoration = LinearDecoration.lineDecorationColors(),
+            linearData: LinearStringData,
+            plot: LinearLinePlot = LinearLinePlot(),
+            colorConvention: LinearColorConventionInterface = LinearDefaultColorConvention()
+        ) = LinearChart(
+            margin = margin,
+            decoration = decoration,
+            linearData = linearData,
+            plot = plot,
+            colorConvention = colorConvention
+        ).Build(modifier = modifier)
+
+
+        /**
+         * This function creates an object of the LinearChart which draws a basic Line chart
+         * It can draw Single Line Charts as well as multiple Line Charts with Drawable Markers or
+         * Emoji Markers but drawables should be converted into [BitmapDrawable] first for this to
+         * work
+         *
+         *              Note :-
+         *                  1. ContextCompat.getDrawable(
+         *                          LocalContext.current,
+         *                          R.drawable.emoji_furious
+         *                     ) as BitmapDrawable
+         *                  It is the code to convert a drawable into a Bitmap Drawable
+         *
+         * @param modifier This is to be passed from the Parent Class for the modifications
+         * @param margin This is the implementation for drawing the Margins
+         * @param decoration This is the implementation for drawing the Decorations
+         * @param linearData This is the implementation for keeping the Linear Chart data and calculations
+         * @param plot This is the implementation for how shall the plotting be drawn on the graph
+         * @param colorConvention This is the implementation for how we are going to draw all
+         * the color conventions in the graph
+         */
+        @Composable
+        fun EmojiLineChart(
+            modifier: Modifier = Modifier,
+            margin: LinearEmojiMargin = LinearEmojiMargin(),
+            decoration: LinearDecoration = LinearDecoration.lineDecorationColors(),
+            linearData: LinearEmojiData,
+            plot: LinearLinePlot = LinearLinePlot(),
+            colorConvention: LinearColorConventionInterface = LinearDefaultColorConvention()
+        ) = LinearChart(
+            margin = margin,
+            decoration = decoration,
+            linearData = linearData,
+            plot = plot,
+            colorConvention = colorConvention
+        ).Build(modifier = modifier)
+
+
+        /**
+         * This function creates an object of the LinearChart which draws a basic Line chart
+         * It can draw Single Line Charts as well as multiple Line Charts with String Markers and
+         * a gradient Plotting
+         *
+         * @param modifier This is to be passed from the Parent Class for the modifications
+         * @param margin This is the implementation for drawing the Margins
+         * @param decoration This is the implementation for drawing the Decorations
+         * @param linearData This is the implementation for keeping the Linear Chart data and calculations
+         * @param plot This is the implementation for how shall the plotting be drawn on the graph
+         * @param colorConvention This is the implementation for how we are going to draw all
+         * the color conventions in the graph
+         */
+        @Composable
+        fun GradientChart(
+            modifier: Modifier = Modifier,
+            margin: LinearStringMargin = LinearStringMargin(),
+            decoration: LinearDecoration = LinearDecoration.lineDecorationColors(),
+            linearData: LinearStringData,
+            plot: LinearGradientLinePlot,
+            colorConvention: LinearColorConventionInterface = LinearDefaultColorConvention()
+        ) = LinearChart(
+            margin = margin,
+            decoration = decoration,
+            linearData = linearData,
+            plot = plot,
+            colorConvention = colorConvention
+        ).Build(modifier = modifier)
+
+
+        /**
+         * This function creates an object of the LinearChart which draws a basic Bar chart
+         *
+         * @param modifier This is to be passed from the Parent Class for the modifications
+         * @param margin This is the implementation for drawing the Margins
+         * @param decoration This is the implementation for drawing the Decorations
+         * @param linearData This is the implementation for keeping the Linear Chart data and calculations
+         * @param plot This is the implementation for how shall the plotting be drawn on the graph
+         * @param colorConvention This is the implementation for how we are going to draw all
+         * the color conventions in the graph
+         */
+        @Composable
+        fun BarChart(
+            modifier: Modifier = Modifier,
+            margin: LinearStringMargin = LinearStringMargin(),
+            decoration: LinearDecoration = LinearDecoration.barDecorationColors(),
+            linearData: LinearStringData,
+            plot: LinearBarPlot = LinearBarPlot(),
+            colorConvention: LinearColorConventionInterface = LinearDefaultColorConvention()
+        ) = LinearChart(
+            margin = margin,
+            decoration = decoration,
+            linearData = linearData,
+            plot = plot,
+            colorConvention = colorConvention
+        ).Build(modifier = modifier)
+
+
+        /**
+         * This function creates an object of the LinearChart which draws a basic Bar chart
+         *
+         * @param modifier This is to be passed from the Parent Class for the modifications
+         * @param margin This is the implementation for drawing the Margins
+         * @param decoration This is the implementation for drawing the Decorations
+         * @param linearData This is the implementation for keeping the Linear Chart data and calculations
+         * @param plot This is the implementation for how shall the plotting be drawn on the graph
+         * @param colorConvention This is the implementation for how we are going to draw all
+         * the color conventions in the graph
+         */
+        @Composable
+        fun EmojiBarChart(
+            modifier: Modifier = Modifier,
+            margin: LinearEmojiMargin = LinearEmojiMargin(),
+            decoration: LinearDecoration = LinearDecoration.barDecorationColors(),
+            linearData: LinearEmojiData,
+            plot: LinearBarPlot = LinearBarPlot(),
+            colorConvention: LinearColorConventionInterface = LinearDefaultColorConvention()
+        ) = LinearChart(
+            margin = margin,
+            decoration = decoration,
+            linearData = linearData,
+            plot = plot,
+            colorConvention = colorConvention
+        ).Build(modifier = modifier)
+
+
+        /**
+         * This function creates an object of the LinearChart which draws a basic Line chart
+         * It can draw Single Line Charts as well as multiple Line Charts with custom objects passed
+         * by the developer
+         *
+         * @param modifier This is to be passed from the Parent Class for the modifications
+         * @param margin This is the implementation for drawing the Margins
+         * @param decoration This is the implementation for drawing the Decorations
+         * @param linearData This is the implementation for keeping the Linear Chart data and calculations
+         * @param plot This is the implementation for how shall the plotting be drawn on the graph
+         * @param colorConvention This is the implementation for how we are going to draw all
+         * the color conventions in the graph
+         */
+        @Composable
+        fun CustomLinearChart(
+            modifier: Modifier = Modifier,
+            margin: LinearMarginInterface = LinearEmojiMargin(),
+            decoration: LinearDecoration = LinearDecoration.lineDecorationColors(),
+            linearData: LinearDataInterface,
+            plot: LinearPlotInterface = LinearLinePlot(),
+            colorConvention: LinearColorConventionInterface = LinearDefaultColorConvention()
+        ) = LinearChart(
+            margin = margin,
+            decoration = decoration,
+            linearData = linearData,
+            plot = plot,
+            colorConvention = colorConvention
+        ).Build(modifier = modifier)
     }
 }
