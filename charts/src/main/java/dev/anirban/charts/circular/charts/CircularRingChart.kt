@@ -1,4 +1,4 @@
-package com.dev.anirban.charts.circular.charts
+package dev.anirban.charts.circular.charts
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -11,16 +11,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.unit.dp
-import com.dev.anirban.charts.circular.CircularChart
-import com.dev.anirban.charts.circular.center.CircularRingTextCenter
-import com.dev.anirban.charts.circular.colorconvention.CircularDefaultColorConvention
+import dev.anirban.charts.circular.CircularChart
+import dev.anirban.charts.circular.center.CircularRingTextCenter
+import dev.anirban.charts.circular.colorconvention.CircularDefaultColorConvention
 import dev.anirban.charts.circular.data.CircularTargetDataBuilder
-import com.dev.anirban.charts.circular.decoration.CircularDecoration
-import com.dev.anirban.charts.circular.foreground.CircularRingForeground
-import com.dev.anirban.charts.circular.interfaces.CircularCenterInterface
-import com.dev.anirban.charts.circular.interfaces.CircularColorConventionInterface
-import com.dev.anirban.charts.circular.interfaces.CircularDataInterface
-import com.dev.anirban.charts.circular.interfaces.CircularForegroundInterface
+import dev.anirban.charts.circular.decoration.CircularDecoration
+import dev.anirban.charts.circular.foreground.CircularRingForeground
+import dev.anirban.charts.circular.interfaces.CircularCenterInterface
+import dev.anirban.charts.circular.interfaces.CircularColorConventionInterface
+import dev.anirban.charts.circular.interfaces.CircularDataInterface
+import dev.anirban.charts.circular.interfaces.CircularForegroundInterface
 
 /**
  * This class is the sub - class of [CircularChart] class which is the root parent class of the
