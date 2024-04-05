@@ -13,15 +13,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.unit.dp
-import dev.anirban.charts.linear.colorconvention.LinearDefaultColorConvention
-import dev.anirban.charts.linear.decoration.LinearDecoration
+import dev.anirban.charts.linear.exceptions.LinearChartTypeMismatch
+import dev.anirban.charts.linear.exceptions.LinearColorConventionMismatch
+import dev.anirban.charts.linear.exceptions.LinearDataMismatch
+import dev.anirban.charts.linear.exceptions.LinearDecorationMismatch
 import dev.anirban.charts.linear.interfaces.LinearChartExceptionHandler
 import dev.anirban.charts.linear.interfaces.LinearChartInterface
 import dev.anirban.charts.linear.interfaces.LinearColorConventionInterface
 import dev.anirban.charts.linear.interfaces.LinearDataInterface
 import dev.anirban.charts.linear.interfaces.LinearMarginInterface
 import dev.anirban.charts.linear.interfaces.LinearPlotInterface
-
+import dev.anirban.charts.linear.colorconvention.LinearDefaultColorConvention
+import dev.anirban.charts.linear.data.LinearEmojiData
+import dev.anirban.charts.linear.decoration.LinearDecoration
+import dev.anirban.charts.linear.margins.LinearEmojiMargin
+import dev.anirban.charts.linear.plots.LinearBarPlot
 
 /**
  * This is the base class which directly implements the [LinearDataInterface] interfaces.
@@ -47,6 +53,17 @@ open class LinearChart(
      */
     override fun validateDataInput() {
 
+        var maxSize = -1
+
+        // calculating the number of max Y - Axis Readings in a particular Coordinate set
+        linearData.yAxisReadings.forEach {
+            if (it.size > maxSize)
+                maxSize = it.size
+        }
+
+        // Comparing the num of max Y - Axis Readings to X - Axis Readings/Markers
+        if (linearData.xAxisReadings.size < maxSize)
+            throw LinearDataMismatch("X - Axis Markers Size is less than Number of Y - Axis Reading")
     }
 
     /**
@@ -55,6 +72,28 @@ open class LinearChart(
      */
     override fun validateDecorationInput() {
 
+        // checking if we have enough Primary Color for the plots
+        if (decoration.plotPrimaryColor.size < linearData.yAxisReadings.size) {
+            if (plot is LinearBarPlot && decoration.plotPrimaryColor.isEmpty())
+                throw Exception(
+                    "plotPrimaryColor for the decoration have 0 Colors whereas at least " +
+                            "one color needs to be provided"
+                )
+            else
+                throw LinearDecorationMismatch(
+                    "Need to provide ${linearData.yAxisReadings.size} number of colors for the " +
+                            "plotPrimaryColor"
+                )
+        }
+
+        // checking if we have enough Secondary Color for the plots
+        if (decoration.plotSecondaryColor.size < linearData.yAxisReadings.size && plot !is LinearBarPlot)
+            throw LinearDecorationMismatch(
+                "Secondary Color of Decoration Class needs " +
+                        "${linearData.yAxisReadings.size} colors but it has " +
+                        "${decoration.plotSecondaryColor.size} colors"
+            )
+
     }
 
     /**
@@ -62,6 +101,9 @@ open class LinearChart(
      */
     override fun validateColorConventionInput() {
 
+        //Checking if the given textList has more texts than the given yAxisReadings size
+        if (colorConvention.textList.size > linearData.yAxisReadings.size)
+            throw LinearColorConventionMismatch("Texts for Color Lists are More than provided yAxis Coordinate Sets")
     }
 
     /**
@@ -69,7 +111,17 @@ open class LinearChart(
      * a meaningful result to the developer
      */
     override fun validateTypeMismatch() {
+        if (linearData is LinearEmojiData && margin !is LinearEmojiMargin)
+            throw LinearChartTypeMismatch(
+                "Need to pass a Margin of Type LinearEmojiMargin for a " +
+                        "data of type LinearEmojiData"
+            )
 
+        if (margin is LinearEmojiMargin && linearData !is LinearEmojiData)
+            throw LinearChartTypeMismatch(
+                "Need to pass a Data of Type LinearEmojiData for a " +
+                        "margin of type LinearEmojiMargin"
+            )
     }
 
     /**
