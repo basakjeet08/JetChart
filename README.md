@@ -18,13 +18,14 @@ JetChart is a light chart library for Android, which is currently under developm
 
 ## Screenshots
 
-![IMG-20240405-WA0019](https://github.com/basakjeet08/JetChart/assets/24616267/eda6e515-04a7-484c-b6bf-ffe626e11610)
+![IMG-20240405-WA0019](https://github.com/basakjeet08/JetChart/assets/24616267/1b7fc019-32fe-4b79-bc3b-6606e7d61c6b)
 
-![IMG-20240405-WA0018](https://github.com/basakjeet08/JetChart/assets/24616267/dffcb148-1c8c-4132-913a-a045acc62b36)
+![IMG-20240405-WA0018](https://github.com/basakjeet08/JetChart/assets/24616267/bcf70375-bdf6-471d-aa34-58b1118dba40)
 
-![IMG-20240405-WA0017](https://github.com/basakjeet08/JetChart/assets/24616267/43885ed4-00ad-43cc-a8d3-d1cc47266310)
+![IMG-20240405-WA0017](https://github.com/basakjeet08/JetChart/assets/24616267/23f93fdc-9ce9-427b-9e44-8a43b02f2e65)
 
-![IMG-20240405-WA0015](https://github.com/basakjeet08/JetChart/assets/24616267/5df20b0d-ef0b-4155-837a-f327766b610c)
+![IMG-20240405-WA0015](https://github.com/basakjeet08/JetChart/assets/24616267/5ad67953-d5f4-49ca-8777-507215b092c7)
+
 ## Usage/Examples
 
 Defining Variables for the Charts.
