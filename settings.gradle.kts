@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "JetChart"
 include(":app")
+include(":charts")
