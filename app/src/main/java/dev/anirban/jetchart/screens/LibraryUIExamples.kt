@@ -243,8 +243,8 @@ fun LibraryUIExample() {
                 ),
                 plot = LinearGradientLinePlot(
                     colorList = listOf(
-                        Color(0xFF85DE50).copy(alpha = .5f),
-                        Color(0xFF85DE50).copy(alpha = .1f),
+                        Color(0xFF4999DF).copy(alpha = .5f),
+                        Color(0xFF4999DF).copy(alpha = .1f),
                     )
                 )
             )
