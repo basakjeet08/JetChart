@@ -42,7 +42,7 @@ dependencyResolutionManagement {
 After that add the Dependency 
 
 ```
-implementation 'com.github.basakjeet08:JetChart:1.1.0'
+implementation 'com.github.basakjeet08:JetChart:1.1.1'
 ```
 ## Usage/Examples
 
