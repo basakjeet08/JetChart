@@ -45,7 +45,7 @@ publishing {
         register<MavenPublication>("release") {
             groupId = "com.github.basakjeet08.JetChart"
             artifactId = "JetChart"
-            version = "1.1.0"
+            version = "1.1.1"
 
             afterEvaluate {
                 from(components["release"])
