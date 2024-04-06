@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+
+    id("maven-publish")
 }
 
 android {
@@ -35,6 +37,20 @@ android {
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
+    }
+}
+
+publishing {
+    publications {
+        register<MavenPublication>("release") {
+            groupId = "com.github.basakjeet08.JetChart"
+            artifactId = "JetChart"
+            version = "1.1.1"
+
+            afterEvaluate {
+                from(components["release"])
+            }
+        }
     }
 }
 
