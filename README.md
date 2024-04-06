@@ -18,13 +18,8 @@ JetChart is a light chart library for Android, which is currently under developm
 
 ## Screenshots
 
-![IMG-20240405-WA0019](https://github.com/basakjeet08/JetChart/assets/24616267/1b7fc019-32fe-4b79-bc3b-6606e7d61c6b)
+![Light Theme](https://github.com/basakjeet08/JetChart/assets/24616267/390b1c29-b800-477c-a5af-2f4fcce1f9b0)
 
-![IMG-20240405-WA0018](https://github.com/basakjeet08/JetChart/assets/24616267/bcf70375-bdf6-471d-aa34-58b1118dba40)
-
-![IMG-20240405-WA0017](https://github.com/basakjeet08/JetChart/assets/24616267/23f93fdc-9ce9-427b-9e44-8a43b02f2e65)
-
-![IMG-20240405-WA0015](https://github.com/basakjeet08/JetChart/assets/24616267/5ad67953-d5f4-49ca-8777-507215b092c7)
 ## Installation
 
 To Add the dependency into your project first add this to your root build.gradle file
