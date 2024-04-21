@@ -43,46 +43,8 @@ implementation 'com.github.basakjeet08:JetChart:1.1.1'
 ```
 ## Usage/Examples
 
-Defining Variables for the Charts.
+For Installating and understanding how to use the Library, refer to the [Documentation](https://dev-anirban.gitbook.io/jetchart)
 
-```Kotlin
-  val xReadingMarker by remember {
-    mutableStateOf(ChartPoint.pointDataBuilder("A", "B", "C", "D", "E", "F", "G"))
-  }
-
-  val dataSet1 by remember {
-    mutableStateOf(listOf(ChartPoint.pointDataBuilder(6f, 5f, 4f, 6f, 7.5f, 7f, 6f)))
-  }
-
-  val dataSet2 by remember {
-    mutableStateOf(
-      listOf(
-        ChartPoint.pointDataBuilder(6f, 5f, 4f, 6f, 7.5f, 7f, 6f),
-        ChartPoint.pointDataBuilder(3f, 6f, 8f, 2f, 3.5f, 3f, 4f)
-      )
-    )
-  }
-```
-
-Making a Simple Line Chart.
-
-```Kotlin
-  LinearChart.LineChart(
-    linearData = LinearStringData(
-      yAxisReadings = dataSet1,
-        xAxisReadings = xReadingMarker
-    )
-  )
-```
-
-```Kotlin
-  LinearChart.LineChart(
-    linearData = LinearStringData(
-      yAxisReadings = dataSet2,
-      xAxisReadings = xReadingMarker
-    )
-  )
-```
 ## Tech Stack
 
 **Language:** Kotlin.
