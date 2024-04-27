@@ -24,11 +24,6 @@ class Coordinate<T>(private val value: T?) {
 
 
     /**
-     * This function is used to get the Offset of the object
-     */
-    fun getOffset(): Offset = offset
-
-    /**
      * This function is used to set the x of the object
      */
     fun setX(x: Float) {
