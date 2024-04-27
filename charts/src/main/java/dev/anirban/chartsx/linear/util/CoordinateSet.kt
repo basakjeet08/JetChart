@@ -14,6 +14,24 @@ class CoordinateSet<T>(
     private var markers: List<Coordinate<T>> = listOf()
 ) {
 
+    /**
+     * This function returns the title of the Coordinate Set
+     */
+    fun getTitle() = title
+
+
+    /**
+     * This function returns the marker list or the CoordinateSet
+     */
+    fun getMarkers() = markers
+
+
+    /**
+     * This function returns the size of the Coordinate Set
+     */
+    fun size() = markers.size
+
+
     companion object {
 
 
