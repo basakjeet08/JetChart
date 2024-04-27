@@ -21,50 +21,19 @@ data class AxisPadding(
  * This class keeps the Chart Axes Elements Padding Values.
  *
  * Note :- The class contains the paddings for X & Y Axis Elements (title and label)
+ *
+ * @param chartTitlePadding This contains the chart main title padding values ([Padding])
+ * @param xPadding This variable keeps the x Axis Elements Padding Values ([AxisPadding])
+ * @param yPadding This variable keeps the y Axis Elements Padding Values ([AxisPadding])
  */
-class ChartPadding {
-
-    /**
-     * This variable keeps the x Axis Elements Padding Values
-     */
-    val xPadding: AxisPadding
-
-
-    /**
-     * This variable keeps the y Axis Elements Padding Values
-     */
-    val yPadding: AxisPadding
-
-
-    /**
-     * Constructor to take the Axes Padding Values
-     *
-     * @param xPadding X Axis Elements Paddings should be given here
-     * @param yPadding Y Axis Elements Paddings should be given here
-     */
-    constructor(
-        xPadding: AxisPadding = AxisPadding(),
-        yPadding: AxisPadding = AxisPadding()
-    ) {
-
-        this.xPadding = xPadding
-        this.yPadding = yPadding
-    }
-
-
-    /**
-     * Default Constructor to initialize the Axes Elements Padding if nothing is passed.
-     */
-    constructor() {
-
-        this.xPadding = AxisPadding(
-            titlePadding = Padding(vertical = 4.dp),
-            labelPadding = Padding(top = 4.dp)
-        )
-
-        this.yPadding = AxisPadding(
-            titlePadding = Padding(horizontal = 4.dp),
-            labelPadding = Padding(end = 4.dp)
-        )
-    }
-}
+data class ChartPadding(
+    val chartTitlePadding: Padding = Padding(vertical = 4.dp),
+    val xPadding: AxisPadding = AxisPadding(
+        titlePadding = Padding(vertical = 4.dp),
+        labelPadding = Padding(top = 4.dp)
+    ),
+    val yPadding: AxisPadding = AxisPadding(
+        titlePadding = Padding(horizontal = 4.dp),
+        labelPadding = Padding(end = 4.dp)
+    )
+)
