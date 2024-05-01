@@ -7,13 +7,7 @@ import androidx.compose.ui.geometry.Offset
  * This class is made to indicate each and every point or coordinate in the graph along with
  * their calculated coordinates in the Canvas Graph.
  */
-class Coordinate<T>(private val value: T?) {
-
-
-    /**
-     * This function returns the Value of the Coordinate
-     */
-    fun getValue(): T? = value
+class Coordinate<T>(val value: T?) {
 
 
     /**
