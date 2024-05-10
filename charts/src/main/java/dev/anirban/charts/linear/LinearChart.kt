@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -15,16 +16,16 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.unit.dp
 import dev.anirban.charts.linear.exceptions.LinearChartTypeMismatch
-import dev.anirban.charts.linear.exceptions.LinearColorConventionMismatch
 import dev.anirban.charts.linear.exceptions.LinearDataMismatch
 import dev.anirban.charts.linear.exceptions.LinearDecorationMismatch
 import dev.anirban.charts.linear.interfaces.LinearChartExceptionHandler
 import dev.anirban.charts.linear.interfaces.LinearChartInterface
-import dev.anirban.charts.linear.interfaces.LinearColorConventionInterface
+import dev.anirban.charts.linear.interfaces.LinearLegends
 import dev.anirban.charts.linear.interfaces.LinearDataInterface
 import dev.anirban.charts.linear.interfaces.LinearMarginInterface
 import dev.anirban.charts.linear.interfaces.LinearPlotInterface
-import dev.anirban.charts.linear.colorconvention.LinearDefaultColorConvention
+import dev.anirban.charts.linear.colorconvention.NoLegend
+import dev.anirban.charts.linear.colorconvention.LinearGridLegend
 import dev.anirban.charts.linear.data.LinearEmojiData
 import dev.anirban.charts.linear.data.LinearStringData
 import dev.anirban.charts.linear.decoration.LinearDecoration
@@ -41,7 +42,7 @@ import dev.anirban.charts.linear.plots.LinearLinePlot
  * @param decoration This is the implementation for drawing the Decorations
  * @param linearData This is the implementation for keeping the Linear Chart data and calculations
  * @param plot This is the implementation for how shall the plotting be drawn on the graph
- * @param colorConvention This is the implementation for how we are  going to draw all the color
+ * @param legends This is the implementation for how we are  going to draw all the color
  * conventions in the graph
  */
 open class LinearChart(
@@ -49,7 +50,7 @@ open class LinearChart(
     override val decoration: LinearDecoration,
     override val linearData: LinearDataInterface,
     override val plot: LinearPlotInterface,
-    override val colorConvention: LinearColorConventionInterface
+    override val legends: LinearLegends
 ) : LinearChartInterface, LinearChartExceptionHandler {
 
     /**
@@ -102,16 +103,6 @@ open class LinearChart(
     }
 
     /**
-     * This function validates the [LinearColorConventionInterface] is implemented properly
-     */
-    override fun validateColorConventionInput() {
-
-        //Checking if the given textList has more texts than the given yAxisReadings size
-        if (colorConvention.textList.size > linearData.dataSets.size)
-            throw LinearColorConventionMismatch("Texts for Color Lists are More than provided yAxis Coordinate Sets")
-    }
-
-    /**
      * This function validates if the margin and the data passed are supported or not so it can give
      * a meaningful result to the developer
      */
@@ -157,8 +148,9 @@ open class LinearChart(
      * This function draws the Color Conventions of the Chart
      */
     @Composable
-    override fun DrawColorConvention() {
-        colorConvention.DrawColorConventions(
+    override fun DrawLegends() {
+        legends.DrawLegends(
+            data = linearData,
             decoration = decoration
         )
     }
@@ -174,7 +166,6 @@ open class LinearChart(
         // Validating all the Data if there is any exceptions
         validateDataInput()
         validateDecorationInput()
-        validateColorConventionInput()
 
         Column(
             modifier = Modifier
@@ -201,11 +192,17 @@ open class LinearChart(
             )
 
             // Checking if the implementation is the default one
-            if (colorConvention !is LinearDefaultColorConvention) {
+            if (legends !is NoLegend) {
                 Spacer(modifier = Modifier.height(16.dp))
 
+                HorizontalDivider(
+                    modifier = Modifier.padding(vertical = 4.dp),
+                    thickness = 2.dp,
+                    color = decoration.plotPrimaryColor.first()
+                )
+
                 // Draws the color conventions for the chart
-                DrawColorConvention()
+                DrawLegends()
             }
         }
     }
@@ -236,13 +233,13 @@ open class LinearChart(
             decoration: LinearDecoration = LinearDecoration.lineDecorationColors(),
             linearData: LinearStringData,
             plot: LinearLinePlot = LinearLinePlot(),
-            colorConvention: LinearColorConventionInterface = LinearDefaultColorConvention()
+            colorConvention: LinearLegends = LinearGridLegend()
         ) = LinearChart(
             margin = margin,
             decoration = decoration,
             linearData = linearData,
             plot = plot,
-            colorConvention = colorConvention
+            legends = colorConvention
         ).Build(modifier = modifier)
 
 
@@ -274,13 +271,13 @@ open class LinearChart(
             decoration: LinearDecoration = LinearDecoration.lineDecorationColors(),
             linearData: LinearEmojiData,
             plot: LinearLinePlot = LinearLinePlot(),
-            colorConvention: LinearColorConventionInterface = LinearDefaultColorConvention()
+            colorConvention: LinearLegends = NoLegend()
         ) = LinearChart(
             margin = margin,
             decoration = decoration,
             linearData = linearData,
             plot = plot,
-            colorConvention = colorConvention
+            legends = colorConvention
         ).Build(modifier = modifier)
 
 
@@ -304,13 +301,13 @@ open class LinearChart(
             decoration: LinearDecoration = LinearDecoration.lineDecorationColors(),
             linearData: LinearStringData,
             plot: LinearGradientLinePlot,
-            colorConvention: LinearColorConventionInterface = LinearDefaultColorConvention()
+            colorConvention: LinearLegends = NoLegend()
         ) = LinearChart(
             margin = margin,
             decoration = decoration,
             linearData = linearData,
             plot = plot,
-            colorConvention = colorConvention
+            legends = colorConvention
         ).Build(modifier = modifier)
 
 
@@ -332,13 +329,13 @@ open class LinearChart(
             decoration: LinearDecoration = LinearDecoration.barDecorationColors(),
             linearData: LinearStringData,
             plot: LinearBarPlot = LinearBarPlot(),
-            colorConvention: LinearColorConventionInterface = LinearDefaultColorConvention()
+            colorConvention: LinearLegends = LinearGridLegend()
         ) = LinearChart(
             margin = margin,
             decoration = decoration,
             linearData = linearData,
             plot = plot,
-            colorConvention = colorConvention
+            legends = colorConvention
         ).Build(modifier = modifier)
 
 
@@ -360,13 +357,13 @@ open class LinearChart(
             decoration: LinearDecoration = LinearDecoration.barDecorationColors(),
             linearData: LinearEmojiData,
             plot: LinearBarPlot = LinearBarPlot(),
-            colorConvention: LinearColorConventionInterface = LinearDefaultColorConvention()
+            colorConvention: LinearLegends = NoLegend()
         ) = LinearChart(
             margin = margin,
             decoration = decoration,
             linearData = linearData,
             plot = plot,
-            colorConvention = colorConvention
+            legends = colorConvention
         ).Build(modifier = modifier)
 
 
@@ -390,13 +387,13 @@ open class LinearChart(
             decoration: LinearDecoration = LinearDecoration.lineDecorationColors(),
             linearData: LinearDataInterface,
             plot: LinearPlotInterface = LinearLinePlot(),
-            colorConvention: LinearColorConventionInterface = LinearDefaultColorConvention()
+            colorConvention: LinearLegends = NoLegend()
         ) = LinearChart(
             margin = margin,
             decoration = decoration,
             linearData = linearData,
             plot = plot,
-            colorConvention = colorConvention
+            legends = colorConvention
         ).Build(modifier = modifier)
     }
 }

@@ -21,21 +21,20 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.anirban.charts.linear.decoration.LinearDecoration
-import dev.anirban.charts.linear.interfaces.LinearColorConventionInterface
+import dev.anirban.charts.linear.interfaces.LinearLegends
+import dev.anirban.charts.linear.interfaces.LinearDataInterface
 
 /**
- * This class is the implementation of [LinearColorConventionInterface] which provides the
+ * This class is the implementation of [LinearLegends] which provides the
  * implementations for drawing the color conventions in the canvas
  *
- * @param textList This contains the list of strings which needs to be drawn in the Chart
  * @param fontSize This defines the size of the font
  * @param fontWeight This Defines the weight of the font
  */
-class LinearGridColorConvention(
-    override val textList: List<String>,
+class LinearGridLegend(
     private val fontSize: TextUnit = 14.sp,
     private val fontWeight: FontWeight = FontWeight.W500
-) : LinearColorConventionInterface {
+) : LinearLegends {
 
     /**
      * This function draws the individual chart details or we can say the color codes along with
@@ -94,7 +93,8 @@ class LinearGridColorConvention(
      * @param decoration THis object contains the decorations of the graph
      */
     @Composable
-    override fun DrawColorConventions(
+    override fun DrawLegends(
+        data: LinearDataInterface,
         decoration: LinearDecoration
     ) {
 
@@ -113,11 +113,11 @@ class LinearGridColorConvention(
             ) {
 
                 // Drawing Left column with the conventions
-                for (index in textList.indices step 2) {
+                for (index in data.dataSets.indices step 2) {
 
                     // This function draws one of the color code Item details
                     ChartDetail(
-                        text = textList[index],
+                        text = data.dataSets[index].title,
                         color = decoration.plotPrimaryColor[index],
                         textColor = decoration.textColor
                     )
@@ -133,11 +133,11 @@ class LinearGridColorConvention(
             ) {
 
                 // Drawing Right column with the conventions
-                for (index in 1 until textList.size step 2) {
+                for (index in 1 until data.dataSets.size step 2) {
 
                     // This function draws one of the color code Item details
                     ChartDetail(
-                        text = textList[index],
+                        text = data.dataSets[index].title,
                         color = decoration.plotPrimaryColor[index],
                         textColor = decoration.textColor
                     )
