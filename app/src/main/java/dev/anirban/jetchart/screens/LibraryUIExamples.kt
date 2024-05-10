@@ -44,7 +44,7 @@ import dev.anirban.charts.circular.foreground.CircularDonutTargetForeground
 import dev.anirban.charts.linear.LinearChart
 import dev.anirban.charts.linear.data.LinearStringData
 import dev.anirban.charts.linear.plots.LinearGradientLinePlot
-import dev.anirban.charts.util.ChartPoint
+import dev.anirban.charts.util.Coordinate
 import dev.anirban.jetchart.ui.theme.JetChartTheme
 
 
@@ -73,30 +73,30 @@ fun LibraryUIExample() {
 
     // Example Data Sets
     val xReadingMarker by remember {
-        mutableStateOf(ChartPoint.pointDataBuilder("A", "B", "C", "D", "E", "F", "G"))
+        mutableStateOf(Coordinate.coordinateSetBuilder("A", "B", "C", "D", "E", "F", "G"))
     }
     var dataSet1 by remember {
-        mutableStateOf(listOf(ChartPoint.pointDataBuilder(6f, 5f, 4f, 6f, 7.5f, 7f, 6f)))
+        mutableStateOf(listOf(Coordinate.coordinateSetBuilder(6f, 5f, 4f, 6f, 7.5f, 7f, 6f)))
     }
     var dataSet2 by remember {
         mutableStateOf(
             listOf(
-                ChartPoint.pointDataBuilder(6f, 5f, 4f, 6f, 7.5f, 7f, 6f),
-                ChartPoint.pointDataBuilder(3f, 6f, 8f, 2f, 3.5f, 3f, 4f)
+                Coordinate.coordinateSetBuilder(6f, 5f, 4f, 6f, 7.5f, 7f, 6f),
+                Coordinate.coordinateSetBuilder(3f, 6f, 8f, 2f, 3.5f, 3f, 4f)
             )
         )
     }
     var dataSet3 by remember {
         mutableStateOf(
             listOf(
-                ChartPoint.pointDataBuilder(6f, 5f, 4f, 6f, 7.5f, 7f, 6f),
-                ChartPoint.pointDataBuilder(3f, 6f, 8f, 2f, 3.5f, 3f, 4f),
-                ChartPoint.pointDataBuilder(1f, 8f, 4f, 3f, 5.9f, 2.9f, 4.7f)
+                Coordinate.coordinateSetBuilder(6f, 5f, 4f, 6f, 7.5f, 7f, 6f),
+                Coordinate.coordinateSetBuilder(3f, 6f, 8f, 2f, 3.5f, 3f, 4f),
+                Coordinate.coordinateSetBuilder(1f, 8f, 4f, 3f, 5.9f, 2.9f, 4.7f)
             )
         )
     }
     var dataSet4 by remember {
-        mutableStateOf(listOf(ChartPoint.pointDataBuilder(4f, 0f, 1.7f, 1.9f, 2f, 4f)))
+        mutableStateOf(listOf(Coordinate.coordinateSetBuilder(4f, 0f, 1.7f, 1.9f, 2f, 4f)))
     }
 
     // This variable helps to change data Set when the button is clicked.
@@ -116,17 +116,17 @@ fun LibraryUIExample() {
             mutableList4.add((0..4).random().toFloat())
         }
 
-        dataSet1 = listOf(ChartPoint.pointDataBuilder(mutableList1))
+        dataSet1 = listOf(Coordinate.coordinateSetBuilder(mutableList1))
         dataSet2 = listOf(
-            ChartPoint.pointDataBuilder(mutableList1),
-            ChartPoint.pointDataBuilder(mutableList2)
+            Coordinate.coordinateSetBuilder(mutableList1),
+            Coordinate.coordinateSetBuilder(mutableList2)
         )
         dataSet3 = listOf(
-            ChartPoint.pointDataBuilder(mutableList1),
-            ChartPoint.pointDataBuilder(mutableList2),
-            ChartPoint.pointDataBuilder(mutableList3)
+            Coordinate.coordinateSetBuilder(mutableList1),
+            Coordinate.coordinateSetBuilder(mutableList2),
+            Coordinate.coordinateSetBuilder(mutableList3)
         )
-        dataSet4 = listOf(ChartPoint.pointDataBuilder(mutableList4))
+        dataSet4 = listOf(Coordinate.coordinateSetBuilder(mutableList4))
         onButtonPress = false
     }
 
@@ -185,7 +185,7 @@ fun LibraryUIExample() {
                 linearData = LinearStringData(
                     yAxisReadings = dataSet4,
                     xAxisReadings = xReadingMarker,
-                    yMarkerList = ChartPoint.pointDataBuilder(
+                    yMarkerList = Coordinate.coordinateSetBuilder(
                         "Very High",
                         "High",
                         "Moderate",
@@ -233,7 +233,7 @@ fun LibraryUIExample() {
                 linearData = LinearStringData(
                     yAxisReadings = dataSet4,
                     xAxisReadings = xReadingMarker,
-                    yMarkerList = ChartPoint.pointDataBuilder(
+                    yMarkerList = Coordinate.coordinateSetBuilder(
                         "Very High",
                         "High",
                         "Moderate",

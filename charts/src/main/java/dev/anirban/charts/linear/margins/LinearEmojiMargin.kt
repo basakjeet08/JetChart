@@ -42,7 +42,7 @@ class LinearEmojiMargin : LinearMarginInterface {
                 Bitmap.createScaledBitmap(point.value.bitmap, dimension, dimension, true)
             val width = resizedBitmap.width
 
-            translate(point.xCoordinate, point.yCoordinate) {
+            translate(point.x, point.y) {
                 drawImage(image = resizedBitmap.asImageBitmap())
             }
 
@@ -50,12 +50,12 @@ class LinearEmojiMargin : LinearMarginInterface {
             drawLine(
                 start = Offset(
                     x = width.toFloat(),
-                    y = point.yCoordinate + (dimension.toFloat() / 2f)
+                    y = point.y + (dimension.toFloat() / 2f)
                 ),
                 color = decoration.textColor.copy(alpha = 0.8f),
                 end = Offset(
                     x = size.width,
-                    y = point.yCoordinate + (dimension.toFloat() / 2f)
+                    y = point.y + (dimension.toFloat() / 2f)
                 ),
                 strokeWidth = 1f
             )
@@ -67,8 +67,8 @@ class LinearEmojiMargin : LinearMarginInterface {
             // This draws the String Marker
             drawContext.canvas.nativeCanvas.drawText(
                 currentMarker.value,
-                currentMarker.xCoordinate,
-                currentMarker.yCoordinate,
+                currentMarker.x,
+                currentMarker.y,
                 Paint().apply {
                     color = decoration.textColor.toArgb()
                     textSize = 12.sp.toPx()

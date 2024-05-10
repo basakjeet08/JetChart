@@ -5,7 +5,7 @@ import android.graphics.drawable.BitmapDrawable
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import dev.anirban.charts.linear.interfaces.LinearDataInterface
-import dev.anirban.charts.util.ChartPoint
+import dev.anirban.charts.util.Coordinate
 
 /**
  * This is one of the implementation for storing and calculating the data in the chart. It
@@ -16,9 +16,9 @@ import dev.anirban.charts.util.ChartPoint
  * @param yMarkerList This is the list of marker which are present in the Y - Axis
  */
 class LinearEmojiData(
-    override val yAxisReadings: List<List<ChartPoint<Float>>>,
-    override val xAxisReadings: List<ChartPoint<String>>,
-    override var yMarkerList: MutableList<ChartPoint<*>> = mutableListOf(),
+    override val yAxisReadings: List<List<Coordinate<Float>>>,
+    override val xAxisReadings: List<Coordinate<String>>,
+    override var yMarkerList: MutableList<Coordinate<*>> = mutableListOf(),
     val dimension: Int = 50
 ) : LinearDataInterface {
 
@@ -108,9 +108,7 @@ class LinearEmojiData(
                 maxDimension = resizedBitmap.width
 
             // Setting the calculated graph coordinates to the object
-            point.setXCoordinate(-24f)
-            point.setYCoordinate(currentYCoordinate)
-
+            point.setOffset(x = -24f, y = currentYCoordinate)
         }
         return maxDimension
     }
@@ -133,8 +131,7 @@ class LinearEmojiData(
                 val currentXCoordinate = 48f + (index * xScale) + yMarkerMaxWidth
 
                 // Setting the calculated graph coordinates to the object
-                point.setXCoordinate(currentXCoordinate)
-                point.setYCoordinate(currentYCoordinate)
+                point.setOffset(x = currentXCoordinate, y = currentYCoordinate)
             }
         }
     }
@@ -155,8 +152,7 @@ class LinearEmojiData(
             val yCoordinate = size.height
 
             // Setting the calculated graph coordinates to the object
-            currentMarker.setXCoordinate(xCoordinate)
-            currentMarker.setYCoordinate(yCoordinate)
+            currentMarker.setOffset(x = xCoordinate, y = yCoordinate)
         }
     }
 }

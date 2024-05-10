@@ -45,8 +45,8 @@ class LinearStringMargin : LinearMarginInterface {
             // This draws the String Marker
             drawContext.canvas.nativeCanvas.drawText(
                 point.value.toString(),
-                point.xCoordinate,
-                point.yCoordinate,
+                point.x,
+                point.y,
                 paint
             )
 
@@ -54,12 +54,12 @@ class LinearStringMargin : LinearMarginInterface {
             drawLine(
                 start = Offset(
                     x = width.toFloat(),
-                    y = point.yCoordinate - 12f
+                    y = point.y - 12f
                 ),
                 color = decoration.textColor.copy(alpha = 0.8f),
                 end = Offset(
                     x = size.width,
-                    y = point.yCoordinate - 12f
+                    y = point.y - 12f
                 ),
                 strokeWidth = 1f
             )
@@ -71,8 +71,8 @@ class LinearStringMargin : LinearMarginInterface {
             // This draws the String Marker
             drawContext.canvas.nativeCanvas.drawText(
                 currentMarker.value.toString(),
-                currentMarker.xCoordinate,
-                currentMarker.yCoordinate,
+                currentMarker.x,
+                currentMarker.y,
                 Paint().apply {
                     color = decoration.textColor.toArgb()
                     textSize = 12.sp.toPx()

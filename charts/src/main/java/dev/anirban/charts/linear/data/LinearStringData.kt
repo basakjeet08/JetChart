@@ -7,7 +7,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.unit.sp
 import dev.anirban.charts.linear.interfaces.LinearDataInterface
-import dev.anirban.charts.util.ChartPoint
+import dev.anirban.charts.util.Coordinate
 
 /**
  * This is one of the implementation for storing and calculating the data in the chart. It
@@ -21,9 +21,9 @@ import dev.anirban.charts.util.ChartPoint
  * @param numOfYMarkers This Is useless when a yMarkerList is passed to the Class constructor
  */
 class LinearStringData(
-    override val yAxisReadings: List<List<ChartPoint<Float>>>,
-    override val xAxisReadings: List<ChartPoint<String>>,
-    override var yMarkerList: MutableList<ChartPoint<*>> = mutableListOf(),
+    override val yAxisReadings: List<List<Coordinate<Float>>>,
+    override val xAxisReadings: List<Coordinate<String>>,
+    override var yMarkerList: MutableList<Coordinate<*>> = mutableListOf(),
     override var numOfYMarkers: Int = 5
 ) : LinearDataInterface {
 
@@ -94,7 +94,7 @@ class LinearStringData(
 
                 // This is the value of the current Y Axis Marker
                 val currentYMarker = yUpperReading - (index) * yDividend
-                yMarkerList.add(index, ChartPoint(currentYMarker))
+                yMarkerList.add(index, Coordinate(currentYMarker))
             }
         }
     }
@@ -154,8 +154,7 @@ class LinearStringData(
             val currentYCoordinate = (yScale * index) + 12f
 
             // Setting the calculated graph coordinates to the object
-            point.setXCoordinate(-24f)
-            point.setYCoordinate(currentYCoordinate)
+            point.setOffset(x = -24f, currentYCoordinate)
 
             val width = bounds.width()
             yMarkerMaxWidth = if (yMarkerMaxWidth < width) width else yMarkerMaxWidth
@@ -181,8 +180,7 @@ class LinearStringData(
                 val currentXCoordinate = 48f + (index * xScale) + yMarkerMaxWidth
 
                 // Setting the calculated graph coordinates to the object
-                point.setXCoordinate(currentXCoordinate)
-                point.setYCoordinate(currentYCoordinate)
+                point.setOffset(x = currentXCoordinate, y = currentYCoordinate)
             }
         }
     }
@@ -203,8 +201,7 @@ class LinearStringData(
             val yCoordinate = size.height
 
             // Setting the calculated graph coordinates to the object
-            currentMarker.setXCoordinate(xCoordinate)
-            currentMarker.setYCoordinate(yCoordinate)
+            currentMarker.setOffset(x = xCoordinate, y = yCoordinate)
         }
     }
 }

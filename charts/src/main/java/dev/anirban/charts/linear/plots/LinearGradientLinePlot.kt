@@ -52,15 +52,15 @@ class LinearGradientLinePlot(
 
             // Moving to the (0,0) Origin Of the Graph
             path.moveTo(
-                linearData.xAxisReadings.first().xCoordinate,
-                linearData.yMarkerList.last().yCoordinate - paddingOffset
+                linearData.xAxisReadings.first().x,
+                linearData.yMarkerList.last().y - paddingOffset
             )
 
             // Defining the Brush
             val brush = Brush.horizontalGradient(
                 colors = colorList,
-                startX = linearData.xAxisReadings.first().xCoordinate,
-                endX = linearData.xAxisReadings.last().xCoordinate,
+                startX = linearData.xAxisReadings.first().x,
+                endX = linearData.xAxisReadings.last().x,
                 tileMode = TileMode.Clamp
             )
 
@@ -69,15 +69,15 @@ class LinearGradientLinePlot(
 
                 // Current Line Point Added
                 path.lineTo(
-                    x = point.xCoordinate,
-                    y = point.yCoordinate
+                    x = point.x,
+                    y = point.y
                 )
             }
 
             // Adding the (Max , 0) point to finish the gradient in a proper sequence
             path.lineTo(
-                linearData.xAxisReadings.last().xCoordinate,
-                linearData.yMarkerList.last().yCoordinate - paddingOffset
+                linearData.xAxisReadings.last().x,
+                linearData.yMarkerList.last().y - paddingOffset
             )
 
             // Drawing the Lines of the graph
@@ -104,7 +104,7 @@ class LinearGradientLinePlot(
                 drawCircle(
                     color = decoration.plotSecondaryColor[index],
                     radius = circleRadius,
-                    center = point.getOffset()
+                    center = point.offset()
                 )
             }
         }

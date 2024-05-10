@@ -55,12 +55,12 @@ class LinearBarPlot(
                         )
                     ),
                     topLeft = Offset(
-                        x = point.xCoordinate - barWidth / 2f,
-                        y = point.yCoordinate
+                        x = point.x - barWidth / 2f,
+                        y = point.y
                     ),
                     size = Size(
                         width = barWidth,
-                        height = linearData.yMarkerList.last().yCoordinate - point.yCoordinate - paddingOffset
+                        height = linearData.yMarkerList.last().y - point.y - paddingOffset
                     ),
                     cornerRadius = CornerRadius(cornerRadius)
                 )

@@ -38,8 +38,8 @@ class LinearLinePlot(
 
             // Moving to the start path of the the coordinate set to start making the Curved lines
             path.moveTo(
-                coordinateSet[0].xCoordinate,
-                coordinateSet[0].yCoordinate
+                coordinateSet[0].x,
+                coordinateSet[0].y
             )
 
             // Inner Loop which draws the Lines from point to point of a single coordinate sets
@@ -50,10 +50,10 @@ class LinearLinePlot(
                 val nextPoint = coordinateSet[index + 1]
 
                 // Control Points
-                val control1X = (currentPoint.xCoordinate + nextPoint.xCoordinate) / 2f
-                val control1Y = currentPoint.yCoordinate
-                val control2X = (currentPoint.xCoordinate + nextPoint.xCoordinate) / 2f
-                val control2Y = nextPoint.yCoordinate
+                val control1X = (currentPoint.x + nextPoint.x) / 2f
+                val control1Y = currentPoint.y
+                val control2X = (currentPoint.x + nextPoint.x) / 2f
+                val control2Y = nextPoint.y
 
                 // Defining the path from the last stayed to the next point
                 path.cubicTo(
@@ -61,8 +61,8 @@ class LinearLinePlot(
                     y1 = control1Y,
                     x2 = control2X,
                     y2 = control2Y,
-                    x3 = nextPoint.xCoordinate,
-                    y3 = nextPoint.yCoordinate
+                    x3 = nextPoint.x,
+                    y3 = nextPoint.y
                 )
             }
 
@@ -83,7 +83,7 @@ class LinearLinePlot(
                 drawCircle(
                     color = decoration.plotSecondaryColor[index],
                     radius = circleRadius,
-                    center = it.getOffset()
+                    center = it.offset()
                 )
             }
         }
