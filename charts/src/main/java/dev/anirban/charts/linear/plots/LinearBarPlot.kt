@@ -42,9 +42,9 @@ class LinearBarPlot(
         }
 
         // Adding the Offsets to the Variable
-        linearData.yAxisReadings.forEach { coordinateSet ->
+        linearData.dataSets.forEach { coordinateSet ->
 
-            coordinateSet.forEach { point ->
+            coordinateSet.markers.forEach { point ->
 
                 // This function draws the Bars
                 drawRoundRect(

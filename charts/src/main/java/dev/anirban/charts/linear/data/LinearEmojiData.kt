@@ -12,11 +12,11 @@ import dev.anirban.charts.util.Coordinate
  * Implements the [LinearDataInterface] Interface
  *
  * @param xAxisReadings These are the readings of the X - Axis
- * @param yAxisReadings These are the readings of the Y - Axis
+ * @param dataSets These are the readings of the Y - Axis
  * @param yMarkerList This is the list of marker which are present in the Y - Axis
  */
 class LinearEmojiData(
-    override val yAxisReadings: List<List<Coordinate<Float>>>,
+    override val dataSets: List<DataSet<Float>>,
     override val xAxisReadings: List<Coordinate<String>>,
     override var yMarkerList: MutableList<Coordinate<*>> = mutableListOf(),
     val dimension: Int = 50
@@ -123,9 +123,9 @@ class LinearEmojiData(
     private fun calculateReadingsCoordinates(xScale: Float, yScale: Float, yMarkerMaxWidth: Int) {
 
         // Taking all the points given and calculating where they will stay in the graph
-        yAxisReadings.forEach { pointSet ->
+        dataSets.forEach { pointSet ->
 
-            pointSet.forEachIndexed { index, point ->
+            pointSet.markers.forEachIndexed { index, point ->
 
                 val currentYCoordinate = (yUpperReading - point.value) * yScale / yDividend
                 val currentXCoordinate = 48f + (index * xScale) + yMarkerMaxWidth

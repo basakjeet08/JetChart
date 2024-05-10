@@ -14,14 +14,14 @@ import dev.anirban.charts.util.Coordinate
  * Implements the [LinearDataInterface] Interface
  *
  * @param xAxisReadings These are the readings of the X - Axis
- * @param yAxisReadings These are the readings of the Y - Axis
+ * @param dataSets These are the readings of the Y - Axis
  * @param yMarkerList This is the list of marker which are present in the Y - Axis
  * @param numOfYMarkers These are teh num of markers in Y-axis
  *
  * @param numOfYMarkers This Is useless when a yMarkerList is passed to the Class constructor
  */
 class LinearStringData(
-    override val yAxisReadings: List<List<Coordinate<Float>>>,
+    override val dataSets: List<DataSet<Float>>,
     override val xAxisReadings: List<Coordinate<String>>,
     override var yMarkerList: MutableList<Coordinate<*>> = mutableListOf(),
     override var numOfYMarkers: Int = 5
@@ -63,13 +63,13 @@ class LinearStringData(
         } else {
 
             // Maximum and minimum value provided is calculated
-            val yMax = yAxisReadings.maxOf {
-                it.maxOf { point ->
+            val yMax = dataSets.maxOf {
+                it.markers.maxOf { point ->
                     point.value
                 }
             }
-            val yMin = yAxisReadings.minOf {
-                it.minOf { point ->
+            val yMin = dataSets.minOf {
+                it.markers.minOf { point ->
                     point.value
                 }
             }
@@ -172,9 +172,9 @@ class LinearStringData(
     private fun calculateReadingsCoordinates(xScale: Float, yScale: Float, yMarkerMaxWidth: Int) {
 
         // Taking all the points given and calculating where they will stay in the graph
-        yAxisReadings.forEach { pointSet ->
+        dataSets.forEach { pointSet ->
 
-            pointSet.forEachIndexed { index, point ->
+            pointSet.markers.forEachIndexed { index, point ->
 
                 val currentYCoordinate = (yUpperReading - point.value) * yScale / yDividend
                 val currentXCoordinate = 48f + (index * xScale) + yMarkerMaxWidth

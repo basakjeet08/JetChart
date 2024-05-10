@@ -61,7 +61,7 @@ open class LinearChart(
         var maxSize = -1
 
         // calculating the number of max Y - Axis Readings in a particular Coordinate set
-        linearData.yAxisReadings.forEach {
+        linearData.dataSets.forEach {
             if (it.size > maxSize)
                 maxSize = it.size
         }
@@ -78,7 +78,7 @@ open class LinearChart(
     override fun validateDecorationInput() {
 
         // checking if we have enough Primary Color for the plots
-        if (decoration.plotPrimaryColor.size < linearData.yAxisReadings.size) {
+        if (decoration.plotPrimaryColor.size < linearData.dataSets.size) {
             if (plot is LinearBarPlot && decoration.plotPrimaryColor.isEmpty())
                 throw Exception(
                     "plotPrimaryColor for the decoration have 0 Colors whereas at least " +
@@ -86,16 +86,16 @@ open class LinearChart(
                 )
             else
                 throw LinearDecorationMismatch(
-                    "Need to provide ${linearData.yAxisReadings.size} number of colors for the " +
+                    "Need to provide ${linearData.dataSets.size} number of colors for the " +
                             "plotPrimaryColor"
                 )
         }
 
         // checking if we have enough Secondary Color for the plots
-        if (decoration.plotSecondaryColor.size < linearData.yAxisReadings.size && plot !is LinearBarPlot)
+        if (decoration.plotSecondaryColor.size < linearData.dataSets.size && plot !is LinearBarPlot)
             throw LinearDecorationMismatch(
                 "Secondary Color of Decoration Class needs " +
-                        "${linearData.yAxisReadings.size} colors but it has " +
+                        "${linearData.dataSets.size} colors but it has " +
                         "${decoration.plotSecondaryColor.size} colors"
             )
 
@@ -107,7 +107,7 @@ open class LinearChart(
     override fun validateColorConventionInput() {
 
         //Checking if the given textList has more texts than the given yAxisReadings size
-        if (colorConvention.textList.size > linearData.yAxisReadings.size)
+        if (colorConvention.textList.size > linearData.dataSets.size)
             throw LinearColorConventionMismatch("Texts for Color Lists are More than provided yAxis Coordinate Sets")
     }
 
