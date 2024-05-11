@@ -13,7 +13,6 @@ import dev.anirban.charts.linear.data.LinearDataSet
 import dev.anirban.charts.linear.data.LinearStringData
 import dev.anirban.charts.linear.plots.LinearGradientPlot
 import dev.anirban.charts.util.Coordinate
-import dev.anirban.jetchart.data.model.LinearMockObservation.Companion.toLinearDataSet
 import dev.anirban.jetchart.data.model.LinearMockResponse
 import dev.anirban.jetchart.view.components.CustomCard
 
