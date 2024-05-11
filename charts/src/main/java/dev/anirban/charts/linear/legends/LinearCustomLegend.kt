@@ -26,6 +26,6 @@ class LinearCustomLegend(
      */
     @Composable
     override fun DrawLegends(data: LinearDataInterface, decoration: LinearDecoration) {
-        drawLegend(data.dataSets.map { it.title })
+        drawLegend(data.linearDataSets.map { it.title })
     }
 }

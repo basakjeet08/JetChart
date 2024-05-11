@@ -31,7 +31,7 @@ class LinearLinePlot(
     ) {
 
         // This loop makes the curved line between two points
-        linearData.dataSets.forEachIndexed { coordinateSetIndex, coordinateSet ->
+        linearData.linearDataSets.forEachIndexed { coordinateSetIndex, coordinateSet ->
 
             // Path Variable
             val path = Path()
@@ -77,7 +77,7 @@ class LinearLinePlot(
         }
 
         // This loop draws the circles or the points of the coordinates1
-        linearData.dataSets.forEachIndexed { index, offsets ->
+        linearData.linearDataSets.forEachIndexed { index, offsets ->
             offsets.markers.forEach {
                 // This function draws the Circle points
                 drawCircle(

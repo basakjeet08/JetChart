@@ -45,7 +45,7 @@ class LinearGradientLinePlot(
         }
 
         // Drawing the Lines and the linear Gradient in this Iteration
-        linearData.dataSets.forEachIndexed { i, coordinateSet ->
+        linearData.linearDataSets.forEachIndexed { i, coordinateSet ->
 
             // Path Variable
             val path = Path()
@@ -97,7 +97,7 @@ class LinearGradientLinePlot(
         }
 
         // Drawing all the Circles in this pass
-        linearData.dataSets.forEachIndexed { index, linearPoints ->
+        linearData.linearDataSets.forEachIndexed { index, linearPoints ->
             linearPoints.markers.forEach { point ->
 
                 // This function draws the Circle points

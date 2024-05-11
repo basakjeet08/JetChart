@@ -2,7 +2,7 @@ package dev.anirban.charts.linear.interfaces
 
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.drawscope.DrawScope
-import dev.anirban.charts.linear.data.DataSet
+import dev.anirban.charts.linear.data.LinearDataSet
 import dev.anirban.charts.linear.data.*
 import dev.anirban.charts.util.Coordinate
 
@@ -19,9 +19,9 @@ interface LinearDataInterface {
     /**
      * These are the Data Sets for the Chart.
      *
-     * It uses [DataSet] class object for representing the data set.
+     * It uses [LinearDataSet] class object for representing the data set.
      */
-    val dataSets: List<DataSet>
+    val linearDataSets: List<LinearDataSet>
 
 
     /**

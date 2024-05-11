@@ -42,7 +42,7 @@ class LinearBarPlot(
         }
 
         // Adding the Offsets to the Variable
-        linearData.dataSets.forEach { coordinateSet ->
+        linearData.linearDataSets.forEach { coordinateSet ->
 
             coordinateSet.markers.forEach { point ->
 

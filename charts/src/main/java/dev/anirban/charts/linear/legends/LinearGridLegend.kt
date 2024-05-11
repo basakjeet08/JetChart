@@ -110,7 +110,7 @@ class LinearGridLegend(
         ) {
 
             // Iterating through the whole data set to draw the required Legends
-            for (index in data.dataSets.indices step 2) {
+            for (index in data.linearDataSets.indices step 2) {
 
                 // A Row Containing two legend at a Column
                 Row(
@@ -121,15 +121,15 @@ class LinearGridLegend(
 
                     // This function draws the Left Column of the Legends
                     LegendItem(
-                        text = data.dataSets[index].title,
+                        text = data.linearDataSets[index].title,
                         color = decoration.plotPrimaryColor[index],
                         textColor = decoration.textColor
                     )
 
                     // This draws the right column of the legends
-                    if (index + 1 < data.dataSets.size) {
+                    if (index + 1 < data.linearDataSets.size) {
                         LegendItem(
-                            text = data.dataSets[index + 1].title,
+                            text = data.linearDataSets[index + 1].title,
                             color = decoration.plotPrimaryColor[index + 1],
                             textColor = decoration.textColor
                         )

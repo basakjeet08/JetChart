@@ -9,7 +9,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
 import dev.anirban.charts.linear.LinearChart
-import dev.anirban.charts.linear.data.DataSet
+import dev.anirban.charts.linear.data.LinearDataSet
 import dev.anirban.charts.linear.data.LinearStringData
 import dev.anirban.charts.linear.plots.LinearGradientLinePlot
 import dev.anirban.charts.util.Coordinate
@@ -24,32 +24,32 @@ fun LinearChartUI(onReload: () -> Unit) {
         mutableStateOf(Coordinate.coordinateSetBuilder("A", "B", "C", "D", "E", "F", "G"))
     }
 
-    val dataSet1 = listOf(
-        DataSet.createDataSet(
+    val linearDataSet1 = listOf(
+        LinearDataSet.createDataSet(
             title = "Netflix",
             points = listOf(6f, 5f, 4f, 6f, 7.5f, 7f, 6f)
         )
     )
 
-    val dataSet2 = listOf(
-        dataSet1[0],
-        DataSet.createDataSet(
+    val linearDataSet2 = listOf(
+        linearDataSet1[0],
+        LinearDataSet.createDataSet(
             title = "Amazon",
             points = listOf(3f, 6f, 8f, 2f, 3.5f, 3f, 4f)
         )
     )
 
-    val dataSet3 = listOf(
-        dataSet2[0],
-        dataSet2[1],
-        DataSet.createDataSet(
+    val linearDataSet3 = listOf(
+        linearDataSet2[0],
+        linearDataSet2[1],
+        LinearDataSet.createDataSet(
             title = "Google",
             points = listOf(1f, 8f, 4f, 3f, 5.9f, 2.9f, 4.7f)
         )
     )
 
-    val dataSet4 = listOf(
-        DataSet.createDataSet(
+    val linearDataSet4 = listOf(
+        LinearDataSet.createDataSet(
             title = "Facebook",
             points = listOf(4f, 0f, 1.7f, 1.9f, 2f, 4f)
         )
@@ -65,7 +65,7 @@ fun LinearChartUI(onReload: () -> Unit) {
 
         LinearChart.LineChart(
             linearData = LinearStringData(
-                dataSets = dataSet1,
+                linearDataSets = linearDataSet1,
                 xAxisLabels = xReadingMarker
             )
         )
@@ -76,7 +76,7 @@ fun LinearChartUI(onReload: () -> Unit) {
 
         LinearChart.LineChart(
             linearData = LinearStringData(
-                dataSets = dataSet2,
+                linearDataSets = linearDataSet2,
                 xAxisLabels = xReadingMarker
             )
         )
@@ -87,7 +87,7 @@ fun LinearChartUI(onReload: () -> Unit) {
 
         LinearChart.LineChart(
             linearData = LinearStringData(
-                dataSets = dataSet3,
+                linearDataSets = linearDataSet3,
                 xAxisLabels = xReadingMarker
             )
         )
@@ -97,7 +97,7 @@ fun LinearChartUI(onReload: () -> Unit) {
     CustomCard(title = "String Marker Chart") {
         LinearChart.LineChart(
             linearData = LinearStringData(
-                dataSets = dataSet4,
+                linearDataSets = linearDataSet4,
                 xAxisLabels = xReadingMarker,
                 yAxisLabels = Coordinate.coordinateSetBuilder(
                     "Very High",
@@ -145,7 +145,7 @@ fun LinearChartUI(onReload: () -> Unit) {
 
         LinearChart.GradientChart(
             linearData = LinearStringData(
-                dataSets = dataSet4,
+                linearDataSets = linearDataSet4,
                 xAxisLabels = xReadingMarker,
                 yAxisLabels = Coordinate.coordinateSetBuilder(
                     "Very High",
@@ -217,7 +217,7 @@ fun LinearChartUI(onReload: () -> Unit) {
 
         LinearChart.BarChart(
             linearData = LinearStringData(
-                dataSets = dataSet4,
+                linearDataSets = linearDataSet4,
                 xAxisLabels = xReadingMarker
             )
         )

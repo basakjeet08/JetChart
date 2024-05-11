@@ -11,19 +11,16 @@ import dev.anirban.charts.util.Coordinate
 
 
 /**
- * This is one of the implementation for storing and calculating the data in the chart. It
- * implements the [LinearDataInterface].
+ * This class implements the [LinearDataInterface] and stores the data necessary for a linear chart.
+ * For other implementations check [LinearEmojiData].
  *
- * Purpose :- Providing a way to calculate the necessary data required to show the chart and
- * store them. It also calculates the graphical coordinates of the data.
- *
- * @param dataSets This is the dataset of the Chart.
- * @param xAxisLabels These are the labels of the X - Axis
- * @param yAxisLabels This is the list of Y axis Labels.
+ * @param linearDataSets This is the data set of the chart.
+ * @param xAxisLabels These are the labels for the X - Axis.
+ * @param yAxisLabels These are the labels for the Y - Axis.
  * @param numOfYLabels These are the num of labels in Y-axis
  */
 class LinearStringData(
-    override val dataSets: List<DataSet>,
+    override val linearDataSets: List<LinearDataSet>,
     override val xAxisLabels: List<Coordinate<String>>,
     override var yAxisLabels: MutableList<Coordinate<*>> = mutableListOf(),
     override var numOfYLabels: Int = 5
@@ -31,13 +28,13 @@ class LinearStringData(
 
 
     /**
-     * These are the num of labels in X-Axis
+     * These are the count of labels in X-Axis
      */
     override val numOfXLabels: Int = xAxisLabels.size
 
 
     /**
-     * The Maximum Y Label Reading of the Graph
+     * The maximum or peak Y Label of the Graph.
      */
     private var maxYLabel: Int = Int.MIN_VALUE
 
@@ -49,7 +46,7 @@ class LinearStringData(
 
 
     /**
-     * It is the difference between each Y Label from its following one.
+     * This is the difference between each Y label and its subsequent label.
      */
     private var yLabelDifference: Int
 
@@ -61,7 +58,7 @@ class LinearStringData(
 
 
     /**
-     * This are the X and Y Scales for the Graph
+     * These are the X and Y Scales for the graph.
      */
     private var xScale: Float = 0f
     private var yScale: Float = 0f
@@ -75,37 +72,36 @@ class LinearStringData(
 
                 numOfYLabels = yAxisLabels.size
 
-                // Storing the upper Label and Lower Label of Y Axis
+                // Storing the maximum Label and minimum Label of Y Axis
                 maxYLabel = yAxisLabels.size - 1
                 minYLabel = 0
 
-                // Difference between each Y Labels
+                // Difference between each Y label to its subsequent label
                 yLabelDifference = 1
             }
 
             false -> {
 
-                // Maximum and minimum value provided is calculated
-                val yMax = dataSets.maxOf { it.max }
-                val yMin = dataSets.minOf { it.min }
+                // Maximum and minimum value provided
+                val yMax = linearDataSets.maxOf { it.max }
+                val yMin = linearDataSets.minOf { it.min }
 
 
-                // Storing the upper Label and Lower Label of Y Axis
+                // Storing the maximum and minimum Label of Y Axis
                 maxYLabel = if (yMax % (numOfYLabels - 1) != 0.0f)
                     yMax.toInt() + ((numOfYLabels - 1) - (yMax.toInt() % (numOfYLabels - 1)))
                 else
                     yMax.toInt()
-
                 minYLabel = if (yMin.toInt() % (numOfYLabels - 1) == 0)
                     yMin.toInt() - (numOfYLabels - 1)
                 else
                     yMin.toInt() - (yMin.toInt() % (numOfYLabels - 1))
 
 
-                // Difference between each Y Label
+                // Difference between each Y label to its subsequent label
                 yLabelDifference = (maxYLabel - minYLabel) / (numOfYLabels - 1)
 
-                // Calculating the points for Y - Axis labels
+                // Calculating the values of Y - Axis labels
                 for (index in 0 until numOfYLabels) {
 
                     // This is the value of the current Y Axis labels
@@ -118,37 +114,37 @@ class LinearStringData(
 
 
     /**
-     * This is the function which is responsible for the calculations of all the graph related stuff
+     * This is the function responsible for all the graph related calculations.
      *
-     * @param size This is the size of the whole canvas which also haves the componentSize in it
+     * @param size This is the size of the whole canvas.
      */
     override fun DrawScope.doCalculations(size: Size) {
 
-        // Scale of Y - Axis of the Graph
+        // Scale of Y Axis of the graph
         yScale = size.height / numOfYLabels
 
-        // maximum Width of the Y - Labels. Needs Y Scale
+        // Maximum width of the Y labels. Needs y Scale to be calculated beforehand.
         val yLabelMaxWidth = calculateYLabelsCoordinates()
 
         // X - Axis Scale
         xScale = (size.width - yLabelMaxWidth) / numOfXLabels
 
-        // This function calculates the Coordinates of the Markers
-        calculateMarkersCoordinates(yMarkerMaxWidth = yLabelMaxWidth)
+        // This function calculates the offset of the markers/observation in the graph
+        calculateMarkersCoordinates(yLabelMaxWidth = yLabelMaxWidth)
 
-        // This function calculates the Coordinates for the X - Labels
-        calculateXLabelsCoordinates(size = size, yMarkerMaxWidth = yLabelMaxWidth)
+        // This function calculates the offset for the X labels in the graph
+        calculateXLabelsCoordinates(size = size, yLabelsMaxWidth = yLabelMaxWidth)
     }
 
 
     /**
-     * This function calculates the Y - Axis Labels Coordinates
+     * This function calculates the Y axis labels offsets.
      */
     private fun DrawScope.calculateYLabelsCoordinates(): Int {
 
         var yLabelMaxWidth = 0
 
-        // Calculating all the chart Y - Axis Labels in the chart along with their coordinates
+        // Calculating all the Y axis labels in the chart along with their offset.
         yAxisLabels.forEachIndexed { index, point ->
 
             with(point) {
@@ -160,10 +156,10 @@ class LinearStringData(
                 paint.typeface = Typeface.create(Typeface.DEFAULT, Typeface.NORMAL)
                 paint.getTextBounds(value.toString(), 0, value.toString().length, bounds)
 
-                // Current Y Coordinate for the point
+                // Current Y offset for the point.
                 val currentYCoordinate = (yScale * index) + 12f
 
-                // Setting the calculated graph coordinates to the object
+                // Setting the calculated graph offset of the object.
                 setOffset(x = -24f, currentYCoordinate)
 
                 val width = bounds.width()
@@ -175,22 +171,22 @@ class LinearStringData(
 
 
     /**
-     * This function calculates the Coordinates for the Markers
+     * This function calculates the offset for the markers or observation or data set.
      *
-     * @param yMarkerMaxWidth This is the maximum width of the Y - Labels
+     * @param yLabelMaxWidth This is the maximum width of the Y labels.
      */
-    private fun calculateMarkersCoordinates(yMarkerMaxWidth: Int) {
+    private fun calculateMarkersCoordinates(yLabelMaxWidth: Int) {
 
-        // Taking all the points given and calculating where they will stay in the graph
-        dataSets.forEach { pointSet ->
+        // Taking all the observations given and calculating their offset.
+        linearDataSets.forEach { pointSet ->
 
             pointSet.forEachIndexed { index, point ->
                 with(point) {
 
                     val currentYCoordinate = (maxYLabel - value) * yScale / yLabelDifference
-                    val currentXCoordinate = xAxisOffset + (index * xScale) + yMarkerMaxWidth
+                    val currentXCoordinate = xAxisOffset + (index * xScale) + yLabelMaxWidth
 
-                    // Setting the calculated graph coordinates to the object
+                    // Setting the calculated graph offset to the object
                     setOffset(x = currentXCoordinate, y = currentYCoordinate)
                 }
             }
@@ -199,20 +195,20 @@ class LinearStringData(
 
 
     /**
-     * This Function calculates the coordinates for the X Labels
+     * This function calculates the offset for the X labels
      *
      * @param size This is the size of the canvas
-     * @param yMarkerMaxWidth This is the maximum width of the Y - Labels
+     * @param yLabelsMaxWidth This is the maximum width of the Y labels
      */
-    private fun calculateXLabelsCoordinates(size: Size, yMarkerMaxWidth: Int) {
+    private fun calculateXLabelsCoordinates(size: Size, yLabelsMaxWidth: Int) {
 
-        // Calculating all the chart X - Axis Labels coordinates
+        // Calculating all the chart X axis labels offset
         xAxisLabels.forEachIndexed { index, currentMarker ->
 
-            val xCoordinate = (xScale * index) + xAxisOffset + yMarkerMaxWidth
+            val xCoordinate = (xScale * index) + xAxisOffset + yLabelsMaxWidth
             val yCoordinate = size.height
 
-            // Setting the calculated graph coordinates to the object
+            // Setting the calculated graph offsets to the object
             currentMarker.setOffset(x = xCoordinate, y = yCoordinate)
         }
     }

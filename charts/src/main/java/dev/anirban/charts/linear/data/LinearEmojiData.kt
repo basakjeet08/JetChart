@@ -9,15 +9,16 @@ import dev.anirban.charts.util.Coordinate
 
 
 /**
- * This is one of the implementation for storing and calculating the data in the chart. It
- * Implements the [LinearDataInterface] Interface
+ * This class implements the [LinearDataInterface] and stores the data necessary for a linear chart.
+ * For other implementations check [LinearStringData].
  *
- * @param xAxisLabels These are the readings of the X - Axis
- * @param dataSets These are the readings of the Y - Axis
- * @param yAxisLabels This is the list of marker which are present in the Y - Axis
+ * @param linearDataSets This is the data set of the chart.
+ * @param xAxisLabels These are the labels for the X - Axis.
+ * @param yAxisLabels These are the labels for the Y - Axis.
+ * @param dimension This is the dimension of the label drawable or observations.
  */
 class LinearEmojiData(
-    override val dataSets: List<DataSet>,
+    override val linearDataSets: List<LinearDataSet>,
     override val xAxisLabels: List<Coordinate<String>>,
     override var yAxisLabels: MutableList<Coordinate<*>> = mutableListOf(),
     val dimension: Int = 50
@@ -25,28 +26,22 @@ class LinearEmojiData(
 
 
     /**
-     * These are the num of markers in X-Axis
+     * These are the count of labels in X-Axis and Y - Axis.
      */
     override val numOfXLabels: Int = xAxisLabels.size
     override var numOfYLabels: Int = yAxisLabels.size
 
 
     /**
-     * The Maximum Y Label Reading of the Graph
+     * The maximum or peak Y Label of the Graph.
      */
-    private var maxYLabel: Int = Int.MIN_VALUE
+    private var maxYLabel: Int = yAxisLabels.size - 1
 
 
     /**
-     * The Minimum Y Label Reading of the Graph
+     * This is the difference between each Y label and its subsequent label.
      */
-    private var minYLabel: Int = Int.MAX_VALUE
-
-
-    /**
-     * It is the difference between each Y Label from its following one.
-     */
-    private var yLabelDifference: Int
+    private var yLabelDifference: Int = 1
 
 
     /**
@@ -56,111 +51,105 @@ class LinearEmojiData(
 
 
     /**
-     * This are the X and Y Scales for the Graph
+     * These are the X and Y Scales for the graph.
      */
     private var xScale: Float = 0f
     private var yScale: Float = 0f
 
-    init {
-
-        // Storing the upper Label and Lower Label of Y Axis
-        maxYLabel = yAxisLabels.size - 1
-        minYLabel = 0
-
-        // Difference between each Y Labels
-        yLabelDifference = 1
-    }
-
 
     /**
-     * This is the function which is responsible for the calculations of all the graph related stuff
+     * This is the function responsible for all the graph related calculations.
      *
-     * @param size This is the size of the whole canvas which also haves the componentSize in it
+     * @param size This is the size of the whole canvas.
      */
     override fun DrawScope.doCalculations(size: Size) {
 
-        // Scale of Y - Axis of the Graph
+        // Scale of Y Axis of the graph
         yScale = size.height / numOfYLabels
 
-        // maximum Width of the Y - Labels. Needs Y Scale
+        // Maximum width of the Y labels. Needs y Scale to be calculated beforehand.
         val yMarkerMaxWidth = calculateYLabelCoordinates()
 
         // X - Axis Scale
         xScale = (size.width - yMarkerMaxWidth) / numOfXLabels
 
-        // This function calculates the Coordinates of the Markers
-        calculateMarkersCoordinates(yMarkerMaxWidth = yMarkerMaxWidth)
+        // This function calculates the offset of the markers/observation in the graph
+        calculateMarkersCoordinates(yLabelMaxWidth = yMarkerMaxWidth)
 
-        // This function calculates the Coordinates for the X - Labels
-        calculateXLabelsCoordinates(size = size, yMarkerMaxWidth = yMarkerMaxWidth)
+        // This function calculates the offset for the X labels in the graph
+        calculateXLabelsCoordinates(size = size, yLabelsMaxWidth = yMarkerMaxWidth)
     }
 
 
     /**
-     * This function calculates the Y - Axis Labels Coordinates
+     * This function calculates the Y axis labels offsets.
      */
     private fun calculateYLabelCoordinates(): Int {
 
         var maxDimension = 0
 
-        // Calculating all the chart Y - Axis Labels in the chart along with their coordinates
+        // Calculating all the Y axis labels in the chart along with their offset.
         yAxisLabels.forEachIndexed { index, point ->
 
-            point.value as BitmapDrawable
+            with(point) {
+                value as BitmapDrawable
 
-            // Current Y Coordinate for the point
-            val currentYCoordinate = (yScale * index) - (dimension.toFloat() / 2f)
+                // Current Y offset for the point.
+                val currentYOffset = (yScale * index) - (dimension.toFloat() / 2f)
 
-            val resizedBitmap =
-                Bitmap.createScaledBitmap(point.value.bitmap, dimension, dimension, true)
+                val resizedBitmap =
+                    Bitmap.createScaledBitmap(value.bitmap, dimension, dimension, true)
 
-            if (resizedBitmap.width > maxDimension)
-                maxDimension = resizedBitmap.width
+                if (resizedBitmap.width > maxDimension)
+                    maxDimension = resizedBitmap.width
 
-            // Setting the calculated graph coordinates to the object
-            point.setOffset(x = -24f, y = currentYCoordinate)
+                // Setting the calculated graph offset of the object.
+                setOffset(x = -24f, y = currentYOffset)
+            }
         }
         return maxDimension
     }
 
 
     /**
-     * This function calculates the Coordinates for the Markers
+     * This function calculates the offset for the markers or observation or data set.
      *
-     * @param yMarkerMaxWidth This is the maximum width of the Y - Labels
+     * @param yLabelMaxWidth This is the maximum width of the Y labels.
      */
-    private fun calculateMarkersCoordinates(yMarkerMaxWidth: Int) {
+    private fun calculateMarkersCoordinates(yLabelMaxWidth: Int) {
 
-        // Taking all the points given and calculating where they will stay in the graph
-        dataSets.forEach { pointSet ->
+        // Taking all the observations given and calculating their offset.
+        linearDataSets.forEach { pointSet ->
 
             pointSet.forEachIndexed { index, point ->
+                with(point) {
 
-                val currentYCoordinate = (maxYLabel - point.value) * yScale / yLabelDifference
-                val currentXCoordinate = xAxisOffset + (index * xScale) + yMarkerMaxWidth
+                    val currentYCoordinate = (maxYLabel - value) * yScale / yLabelDifference
+                    val currentXCoordinate = xAxisOffset + (index * xScale) + yLabelMaxWidth
 
-                // Setting the calculated graph coordinates to the object
-                point.setOffset(x = currentXCoordinate, y = currentYCoordinate)
+                    // Setting the calculated graph offset to the object
+                    setOffset(x = currentXCoordinate, y = currentYCoordinate)
+                }
             }
         }
     }
 
 
     /**
-     * This Function calculates the coordinates for the X Labels
+     * This function calculates the offset for the X labels
      *
      * @param size This is the size of the canvas
-     * @param yMarkerMaxWidth This is the maximum width of the Y - Labels
+     * @param yLabelsMaxWidth This is the maximum width of the Y labels
      */
-    private fun calculateXLabelsCoordinates(size: Size, yMarkerMaxWidth: Int) {
+    private fun calculateXLabelsCoordinates(size: Size, yLabelsMaxWidth: Int) {
 
-        // Calculating all the chart X - Axis Labels coordinates
+        // Calculating all the chart X axis labels offset
         xAxisLabels.forEachIndexed { index, currentMarker ->
 
-            val xCoordinate = (xScale * index) + xAxisOffset + yMarkerMaxWidth
+            val xCoordinate = (xScale * index) + xAxisOffset + yLabelsMaxWidth
             val yCoordinate = size.height
 
-            // Setting the calculated graph coordinates to the object
+            // Setting the calculated graph offsets to the object
             currentMarker.setOffset(x = xCoordinate, y = yCoordinate)
         }
     }

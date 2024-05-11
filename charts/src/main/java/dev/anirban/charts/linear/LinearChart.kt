@@ -62,7 +62,7 @@ open class LinearChart(
         var maxSize = -1
 
         // calculating the number of max Y - Axis Readings in a particular Coordinate set
-        linearData.dataSets.forEach {
+        linearData.linearDataSets.forEach {
             if (it.size > maxSize)
                 maxSize = it.size
         }
@@ -79,7 +79,7 @@ open class LinearChart(
     override fun validateDecorationInput() {
 
         // checking if we have enough Primary Color for the plots
-        if (decoration.plotPrimaryColor.size < linearData.dataSets.size) {
+        if (decoration.plotPrimaryColor.size < linearData.linearDataSets.size) {
             if (plot is LinearBarPlot && decoration.plotPrimaryColor.isEmpty())
                 throw Exception(
                     "plotPrimaryColor for the decoration have 0 Colors whereas at least " +
@@ -87,16 +87,16 @@ open class LinearChart(
                 )
             else
                 throw LinearDecorationMismatch(
-                    "Need to provide ${linearData.dataSets.size} number of colors for the " +
+                    "Need to provide ${linearData.linearDataSets.size} number of colors for the " +
                             "plotPrimaryColor"
                 )
         }
 
         // checking if we have enough Secondary Color for the plots
-        if (decoration.plotSecondaryColor.size < linearData.dataSets.size && plot !is LinearBarPlot)
+        if (decoration.plotSecondaryColor.size < linearData.linearDataSets.size && plot !is LinearBarPlot)
             throw LinearDecorationMismatch(
                 "Secondary Color of Decoration Class needs " +
-                        "${linearData.dataSets.size} colors but it has " +
+                        "${linearData.linearDataSets.size} colors but it has " +
                         "${decoration.plotSecondaryColor.size} colors"
             )
 
