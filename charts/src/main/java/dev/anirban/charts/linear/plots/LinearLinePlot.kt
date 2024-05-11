@@ -9,7 +9,9 @@ import dev.anirban.charts.linear.interfaces.LinearPlotInterface
 
 /**
  * This is the Line Plot class which implements the [LinearPlotInterface] Interface and makes a Line
- * Chart
+ * Chart.
+ *
+ * Other implementation are [LinearBarPlot] and [LinearGradientPlot].
  *
  * @param lineStroke This defines the stroke of the line
  * @param circleRadius This defines the radius of curve of the Circle
@@ -20,10 +22,10 @@ class LinearLinePlot(
 ) : LinearPlotInterface {
 
     /**
-     * This is the function which contains the actual margin implementation
+     * This function plots the graph data sets on the graph
      *
-     * @param linearData This is the data of the Line Chart
-     * @param decoration THis is the decoration of the function
+     * @param linearData The data of the graph [LinearDataInterface] object implementation.
+     * @param decoration The decoration of the graph [LinearDecoration] object implementation.
      */
     override fun DrawScope.plotChart(
         linearData: LinearDataInterface,

@@ -32,18 +32,22 @@ import dev.anirban.charts.linear.decoration.LinearDecoration
 import dev.anirban.charts.linear.labels.LinearEmojiLabelDrawer
 import dev.anirban.charts.linear.labels.LinearStringLabelDrawer
 import dev.anirban.charts.linear.plots.LinearBarPlot
-import dev.anirban.charts.linear.plots.LinearGradientLinePlot
+import dev.anirban.charts.linear.plots.LinearGradientPlot
 import dev.anirban.charts.linear.plots.LinearLinePlot
 
 /**
  * This is the base class which directly implements the [LinearDataInterface] interfaces.
  *
- * @param labelDrawer This is the implementation for drawing the Margins
- * @param decoration This is the implementation for drawing the Decorations
- * @param linearData This is the implementation for keeping the Linear Chart data and calculations
- * @param plot This is the implementation for how shall the plotting be drawn on the graph
- * @param legendDrawer This is the implementation for how we are  going to draw all the color
- * conventions in the graph
+ * @param labelDrawer This is the implementation of the [LinearLabelDrawerInterface]. The labels
+ * will be drawn in the graph according to the implementation
+ * @param decoration This is the implementation of the [LinearDecoration]. The decoration of
+ * different elements will be provided by this object
+ * @param linearData This is the implementation of the [LinearDataInterface]. The data along with
+ * the chart offsets will be calculated according to this Login
+ * @param plot This is the implementation of the [LinearPlotInterface]. This is responsible for
+ * providing the logic to draw plots in the chart.
+ * @param legendDrawer This is the implementation of [LinearLegendDrawer]. This provides an
+ * implementation for drawing the legends of the chart
  */
 open class LinearChart(
     override val labelDrawer: LinearLabelDrawerInterface,
@@ -52,6 +56,7 @@ open class LinearChart(
     override val plot: LinearPlotInterface,
     override val legendDrawer: LinearLegendDrawer
 ) : LinearChartInterface, LinearChartExceptionHandler {
+
 
     /**
      * This functions validates the [LinearDataInterface] is implemented properly and all the
@@ -69,7 +74,7 @@ open class LinearChart(
 
         // Comparing the num of max Y - Axis Readings to X - Axis Readings/Markers
         if (linearData.xAxisLabels.size < maxSize)
-            throw LinearDataMismatch("X - Axis Markers Size is less than Number of Y - Axis Reading")
+            throw LinearDataMismatch("X - Axis Labels Size is less than Number of observations")
     }
 
     /**
@@ -103,27 +108,28 @@ open class LinearChart(
     }
 
     /**
-     * This function validates if the margin and the data passed are supported or not so it can give
-     * a meaningful result to the developer
+     * This function validates if the label and the data passed are supported or not so it can
+     * give a meaningful result to the developer
      */
     override fun validateTypeMismatch() {
         if (linearData is LinearEmojiData && labelDrawer !is LinearEmojiLabelDrawer)
             throw LinearChartTypeMismatch(
-                "Need to pass a Margin of Type LinearEmojiMargin for a " +
+                "Need to pass a Label of Type LinearEmojiLabelDrawer for a " +
                         "data of type LinearEmojiData"
             )
 
         if (labelDrawer is LinearEmojiLabelDrawer && linearData !is LinearEmojiData)
             throw LinearChartTypeMismatch(
                 "Need to pass a Data of Type LinearEmojiData for a " +
-                        "margin of type LinearEmojiMargin"
+                        "margin of type LinearEmojiLabelDrawer"
             )
     }
 
     /**
-     * This function draws the margins according to the margin implementation passed to it
+     * This function draws the various labels and the Axis Lines of the graph according to the
+     * [LinearChartInterface.labelDrawer] implementation.
      */
-    override fun DrawScope.drawMargin() {
+    override fun DrawScope.drawLabels() {
         labelDrawer.apply {
             drawLabels(
                 linearData = linearData,
@@ -133,9 +139,10 @@ open class LinearChart(
     }
 
     /**
-     * This function draws the plotting of the chart
+     * This function draws the plots of the graph according to the [LinearChartInterface.plot]
+     * implementation.
      */
-    override fun DrawScope.plotChart() {
+    override fun DrawScope.drawPlot() {
         plot.apply {
             plotChart(
                 linearData = linearData,
@@ -145,18 +152,19 @@ open class LinearChart(
     }
 
     /**
-     * This function draws the Color Conventions of the Chart
+     * This function draws the legends of the graph according to the [LinearChartInterface.legendDrawer]
+     * implementation
      */
     @Composable
     override fun DrawLegends() {
         legendDrawer.DrawLegends(
-            data = linearData,
+            linearData = linearData,
             decoration = decoration
         )
     }
 
     /**
-     * This is the Build Function which starts composing the Charts and composes the Charts
+     * This function is called to start building the chart
      *
      * @param modifier This is for default modifications to be passed from the parent Class
      */
@@ -185,8 +193,8 @@ open class LinearChart(
                         linearData.apply {
                             doCalculations(size = size)
                         }
-                        drawMargin()
-                        plotChart()
+                        drawLabels()
+                        drawPlot()
 
                     }
             )
@@ -223,8 +231,8 @@ open class LinearChart(
          * @param decoration This is the implementation for drawing the Decorations
          * @param linearData This is the implementation for keeping the Linear Chart data and calculations
          * @param plot This is the implementation for how shall the plotting be drawn on the graph
-         * @param colorConvention This is the implementation for how we are going to draw all the
-         * color conventions in the graph
+         * @param legendDrawer This is the implementation for how we are going to draw all the
+         * legend in the graph
          */
         @Composable
         fun LineChart(
@@ -233,13 +241,13 @@ open class LinearChart(
             decoration: LinearDecoration = LinearDecoration.lineDecorationColors(),
             linearData: LinearStringData,
             plot: LinearLinePlot = LinearLinePlot(),
-            colorConvention: LinearLegendDrawer = LinearGridLegend()
+            legendDrawer: LinearLegendDrawer = LinearGridLegend()
         ) = LinearChart(
             labelDrawer = labelDrawer,
             decoration = decoration,
             linearData = linearData,
             plot = plot,
-            legendDrawer = colorConvention
+            legendDrawer = legendDrawer
         ).Build(modifier = modifier)
 
 
@@ -261,8 +269,8 @@ open class LinearChart(
          * @param decoration This is the implementation for drawing the Decorations
          * @param linearData This is the implementation for keeping the Linear Chart data and calculations
          * @param plot This is the implementation for how shall the plotting be drawn on the graph
-         * @param colorConvention This is the implementation for how we are going to draw all
-         * the color conventions in the graph
+         * @param legendDrawer This is the implementation for how we are going to draw all
+         * the legend in the graph
          */
         @Composable
         fun EmojiLineChart(
@@ -271,13 +279,13 @@ open class LinearChart(
             decoration: LinearDecoration = LinearDecoration.lineDecorationColors(),
             linearData: LinearEmojiData,
             plot: LinearLinePlot = LinearLinePlot(),
-            colorConvention: LinearLegendDrawer = LinearNoLegend
+            legendDrawer: LinearLegendDrawer = LinearNoLegend
         ) = LinearChart(
             labelDrawer = labelDrawer,
             decoration = decoration,
             linearData = linearData,
             plot = plot,
-            legendDrawer = colorConvention
+            legendDrawer = legendDrawer
         ).Build(modifier = modifier)
 
 
@@ -291,8 +299,8 @@ open class LinearChart(
          * @param decoration This is the implementation for drawing the Decorations
          * @param linearData This is the implementation for keeping the Linear Chart data and calculations
          * @param plot This is the implementation for how shall the plotting be drawn on the graph
-         * @param colorConvention This is the implementation for how we are going to draw all
-         * the color conventions in the graph
+         * @param legendDrawer This is the implementation for how we are going to draw all
+         * the legend in the graph
          */
         @Composable
         fun GradientChart(
@@ -300,14 +308,14 @@ open class LinearChart(
             labelDrawer: LinearStringLabelDrawer = LinearStringLabelDrawer(),
             decoration: LinearDecoration = LinearDecoration.lineDecorationColors(),
             linearData: LinearStringData,
-            plot: LinearGradientLinePlot,
-            colorConvention: LinearLegendDrawer = LinearNoLegend
+            plot: LinearGradientPlot,
+            legendDrawer: LinearLegendDrawer = LinearNoLegend
         ) = LinearChart(
             labelDrawer = labelDrawer,
             decoration = decoration,
             linearData = linearData,
             plot = plot,
-            legendDrawer = colorConvention
+            legendDrawer = legendDrawer
         ).Build(modifier = modifier)
 
 
@@ -319,8 +327,8 @@ open class LinearChart(
          * @param decoration This is the implementation for drawing the Decorations
          * @param linearData This is the implementation for keeping the Linear Chart data and calculations
          * @param plot This is the implementation for how shall the plotting be drawn on the graph
-         * @param colorConvention This is the implementation for how we are going to draw all
-         * the color conventions in the graph
+         * @param legendDrawer This is the implementation for how we are going to draw all
+         * the legend in the graph
          */
         @Composable
         fun BarChart(
@@ -329,13 +337,13 @@ open class LinearChart(
             decoration: LinearDecoration = LinearDecoration.barDecorationColors(),
             linearData: LinearStringData,
             plot: LinearBarPlot = LinearBarPlot(),
-            colorConvention: LinearLegendDrawer = LinearGridLegend()
+            legendDrawer: LinearLegendDrawer = LinearGridLegend()
         ) = LinearChart(
             labelDrawer = labelDrawer,
             decoration = decoration,
             linearData = linearData,
             plot = plot,
-            legendDrawer = colorConvention
+            legendDrawer = legendDrawer
         ).Build(modifier = modifier)
 
 
@@ -347,8 +355,8 @@ open class LinearChart(
          * @param decoration This is the implementation for drawing the Decorations
          * @param linearData This is the implementation for keeping the Linear Chart data and calculations
          * @param plot This is the implementation for how shall the plotting be drawn on the graph
-         * @param colorConvention This is the implementation for how we are going to draw all
-         * the color conventions in the graph
+         * @param legendDrawer This is the implementation for how we are going to draw all
+         * the legend in the graph
          */
         @Composable
         fun EmojiBarChart(
@@ -357,13 +365,13 @@ open class LinearChart(
             decoration: LinearDecoration = LinearDecoration.barDecorationColors(),
             linearData: LinearEmojiData,
             plot: LinearBarPlot = LinearBarPlot(),
-            colorConvention: LinearLegendDrawer = LinearNoLegend
+            legendDrawer: LinearLegendDrawer = LinearNoLegend
         ) = LinearChart(
             labelDrawer = labelDrawer,
             decoration = decoration,
             linearData = linearData,
             plot = plot,
-            legendDrawer = colorConvention
+            legendDrawer = legendDrawer
         ).Build(modifier = modifier)
 
 
@@ -377,8 +385,8 @@ open class LinearChart(
          * @param decoration This is the implementation for drawing the Decorations
          * @param linearData This is the implementation for keeping the Linear Chart data and calculations
          * @param plot This is the implementation for how shall the plotting be drawn on the graph
-         * @param colorConvention This is the implementation for how we are going to draw all
-         * the color conventions in the graph
+         * @param legendDrawer This is the implementation for how we are going to draw all
+         * the legend in the graph
          */
         @Composable
         fun CustomLinearChart(
@@ -387,13 +395,13 @@ open class LinearChart(
             decoration: LinearDecoration = LinearDecoration.lineDecorationColors(),
             linearData: LinearDataInterface,
             plot: LinearPlotInterface = LinearLinePlot(),
-            colorConvention: LinearLegendDrawer = LinearNoLegend
+            legendDrawer: LinearLegendDrawer = LinearNoLegend
         ) = LinearChart(
             labelDrawer = labelDrawer,
             decoration = decoration,
             linearData = linearData,
             plot = plot,
-            legendDrawer = colorConvention
+            legendDrawer = legendDrawer
         ).Build(modifier = modifier)
     }
 }

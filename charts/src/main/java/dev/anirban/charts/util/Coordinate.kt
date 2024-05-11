@@ -5,8 +5,8 @@ import androidx.compose.ui.geometry.Offset
 
 
 /**
- * This class is made to indicate each and every point or coordinate in the graph along with
- * their calculated coordinates in the Canvas Graph.
+ * This class is made to indicate each and every point or value in the graph along with
+ * their calculated offset in the Canvas Graph.
  *
  * @param T The type of the [value] that is being plotted
  * @param value This is the value of the object that is being plotted (We calculate its
@@ -17,14 +17,14 @@ data class Coordinate<T>(val value: T) {
 
 
     /**
-     * This is the graphical x Coordinate of the object
+     * This is the graphical x offset of the object
      */
     var x: Float = 0f
         private set
 
 
     /**
-     * This is the graphical y Coordinate of the object
+     * This is the graphical y offset of the object
      */
     var y: Float = 0f
         private set
@@ -33,8 +33,8 @@ data class Coordinate<T>(val value: T) {
     /**
      * This function sets the graphical offset of the object
      *
-     * @param x The graphical x Coordinate of the object
-     * @param y The graphical y Coordinate of the object
+     * @param x The graphical x offset of the object
+     * @param y The graphical y offset of the object
      */
     fun setOffset(x: Float, y: Float) {
         this.x = x

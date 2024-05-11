@@ -5,14 +5,20 @@ import dev.anirban.charts.linear.decoration.LinearDecoration
 import dev.anirban.charts.linear.plots.*
 
 /**
- * This is the interface which needs to be every graph plot logic to work in the Library
+ * This is the abstraction of graph's plot logic. This class shall be implemented by all the
+ * plot mechanisms or plot logic.
  *
- * Implementations for this interface are :- [LinearBarPlot] , [LinearLinePlot]
+ * Implementations for this interface are :- [LinearBarPlot] , [LinearLinePlot],
+ * [LinearGradientPlot]
  */
 interface LinearPlotInterface {
 
+
     /**
-     * This function plots the graph points
+     * This function plots the graph data sets on the graph
+     *
+     * @param linearData The data of the graph [LinearDataInterface] object implementation.
+     * @param decoration The decoration of the graph [LinearDecoration] object implementation.
      */
     fun DrawScope.plotChart(
         linearData: LinearDataInterface,

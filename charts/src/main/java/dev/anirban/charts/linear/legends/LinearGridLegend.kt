@@ -94,12 +94,12 @@ class LinearGridLegend(
     /**
      * This function draws the color conventions in the canvas
      *
-     * @param data This object contains the data of the graph
+     * @param linearData This object contains the data of the graph
      * @param decoration This object contains the decorations of the graph
      */
     @Composable
     override fun DrawLegends(
-        data: LinearDataInterface,
+        linearData: LinearDataInterface,
         decoration: LinearDecoration
     ) {
 
@@ -110,7 +110,7 @@ class LinearGridLegend(
         ) {
 
             // Iterating through the whole data set to draw the required Legends
-            for (index in data.linearDataSets.indices step 2) {
+            for (index in linearData.linearDataSets.indices step 2) {
 
                 // A Row Containing two legend at a Column
                 Row(
@@ -121,15 +121,15 @@ class LinearGridLegend(
 
                     // This function draws the Left Column of the Legends
                     LegendItem(
-                        text = data.linearDataSets[index].title,
+                        text = linearData.linearDataSets[index].title,
                         color = decoration.plotPrimaryColor[index],
                         textColor = decoration.textColor
                     )
 
                     // This draws the right column of the legends
-                    if (index + 1 < data.linearDataSets.size) {
+                    if (index + 1 < linearData.linearDataSets.size) {
                         LegendItem(
-                            text = data.linearDataSets[index + 1].title,
+                            text = linearData.linearDataSets[index + 1].title,
                             color = decoration.plotPrimaryColor[index + 1],
                             textColor = decoration.textColor
                         )

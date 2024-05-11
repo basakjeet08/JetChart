@@ -12,24 +12,27 @@ import dev.anirban.charts.linear.interfaces.LinearDataInterface
 import dev.anirban.charts.linear.interfaces.LinearPlotInterface
 
 /**
- * This is the Line Plot class which implements the [LinearPlotInterface] Interface and makes a Line
- * Chart
+ * This is the gradient plot class which implements the [LinearPlotInterface] Interface and makes
+ * a gradient line chart.
+ *
+ * Other implementation are [LinearBarPlot] and [LinearLinePlot]
  *
  * @param lineStroke This defines the stroke of the line
  * @param circleRadius This defines the radius of curve of the Circle
  * @param colorList This is the list of colors for the gradient
  */
-class LinearGradientLinePlot(
+class LinearGradientPlot(
     private val lineStroke: Float = 3f,
     private val circleRadius: Float = 6f,
     private val colorList: List<Color>
 ) : LinearPlotInterface {
 
+
     /**
-     * This is the function which contains the actual margin implementation
+     * This function plots the graph data sets on the graph
      *
-     * @param linearData This is the data of the Line Chart
-     * @param decoration THis is the decoration of the function
+     * @param linearData The data of the graph [LinearDataInterface] object implementation.
+     * @param decoration The decoration of the graph [LinearDecoration] object implementation.
      */
     override fun DrawScope.plotChart(
         linearData: LinearDataInterface,

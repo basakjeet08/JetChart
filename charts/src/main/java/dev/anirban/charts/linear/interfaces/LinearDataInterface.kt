@@ -9,7 +9,8 @@ import dev.anirban.charts.util.Coordinate
 
 /**
  * This is the Data Interface which has to be implemented by the class which makes a new
- * Implementation for the handling of data and calculations in the graph
+ * Implementation for the handling of data and calculation of offsets of various observations of
+ * the graph data set.
  *
  * Implementations for this interface are :- [LinearStringData] and [LinearEmojiData]
  */
@@ -17,7 +18,7 @@ interface LinearDataInterface {
 
 
     /**
-     * These are the Data Sets for the Chart.
+     * This is the data set of the chart.
      *
      * It uses [LinearDataSet] class object for representing the data set.
      */
@@ -25,13 +26,19 @@ interface LinearDataInterface {
 
 
     /**
-     * These are the labels of the X - Axis
+     * These are the labels for the X - Axis.
      */
     val xAxisLabels: List<Coordinate<*>>
 
 
     /**
-     * These are the num of labels in X-Axis
+     * These are the labels for the Y - Axis.
+     */
+    var yAxisLabels: MutableList<Coordinate<*>>
+
+
+    /**
+     * These are the count of labels in X-Axis
      */
     val numOfXLabels: Int
 
@@ -43,15 +50,9 @@ interface LinearDataInterface {
 
 
     /**
-     * These are the labels of the X - Axis
-     */
-    var yAxisLabels: MutableList<Coordinate<*>>
-
-
-    /**
-     * This is the function which is responsible for the calculations of all the graph related stuff
+     * This is the function responsible for all the graph related calculations.
      *
-     * @param size This is the size of the whole canvas which also haves the componentSize in it
+     * @param size This is the size of the whole canvas.
      */
     fun DrawScope.doCalculations(size: Size)
 }

@@ -7,70 +7,80 @@ import dev.anirban.charts.linear.decoration.LinearDecoration
 import dev.anirban.charts.linear.LinearChart
 
 /**
- * This interface in the interface which every Linear Chart Implementation has to implement for the
- * Library to work
+ * This is the interface that needs to be implemented by any chart object to work with the Library.
  *
  * Implementations for this interface are :- [LinearChart]
- *
  */
 interface LinearChartInterface {
 
+
     /**
-     * This is the implementation of the [LinearLabelDrawerInterface]. The labels will be drawn in the graph
-     * according to the implementation
+     * This is the implementation of the [LinearLabelDrawerInterface]. The labels will be drawn
+     * in the graph according to the implementation
      *
      * @see LinearLabelDrawerInterface
      */
     val labelDrawer: LinearLabelDrawerInterface
 
+
     /**
-     * This is the implementation of the [LinearDecoration]. The decoration will be drawn
-     * in the graph according to the implementation
+     * This is the implementation of the [LinearDecoration]. The decoration of different elements
+     * will be provided by this object
      *
      * @see LinearDecoration
      */
     val decoration: LinearDecoration
 
+
     /**
-     * This is the implementation of the [LinearDataInterface]. The data will be calculated according
-     * to this business Login
+     * This is the implementation of the [LinearDataInterface]. The data along with the chart
+     * offsets will be calculated according to this Login
      *
      * @see LinearDataInterface
      */
     val linearData: LinearDataInterface
 
+
     /**
-     * This is the implementation of the [LinearPlotInterface]. The plot will be drawn in the graph
-     * according to the implementation
+     * This is the implementation of the [LinearPlotInterface]. This is responsible for providing
+     * the logic to draw plots in the chart.
      *
      * @see LinearPlotInterface
      */
     val plot: LinearPlotInterface
 
+
     /**
      * This is the implementation of [LinearLegendDrawer]. This provides an implementation for
-     * drawing the color conventions in the chart
+     * drawing the legends of the chart
      */
     val legendDrawer: LinearLegendDrawer
 
-    /**
-     * This function draws the margin according to the implementation provided to it
-     */
-    fun DrawScope.drawMargin()
 
     /**
-     * This function draws the plot according to the plot implementation provided to us
+     * This function draws the various labels and the Axis Lines of the graph according to the
+     * [LinearChartInterface.labelDrawer] implementation.
      */
-    fun DrawScope.plotChart()
+    fun DrawScope.drawLabels()
+
 
     /**
-     * This function calls the color convention implementation and draws the color conventions
+     * This function draws the plots of the graph according to the [LinearChartInterface.plot]
+     * implementation.
+     */
+    fun DrawScope.drawPlot()
+
+
+    /**
+     * This function draws the legends of the graph according to the [LinearChartInterface.legendDrawer]
+     * implementation
      */
     @Composable
     fun DrawLegends()
 
+
     /**
-     * This is the Build Function which starts composing the Charts and composes the Charts
+     * This function is called to start building the chart
      *
      * @param modifier This is for default modifications to be passed from the parent Class
      */

@@ -11,6 +11,8 @@ import dev.anirban.charts.linear.interfaces.LinearLegendDrawer
  * functionality of drawing the Legends in the canvas. Here this class lets the user provide an
  * implementation for the Legends building logic.
  *
+ * Other implementations of [LinearLegendDrawer] are [LinearNoLegend] and [LinearGridLegend]
+ *
  * @param drawLegend The implementation of the Legends building logic.
  */
 class LinearCustomLegend(
@@ -19,13 +21,13 @@ class LinearCustomLegend(
 
 
     /**
-     * This function draws the color conventions in the canvas
+     * This function implements the logic for drawing the legends.
      *
-     * @param data This object contains the data of the graph
-     * @param decoration This object contains the decorations of the graph
+     * @param linearData The data of the graph [LinearDataInterface] object implementation.
+     * @param decoration The decoration of the graph [LinearDecoration] object implementation.
      */
     @Composable
-    override fun DrawLegends(data: LinearDataInterface, decoration: LinearDecoration) {
-        drawLegend(data.linearDataSets.map { it.title })
+    override fun DrawLegends(linearData: LinearDataInterface, decoration: LinearDecoration) {
+        drawLegend(linearData.linearDataSets.map { it.title })
     }
 }

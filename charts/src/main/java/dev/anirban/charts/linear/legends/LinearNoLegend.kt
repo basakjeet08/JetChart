@@ -9,16 +9,20 @@ import dev.anirban.charts.linear.interfaces.LinearDataInterface
  * This class is the implementation of [LinearLegendDrawer] which provides the
  * implementations for drawing the color conventions in the canvas
  *
+ * Other implementations are [LinearNoLegend], [LinearCustomLegend]
  */
 object LinearNoLegend : LinearLegendDrawer {
 
 
     /**
-     * This function draws the color conventions. In this case this draws nothing in the Chart
+     * This function implements the logic for drawing the legends.
+     *
+     * @param linearData The data of the graph [LinearDataInterface] object implementation.
+     * @param decoration The decoration of the graph [LinearDecoration] object implementation.
      */
     @Composable
     override fun DrawLegends(
-        data: LinearDataInterface,
+        linearData: LinearDataInterface,
         decoration: LinearDecoration
     ) = Unit
 }

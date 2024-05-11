@@ -11,7 +11,7 @@ import androidx.compose.ui.graphics.Color
 import dev.anirban.charts.linear.LinearChart
 import dev.anirban.charts.linear.data.LinearDataSet
 import dev.anirban.charts.linear.data.LinearStringData
-import dev.anirban.charts.linear.plots.LinearGradientLinePlot
+import dev.anirban.charts.linear.plots.LinearGradientPlot
 import dev.anirban.charts.util.Coordinate
 import dev.anirban.jetchart.screens.CustomCard
 
@@ -155,7 +155,7 @@ fun LinearChartUI(onReload: () -> Unit) {
                     "Bad"
                 ).toMutableList()
             ),
-            plot = LinearGradientLinePlot(
+            plot = LinearGradientPlot(
                 colorList = listOf(
                     Color(0xFF4999DF).copy(alpha = .5f),
                     Color(0xFF4999DF).copy(alpha = .1f),

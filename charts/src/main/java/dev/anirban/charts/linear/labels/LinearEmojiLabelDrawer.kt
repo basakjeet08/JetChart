@@ -17,16 +17,19 @@ import dev.anirban.charts.linear.interfaces.LinearLabelDrawerInterface
 import dev.anirban.charts.linear.data.LinearEmojiData
 
 /**
- * This is one of the implementations of the [LinearLabelDrawerInterface] and it provides with a implementation
- * of how we should draw the Labels
+ * This is one of the implementations of the [LinearLabelDrawerInterface] and it
+ * provides with a implementation of how we should draw the Labels
+ *
+ * The other implementation is [LinearEmojiLabelDrawer]
  */
 class LinearEmojiLabelDrawer : LinearLabelDrawerInterface {
 
+
     /**
-     * This is the function which contains the actual label implementation
+     * This function draws the labels in the graph according to the implementation passed
      *
-     * @param linearData This is the data of the Line Chart
-     * @param decoration THis is the decoration of the function
+     * @param linearData The data of the graph [LinearDataInterface] object implementation.
+     * @param decoration The decoration of the graph [LinearDecoration] object implementation.
      */
     override fun DrawScope.drawLabels(
         linearData: LinearDataInterface,
