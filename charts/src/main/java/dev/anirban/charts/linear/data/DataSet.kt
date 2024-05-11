@@ -12,9 +12,9 @@ import dev.anirban.charts.util.Coordinate.Companion.coordinateSetBuilder
  * @param title This is the title of the Data Set
  * @param markers This is the list of coordinates or the data set.
  */
-data class DataSet<T>(
+data class DataSet(
     val title: String = "",
-    val markers: List<Coordinate<T>>
+    val markers: List<Coordinate<Float>>
 ) {
 
 
@@ -22,6 +22,41 @@ data class DataSet<T>(
      * This is the size of the data set
      */
     val size: Int = markers.size
+
+
+    /**
+     * This is the maximum value of the data set
+     */
+    val max: Float = markers.maxOf { it.value }
+
+
+    /**
+     * This is the minimum value of the data set
+     */
+    val min: Float = markers.minOf { it.value }
+
+
+    /**
+     * This function is used to iterate through the [DataSet.markers] and perform an action on
+     * each element.
+     *
+     * @param action This is the Action to be performed on each element.
+     */
+    fun forEach(action: (Coordinate<Float>) -> Unit) {
+        markers.forEach(action)
+    }
+
+
+    /**
+     * This function is used to iterate through the [DataSet.markers] and perform an action on
+     * each element.
+     *
+     * @param action This is the Action to be performed on each element.
+     */
+    fun forEachIndexed(action: (Int, Coordinate<Float>) -> Unit) {
+        markers.forEachIndexed(action)
+    }
+
 
     companion object {
 
@@ -35,7 +70,7 @@ data class DataSet<T>(
          * @param title This is the title of the Data Set
          * @param points This is the list of coordinates or the data set.
          */
-        fun <T> createDataSet(title: String, points: List<T>): DataSet<T> =
+        fun createDataSet(title: String, points: List<Float>): DataSet =
             DataSet(
                 title = title,
                 markers = coordinateSetBuilder(points = points)

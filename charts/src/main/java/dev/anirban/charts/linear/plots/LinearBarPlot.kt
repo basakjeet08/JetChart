@@ -60,7 +60,7 @@ class LinearBarPlot(
                     ),
                     size = Size(
                         width = barWidth,
-                        height = linearData.yMarkerList.last().y - point.y - paddingOffset
+                        height = linearData.yAxisLabels.last().y - point.y - paddingOffset
                     ),
                     cornerRadius = CornerRadius(cornerRadius)
                 )

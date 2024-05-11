@@ -66,7 +66,7 @@ fun LinearChartUI(onReload: () -> Unit) {
         LinearChart.LineChart(
             linearData = LinearStringData(
                 dataSets = dataSet1,
-                xAxisReadings = xReadingMarker
+                xAxisLabels = xReadingMarker
             )
         )
     }
@@ -77,7 +77,7 @@ fun LinearChartUI(onReload: () -> Unit) {
         LinearChart.LineChart(
             linearData = LinearStringData(
                 dataSets = dataSet2,
-                xAxisReadings = xReadingMarker
+                xAxisLabels = xReadingMarker
             )
         )
     }
@@ -88,7 +88,7 @@ fun LinearChartUI(onReload: () -> Unit) {
         LinearChart.LineChart(
             linearData = LinearStringData(
                 dataSets = dataSet3,
-                xAxisReadings = xReadingMarker
+                xAxisLabels = xReadingMarker
             )
         )
     }
@@ -98,8 +98,8 @@ fun LinearChartUI(onReload: () -> Unit) {
         LinearChart.LineChart(
             linearData = LinearStringData(
                 dataSets = dataSet4,
-                xAxisReadings = xReadingMarker,
-                yMarkerList = Coordinate.coordinateSetBuilder(
+                xAxisLabels = xReadingMarker,
+                yAxisLabels = Coordinate.coordinateSetBuilder(
                     "Very High",
                     "High",
                     "Moderate",
@@ -146,8 +146,8 @@ fun LinearChartUI(onReload: () -> Unit) {
         LinearChart.GradientChart(
             linearData = LinearStringData(
                 dataSets = dataSet4,
-                xAxisReadings = xReadingMarker,
-                yMarkerList = Coordinate.coordinateSetBuilder(
+                xAxisLabels = xReadingMarker,
+                yAxisLabels = Coordinate.coordinateSetBuilder(
                     "Very High",
                     "High",
                     "Moderate",
@@ -218,7 +218,7 @@ fun LinearChartUI(onReload: () -> Unit) {
         LinearChart.BarChart(
             linearData = LinearStringData(
                 dataSets = dataSet4,
-                xAxisReadings = xReadingMarker
+                xAxisLabels = xReadingMarker
             )
         )
     }

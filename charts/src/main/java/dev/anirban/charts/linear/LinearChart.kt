@@ -68,7 +68,7 @@ open class LinearChart(
         }
 
         // Comparing the num of max Y - Axis Readings to X - Axis Readings/Markers
-        if (linearData.xAxisReadings.size < maxSize)
+        if (linearData.xAxisLabels.size < maxSize)
             throw LinearDataMismatch("X - Axis Markers Size is less than Number of Y - Axis Reading")
     }
 

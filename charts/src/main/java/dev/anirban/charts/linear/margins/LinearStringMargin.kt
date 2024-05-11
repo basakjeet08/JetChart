@@ -29,7 +29,7 @@ class LinearStringMargin : LinearMarginInterface {
         decoration: LinearDecoration
     ) {
 
-        linearData.yMarkerList.forEach { point ->
+        linearData.yAxisLabels.forEach { point ->
 
             val bounds = Rect()
             val paint = Paint()
@@ -66,7 +66,7 @@ class LinearStringMargin : LinearMarginInterface {
         }
 
         // This Draws the Y Markers below the Graph
-        linearData.xAxisReadings.forEach { currentMarker ->
+        linearData.xAxisLabels.forEach { currentMarker ->
 
             // This draws the String Marker
             drawContext.canvas.nativeCanvas.drawText(

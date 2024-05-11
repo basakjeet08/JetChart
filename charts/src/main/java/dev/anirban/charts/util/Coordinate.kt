@@ -13,7 +13,7 @@ import androidx.compose.ui.geometry.Offset
  * coordinates according to this value)
  */
 @Immutable
-class Coordinate<T>(val value: T) {
+data class Coordinate<T>(val value: T) {
 
 
     /**

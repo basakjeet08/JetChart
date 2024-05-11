@@ -7,51 +7,70 @@ import androidx.compose.ui.graphics.drawscope.DrawScope
 import dev.anirban.charts.linear.interfaces.LinearDataInterface
 import dev.anirban.charts.util.Coordinate
 
+
 /**
  * This is one of the implementation for storing and calculating the data in the chart. It
  * Implements the [LinearDataInterface] Interface
  *
- * @param xAxisReadings These are the readings of the X - Axis
+ * @param xAxisLabels These are the readings of the X - Axis
  * @param dataSets These are the readings of the Y - Axis
- * @param yMarkerList This is the list of marker which are present in the Y - Axis
+ * @param yAxisLabels This is the list of marker which are present in the Y - Axis
  */
 class LinearEmojiData(
-    override val dataSets: List<DataSet<Float>>,
-    override val xAxisReadings: List<Coordinate<String>>,
-    override var yMarkerList: MutableList<Coordinate<*>> = mutableListOf(),
+    override val dataSets: List<DataSet>,
+    override val xAxisLabels: List<Coordinate<String>>,
+    override var yAxisLabels: MutableList<Coordinate<*>> = mutableListOf(),
     val dimension: Int = 50
 ) : LinearDataInterface {
+
 
     /**
      * These are the num of markers in X-Axis
      */
-    override val numOfXMarkers: Int = xAxisReadings.size
-    override var numOfYMarkers: Int = yMarkerList.size
+    override val numOfXLabels: Int = xAxisLabels.size
+    override var numOfYLabels: Int = yAxisLabels.size
+
 
     /**
-     * Upper Y - Axis Reading or the Maximum Reading of the Graph
+     * The Maximum Y Label Reading of the Graph
      */
-    private var yUpperReading: Int = Int.MIN_VALUE
+    private var maxYLabel: Int = Int.MIN_VALUE
+
 
     /**
-     * Lower Y - Axis Reading or the Maximum Reading of the Graph
+     * The Minimum Y Label Reading of the Graph
      */
-    private var yLowerReading: Int = Int.MAX_VALUE
+    private var minYLabel: Int = Int.MAX_VALUE
+
 
     /**
-     * It is the difference of the Upper and Lower Markers divided by the Markers count
+     * It is the difference between each Y Label from its following one.
      */
-    private var yDividend: Int
+    private var yLabelDifference: Int
+
+
+    /**
+     * This is the offset of the X Axis from the initial starting point.
+     */
+    private val xAxisOffset: Float = 48f
+
+
+    /**
+     * This are the X and Y Scales for the Graph
+     */
+    private var xScale: Float = 0f
+    private var yScale: Float = 0f
 
     init {
 
-        // Storing the upper Bound and Lower bound of Y Markers
-        yUpperReading = yMarkerList.size - 1
-        yLowerReading = 0
+        // Storing the upper Label and Lower Label of Y Axis
+        maxYLabel = yAxisLabels.size - 1
+        minYLabel = 0
 
-        // Difference between each Y Markers
-        yDividend = 1
+        // Difference between each Y Labels
+        yLabelDifference = 1
     }
+
 
     /**
      * This is the function which is responsible for the calculations of all the graph related stuff
@@ -61,40 +80,31 @@ class LinearEmojiData(
     override fun DrawScope.doCalculations(size: Size) {
 
         // Scale of Y - Axis of the Graph
-        val yScale = size.height / numOfYMarkers
+        yScale = size.height / numOfYLabels
 
-        // maximum Width of the Y - Markers
-        val yMarkerMaxWidth = calculateYMarkersCoordinates(yScale = yScale)
+        // maximum Width of the Y - Labels. Needs Y Scale
+        val yMarkerMaxWidth = calculateYLabelCoordinates()
 
         // X - Axis Scale
-        val xScale = (size.width - yMarkerMaxWidth) / numOfXMarkers
+        xScale = (size.width - yMarkerMaxWidth) / numOfXLabels
 
-        // This function calculates the Coordinates for the Readings
-        calculateReadingsCoordinates(
-            xScale = xScale,
-            yScale = yScale,
-            yMarkerMaxWidth = yMarkerMaxWidth
-        )
+        // This function calculates the Coordinates of the Markers
+        calculateMarkersCoordinates(yMarkerMaxWidth = yMarkerMaxWidth)
 
-        // This function calculates the Coordinates for the X - Markers
-        calculateXMarkersCoordinates(
-            size = size,
-            xScale = xScale,
-            yMarkerMaxWidth = yMarkerMaxWidth
-        )
+        // This function calculates the Coordinates for the X - Labels
+        calculateXLabelsCoordinates(size = size, yMarkerMaxWidth = yMarkerMaxWidth)
     }
 
+
     /**
-     * This function calculates the Y - Axis Markers Coordinates
-     *
-     * @param yScale This is the scale for the Y - Axis
+     * This function calculates the Y - Axis Labels Coordinates
      */
-    private fun calculateYMarkersCoordinates(yScale: Float): Int {
+    private fun calculateYLabelCoordinates(): Int {
 
         var maxDimension = 0
 
-        // Calculating all the chart Y - Axis markers in the chart along with their coordinates
-        yMarkerList.forEachIndexed { index, point ->
+        // Calculating all the chart Y - Axis Labels in the chart along with their coordinates
+        yAxisLabels.forEachIndexed { index, point ->
 
             point.value as BitmapDrawable
 
@@ -113,22 +123,21 @@ class LinearEmojiData(
         return maxDimension
     }
 
+
     /**
-     * This function calculates the Coordinates for the Readings
+     * This function calculates the Coordinates for the Markers
      *
-     * @param xScale This is the scale for the X - Axis
-     * @param yScale  This is the scale for the Y - Axis
-     * @param yMarkerMaxWidth This is the maximum width of the Y - Markers
+     * @param yMarkerMaxWidth This is the maximum width of the Y - Labels
      */
-    private fun calculateReadingsCoordinates(xScale: Float, yScale: Float, yMarkerMaxWidth: Int) {
+    private fun calculateMarkersCoordinates(yMarkerMaxWidth: Int) {
 
         // Taking all the points given and calculating where they will stay in the graph
         dataSets.forEach { pointSet ->
 
-            pointSet.markers.forEachIndexed { index, point ->
+            pointSet.forEachIndexed { index, point ->
 
-                val currentYCoordinate = (yUpperReading - point.value) * yScale / yDividend
-                val currentXCoordinate = 48f + (index * xScale) + yMarkerMaxWidth
+                val currentYCoordinate = (maxYLabel - point.value) * yScale / yLabelDifference
+                val currentXCoordinate = xAxisOffset + (index * xScale) + yMarkerMaxWidth
 
                 // Setting the calculated graph coordinates to the object
                 point.setOffset(x = currentXCoordinate, y = currentYCoordinate)
@@ -136,19 +145,19 @@ class LinearEmojiData(
         }
     }
 
+
     /**
-     * This Function calculates the coordinates for the X Markers
+     * This Function calculates the coordinates for the X Labels
      *
      * @param size This is the size of the canvas
-     * @param xScale This is the scale for the X - Axis
-     * @param yMarkerMaxWidth This is the maximum width of the Y - Markers
+     * @param yMarkerMaxWidth This is the maximum width of the Y - Labels
      */
-    private fun calculateXMarkersCoordinates(size: Size, xScale: Float, yMarkerMaxWidth: Int) {
+    private fun calculateXLabelsCoordinates(size: Size, yMarkerMaxWidth: Int) {
 
-        // Calculating all the chart X - Axis markers coordinates
-        xAxisReadings.forEachIndexed { index, currentMarker ->
+        // Calculating all the chart X - Axis Labels coordinates
+        xAxisLabels.forEachIndexed { index, currentMarker ->
 
-            val xCoordinate = (xScale * index) + 48f + yMarkerMaxWidth
+            val xCoordinate = (xScale * index) + xAxisOffset + yMarkerMaxWidth
             val yCoordinate = size.height
 
             // Setting the calculated graph coordinates to the object

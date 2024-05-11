@@ -3,50 +3,55 @@ package dev.anirban.charts.linear.interfaces
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import dev.anirban.charts.linear.data.DataSet
-import dev.anirban.charts.linear.data.LinearStringData
+import dev.anirban.charts.linear.data.*
 import dev.anirban.charts.util.Coordinate
+
 
 /**
  * This is the Data Interface which has to be implemented by the class which makes a new
  * Implementation for the handling of data and calculations in the graph
  *
- * Implementations for this interface are :- [LinearStringData]
+ * Implementations for this interface are :- [LinearStringData] and [LinearEmojiData]
  */
 interface LinearDataInterface {
 
+
     /**
-     * These are the readings of the Y - Axis
+     * These are the Data Sets for the Chart.
+     *
+     * It uses [DataSet] class object for representing the data set.
      */
-    val dataSets: List<DataSet<Float>>
+    val dataSets: List<DataSet>
 
 
     /**
-     * These are the readings of the X - Axis
+     * These are the labels of the X - Axis
      */
-    val xAxisReadings: List<Coordinate<*>>
+    val xAxisLabels: List<Coordinate<*>>
 
 
     /**
-     * These are the markers needed in X Axis
+     * These are the num of labels in X-Axis
      */
-    val numOfXMarkers: Int
+    val numOfXLabels: Int
 
 
     /**
-     * These are teh num of markers in Y-axis
+     * These are the num of labels in Y-axis
      */
-    val numOfYMarkers: Int
+    val numOfYLabels: Int
 
 
     /**
-     * List of all the markers in the Y - Axis
+     * These are the labels of the X - Axis
      */
-    var yMarkerList: MutableList<Coordinate<*>>
+    var yAxisLabels: MutableList<Coordinate<*>>
 
 
     /**
-     * THis is the function which contains most of the calculation logic of the graph
+     * This is the function which is responsible for the calculations of all the graph related stuff
+     *
+     * @param size This is the size of the whole canvas which also haves the componentSize in it
      */
     fun DrawScope.doCalculations(size: Size)
-
 }

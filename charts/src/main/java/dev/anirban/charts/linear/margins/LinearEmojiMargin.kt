@@ -34,7 +34,7 @@ class LinearEmojiMargin : LinearMarginInterface {
     ) {
 
         val dimension = (linearData as LinearEmojiData).dimension
-        linearData.yMarkerList.forEach { point ->
+        linearData.yAxisLabels.forEach { point ->
 
             point.value as BitmapDrawable
 
@@ -62,7 +62,7 @@ class LinearEmojiMargin : LinearMarginInterface {
         }
 
         // This Draws the Y Markers below the Graph
-        linearData.xAxisReadings.forEach { currentMarker ->
+        linearData.xAxisLabels.forEach { currentMarker ->
 
             // This draws the String Marker
             drawContext.canvas.nativeCanvas.drawText(
