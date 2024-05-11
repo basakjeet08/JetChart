@@ -16,12 +16,12 @@ import dev.anirban.charts.linear.LinearChart
 interface LinearChartInterface {
 
     /**
-     * This is the implementation of the [LinearMarginInterface]. The margins will be drawn in the graph
+     * This is the implementation of the [LinearLabelDrawerInterface]. The labels will be drawn in the graph
      * according to the implementation
      *
-     * @see LinearMarginInterface
+     * @see LinearLabelDrawerInterface
      */
-    val margin: LinearMarginInterface
+    val labelDrawer: LinearLabelDrawerInterface
 
     /**
      * This is the implementation of the [LinearDecoration]. The decoration will be drawn

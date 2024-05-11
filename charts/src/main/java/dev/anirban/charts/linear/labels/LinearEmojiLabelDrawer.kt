@@ -1,4 +1,4 @@
-package dev.anirban.charts.linear.margins
+package dev.anirban.charts.linear.labels
 
 import android.graphics.Bitmap
 import android.graphics.Paint
@@ -13,22 +13,22 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.sp
 import dev.anirban.charts.linear.decoration.LinearDecoration
 import dev.anirban.charts.linear.interfaces.LinearDataInterface
-import dev.anirban.charts.linear.interfaces.LinearMarginInterface
+import dev.anirban.charts.linear.interfaces.LinearLabelDrawerInterface
 import dev.anirban.charts.linear.data.LinearEmojiData
 
 /**
- * This is one of the implementations of the [LinearMarginInterface] and it provides with a implementation
- * of how we should draw the Margin
+ * This is one of the implementations of the [LinearLabelDrawerInterface] and it provides with a implementation
+ * of how we should draw the Labels
  */
-class LinearEmojiMargin : LinearMarginInterface {
+class LinearEmojiLabelDrawer : LinearLabelDrawerInterface {
 
     /**
-     * This is the function which contains the actual margin implementation
+     * This is the function which contains the actual label implementation
      *
      * @param linearData This is the data of the Line Chart
      * @param decoration THis is the decoration of the function
      */
-    override fun DrawScope.drawMargin(
+    override fun DrawScope.drawLabels(
         linearData: LinearDataInterface,
         decoration: LinearDecoration
     ) {
@@ -61,10 +61,10 @@ class LinearEmojiMargin : LinearMarginInterface {
             )
         }
 
-        // This Draws the Y Markers below the Graph
+        // This Draws the Y labels below the Graph
         linearData.xAxisLabels.forEach { currentMarker ->
 
-            // This draws the String Marker
+            // This draws the String label
             drawContext.canvas.nativeCanvas.drawText(
                 currentMarker.value,
                 currentMarker.x,

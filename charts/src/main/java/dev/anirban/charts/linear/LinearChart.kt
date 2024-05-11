@@ -22,15 +22,15 @@ import dev.anirban.charts.linear.interfaces.LinearChartExceptionHandler
 import dev.anirban.charts.linear.interfaces.LinearChartInterface
 import dev.anirban.charts.linear.interfaces.LinearLegendDrawer
 import dev.anirban.charts.linear.interfaces.LinearDataInterface
-import dev.anirban.charts.linear.interfaces.LinearMarginInterface
+import dev.anirban.charts.linear.interfaces.LinearLabelDrawerInterface
 import dev.anirban.charts.linear.interfaces.LinearPlotInterface
 import dev.anirban.charts.linear.legends.LinearNoLegend
 import dev.anirban.charts.linear.legends.LinearGridLegend
 import dev.anirban.charts.linear.data.LinearEmojiData
 import dev.anirban.charts.linear.data.LinearStringData
 import dev.anirban.charts.linear.decoration.LinearDecoration
-import dev.anirban.charts.linear.margins.LinearEmojiMargin
-import dev.anirban.charts.linear.margins.LinearStringMargin
+import dev.anirban.charts.linear.labels.LinearEmojiLabelDrawer
+import dev.anirban.charts.linear.labels.LinearStringLabelDrawer
 import dev.anirban.charts.linear.plots.LinearBarPlot
 import dev.anirban.charts.linear.plots.LinearGradientLinePlot
 import dev.anirban.charts.linear.plots.LinearLinePlot
@@ -38,7 +38,7 @@ import dev.anirban.charts.linear.plots.LinearLinePlot
 /**
  * This is the base class which directly implements the [LinearDataInterface] interfaces.
  *
- * @param margin This is the implementation for drawing the Margins
+ * @param labelDrawer This is the implementation for drawing the Margins
  * @param decoration This is the implementation for drawing the Decorations
  * @param linearData This is the implementation for keeping the Linear Chart data and calculations
  * @param plot This is the implementation for how shall the plotting be drawn on the graph
@@ -46,7 +46,7 @@ import dev.anirban.charts.linear.plots.LinearLinePlot
  * conventions in the graph
  */
 open class LinearChart(
-    override val margin: LinearMarginInterface,
+    override val labelDrawer: LinearLabelDrawerInterface,
     override val decoration: LinearDecoration,
     override val linearData: LinearDataInterface,
     override val plot: LinearPlotInterface,
@@ -107,13 +107,13 @@ open class LinearChart(
      * a meaningful result to the developer
      */
     override fun validateTypeMismatch() {
-        if (linearData is LinearEmojiData && margin !is LinearEmojiMargin)
+        if (linearData is LinearEmojiData && labelDrawer !is LinearEmojiLabelDrawer)
             throw LinearChartTypeMismatch(
                 "Need to pass a Margin of Type LinearEmojiMargin for a " +
                         "data of type LinearEmojiData"
             )
 
-        if (margin is LinearEmojiMargin && linearData !is LinearEmojiData)
+        if (labelDrawer is LinearEmojiLabelDrawer && linearData !is LinearEmojiData)
             throw LinearChartTypeMismatch(
                 "Need to pass a Data of Type LinearEmojiData for a " +
                         "margin of type LinearEmojiMargin"
@@ -124,8 +124,8 @@ open class LinearChart(
      * This function draws the margins according to the margin implementation passed to it
      */
     override fun DrawScope.drawMargin() {
-        margin.apply {
-            drawMargin(
+        labelDrawer.apply {
+            drawLabels(
                 linearData = linearData,
                 decoration = decoration
             )
@@ -216,10 +216,10 @@ open class LinearChart(
 
         /**
          * This function creates an object of the LinearChart which draws a basic Line chart
-         * It can draw Single Line Charts as well as multiple Line Charts with String Markers
+         * It can draw Single Line Charts as well as multiple Line Charts with String Labels
          *
          * @param modifier This is to be passed from the Parent Class for the modifications
-         * @param margin This is the implementation for drawing the Margins
+         * @param labelDrawer This is the implementation for drawing the Margins
          * @param decoration This is the implementation for drawing the Decorations
          * @param linearData This is the implementation for keeping the Linear Chart data and calculations
          * @param plot This is the implementation for how shall the plotting be drawn on the graph
@@ -229,13 +229,13 @@ open class LinearChart(
         @Composable
         fun LineChart(
             modifier: Modifier = Modifier,
-            margin: LinearStringMargin = LinearStringMargin(),
+            labelDrawer: LinearStringLabelDrawer = LinearStringLabelDrawer(),
             decoration: LinearDecoration = LinearDecoration.lineDecorationColors(),
             linearData: LinearStringData,
             plot: LinearLinePlot = LinearLinePlot(),
             colorConvention: LinearLegendDrawer = LinearGridLegend()
         ) = LinearChart(
-            margin = margin,
+            labelDrawer = labelDrawer,
             decoration = decoration,
             linearData = linearData,
             plot = plot,
@@ -257,7 +257,7 @@ open class LinearChart(
          *                  It is the code to convert a drawable into a Bitmap Drawable
          *
          * @param modifier This is to be passed from the Parent Class for the modifications
-         * @param margin This is the implementation for drawing the Margins
+         * @param labelDrawer This is the implementation for drawing the Labels
          * @param decoration This is the implementation for drawing the Decorations
          * @param linearData This is the implementation for keeping the Linear Chart data and calculations
          * @param plot This is the implementation for how shall the plotting be drawn on the graph
@@ -267,13 +267,13 @@ open class LinearChart(
         @Composable
         fun EmojiLineChart(
             modifier: Modifier = Modifier,
-            margin: LinearEmojiMargin = LinearEmojiMargin(),
+            labelDrawer: LinearEmojiLabelDrawer = LinearEmojiLabelDrawer(),
             decoration: LinearDecoration = LinearDecoration.lineDecorationColors(),
             linearData: LinearEmojiData,
             plot: LinearLinePlot = LinearLinePlot(),
             colorConvention: LinearLegendDrawer = LinearNoLegend
         ) = LinearChart(
-            margin = margin,
+            labelDrawer = labelDrawer,
             decoration = decoration,
             linearData = linearData,
             plot = plot,
@@ -287,7 +287,7 @@ open class LinearChart(
          * a gradient Plotting
          *
          * @param modifier This is to be passed from the Parent Class for the modifications
-         * @param margin This is the implementation for drawing the Margins
+         * @param labelDrawer This is the implementation for drawing the Labels
          * @param decoration This is the implementation for drawing the Decorations
          * @param linearData This is the implementation for keeping the Linear Chart data and calculations
          * @param plot This is the implementation for how shall the plotting be drawn on the graph
@@ -297,13 +297,13 @@ open class LinearChart(
         @Composable
         fun GradientChart(
             modifier: Modifier = Modifier,
-            margin: LinearStringMargin = LinearStringMargin(),
+            labelDrawer: LinearStringLabelDrawer = LinearStringLabelDrawer(),
             decoration: LinearDecoration = LinearDecoration.lineDecorationColors(),
             linearData: LinearStringData,
             plot: LinearGradientLinePlot,
             colorConvention: LinearLegendDrawer = LinearNoLegend
         ) = LinearChart(
-            margin = margin,
+            labelDrawer = labelDrawer,
             decoration = decoration,
             linearData = linearData,
             plot = plot,
@@ -315,7 +315,7 @@ open class LinearChart(
          * This function creates an object of the LinearChart which draws a basic Bar chart
          *
          * @param modifier This is to be passed from the Parent Class for the modifications
-         * @param margin This is the implementation for drawing the Margins
+         * @param labelDrawer This is the implementation for drawing the Labels
          * @param decoration This is the implementation for drawing the Decorations
          * @param linearData This is the implementation for keeping the Linear Chart data and calculations
          * @param plot This is the implementation for how shall the plotting be drawn on the graph
@@ -325,13 +325,13 @@ open class LinearChart(
         @Composable
         fun BarChart(
             modifier: Modifier = Modifier,
-            margin: LinearStringMargin = LinearStringMargin(),
+            labelDrawer: LinearStringLabelDrawer = LinearStringLabelDrawer(),
             decoration: LinearDecoration = LinearDecoration.barDecorationColors(),
             linearData: LinearStringData,
             plot: LinearBarPlot = LinearBarPlot(),
             colorConvention: LinearLegendDrawer = LinearGridLegend()
         ) = LinearChart(
-            margin = margin,
+            labelDrawer = labelDrawer,
             decoration = decoration,
             linearData = linearData,
             plot = plot,
@@ -343,7 +343,7 @@ open class LinearChart(
          * This function creates an object of the LinearChart which draws a basic Bar chart
          *
          * @param modifier This is to be passed from the Parent Class for the modifications
-         * @param margin This is the implementation for drawing the Margins
+         * @param labelDrawer This is the implementation for drawing the Labels
          * @param decoration This is the implementation for drawing the Decorations
          * @param linearData This is the implementation for keeping the Linear Chart data and calculations
          * @param plot This is the implementation for how shall the plotting be drawn on the graph
@@ -353,13 +353,13 @@ open class LinearChart(
         @Composable
         fun EmojiBarChart(
             modifier: Modifier = Modifier,
-            margin: LinearEmojiMargin = LinearEmojiMargin(),
+            labelDrawer: LinearEmojiLabelDrawer = LinearEmojiLabelDrawer(),
             decoration: LinearDecoration = LinearDecoration.barDecorationColors(),
             linearData: LinearEmojiData,
             plot: LinearBarPlot = LinearBarPlot(),
             colorConvention: LinearLegendDrawer = LinearNoLegend
         ) = LinearChart(
-            margin = margin,
+            labelDrawer = labelDrawer,
             decoration = decoration,
             linearData = linearData,
             plot = plot,
@@ -373,7 +373,7 @@ open class LinearChart(
          * by the developer
          *
          * @param modifier This is to be passed from the Parent Class for the modifications
-         * @param margin This is the implementation for drawing the Margins
+         * @param labelDrawer This is the implementation for drawing the Labels
          * @param decoration This is the implementation for drawing the Decorations
          * @param linearData This is the implementation for keeping the Linear Chart data and calculations
          * @param plot This is the implementation for how shall the plotting be drawn on the graph
@@ -383,13 +383,13 @@ open class LinearChart(
         @Composable
         fun CustomLinearChart(
             modifier: Modifier = Modifier,
-            margin: LinearMarginInterface = LinearEmojiMargin(),
+            labelDrawer: LinearLabelDrawerInterface = LinearEmojiLabelDrawer(),
             decoration: LinearDecoration = LinearDecoration.lineDecorationColors(),
             linearData: LinearDataInterface,
             plot: LinearPlotInterface = LinearLinePlot(),
             colorConvention: LinearLegendDrawer = LinearNoLegend
         ) = LinearChart(
-            margin = margin,
+            labelDrawer = labelDrawer,
             decoration = decoration,
             linearData = linearData,
             plot = plot,
