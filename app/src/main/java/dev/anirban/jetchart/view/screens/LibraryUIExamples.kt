@@ -1,4 +1,4 @@
-package dev.anirban.jetchart.screens
+package dev.anirban.jetchart.view.screens
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
@@ -16,6 +16,10 @@ import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -34,8 +38,9 @@ import dev.anirban.charts.circular.data.CircularDonutListData
 import dev.anirban.charts.circular.data.CircularTargetDataBuilder
 import dev.anirban.charts.circular.foreground.CircularDonutForeground
 import dev.anirban.charts.circular.foreground.CircularDonutTargetForeground
-import dev.anirban.jetchart.components.LinearChartUI
-import dev.anirban.jetchart.ui.theme.JetChartTheme
+import dev.anirban.jetchart.data.repo.LinearMockDataRepo
+import dev.anirban.jetchart.view.components.CustomCard
+import dev.anirban.jetchart.view.theme.JetChartTheme
 
 
 // Preview Composable Function
@@ -69,8 +74,14 @@ fun LibraryUIExample() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        LinearChartUI {
-            TODO("Not yet implemented")
+        // Linear Chart Data Sample
+        var linearData by remember {
+            mutableStateOf(LinearMockDataRepo.generateLinearMockDataResponse())
+        }
+
+        // Calling the Linear Chart Data UI
+        LinearChartUI(mockLinearData = linearData) {
+            linearData = LinearMockDataRepo.generateLinearMockDataResponse()
         }
 
         // Design Pattern Same row Donut Chart

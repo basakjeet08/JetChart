@@ -72,12 +72,12 @@ data class LinearDataSet(
          * the title and a [List] of observations as input and returns a data set object.
          *
          * @param title This is the title/type/category of the data set.
-         * @param points This is the [List] of observations or the input data set.
+         * @param markers This is the [List] of observations or the input data set.
          */
-        fun createDataSet(title: String, points: List<Float>): LinearDataSet =
+        fun createDataSet(title: String, markers: List<Float>): LinearDataSet =
             LinearDataSet(
                 title = title,
-                markers = points.toCoordinateSet()
+                markers = markers.toCoordinateSet()
             )
     }
 }

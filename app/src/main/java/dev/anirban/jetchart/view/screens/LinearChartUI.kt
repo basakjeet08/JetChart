@@ -1,4 +1,4 @@
-package dev.anirban.jetchart.components
+package dev.anirban.jetchart.view.screens
 
 
 import androidx.compose.material3.Button
@@ -13,50 +13,48 @@ import dev.anirban.charts.linear.data.LinearDataSet
 import dev.anirban.charts.linear.data.LinearStringData
 import dev.anirban.charts.linear.plots.LinearGradientPlot
 import dev.anirban.charts.util.Coordinate
-import dev.anirban.jetchart.screens.CustomCard
+import dev.anirban.jetchart.data.model.LinearMockObservation.Companion.toLinearDataSet
+import dev.anirban.jetchart.data.model.LinearMockResponse
+import dev.anirban.jetchart.view.components.CustomCard
 
 
 @Composable
-fun LinearChartUI(onReload: () -> Unit) {
+fun LinearChartUI(
+    mockLinearData: LinearMockResponse,
+    onReload: () -> Unit
+) {
 
     // Example Data Sets
     val xReadingMarker by remember {
         mutableStateOf(Coordinate.coordinateSetBuilder("A", "B", "C", "D", "E", "F", "G"))
     }
 
-    val linearDataSet1 = listOf(
+    // Data Set Samples and various ways to create them
+    val linearDataSet1 = mockLinearData.dataSet1.map {
         LinearDataSet.createDataSet(
-            title = "Netflix",
-            points = listOf(6f, 5f, 4f, 6f, 7.5f, 7f, 6f)
+            title = it.title,
+            markers = it.dataSet
         )
-    )
-
-    val linearDataSet2 = listOf(
-        linearDataSet1[0],
+    }
+    val linearDataSet2 = mockLinearData.dataSet2.map {
         LinearDataSet.createDataSet(
-            title = "Amazon",
-            points = listOf(3f, 6f, 8f, 2f, 3.5f, 3f, 4f)
+            title = it.title,
+            markers = it.dataSet
         )
-    )
-
-    val linearDataSet3 = listOf(
-        linearDataSet2[0],
-        linearDataSet2[1],
+    }
+    val linearDataSet3 = mockLinearData.dataSet3.map {
         LinearDataSet.createDataSet(
-            title = "Google",
-            points = listOf(1f, 8f, 4f, 3f, 5.9f, 2.9f, 4.7f)
+            title = it.title,
+            markers = it.dataSet
         )
-    )
+    }
+    val linearDataSet4 = mockLinearData.dataSet4.map {
+        it.toLinearDataSet()
+    }
 
-    val linearDataSet4 = listOf(
-        LinearDataSet.createDataSet(
-            title = "Facebook",
-            points = listOf(4f, 0f, 1.7f, 1.9f, 2f, 4f)
-        )
-    )
-
+    // Reload Button
     Button(onClick = onReload) {
-        Text(text = "Reload DataSet")
+        Text(text = "Reload Data Set")
     }
 
 

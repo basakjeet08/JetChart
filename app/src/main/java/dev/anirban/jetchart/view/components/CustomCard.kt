@@ -1,4 +1,4 @@
-package dev.anirban.jetchart.screens
+package dev.anirban.jetchart.view.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
