@@ -170,8 +170,8 @@ fun LinearChartUIScreen(
                 ),
                 plot = LinearGradientPlot(
                     colorList = listOf(
-                        Color(0xFF4999DF).copy(alpha = .5f),
-                        Color(0xFF4999DF).copy(alpha = .1f),
+                        Color(0xFF8F49DF).copy(alpha = .5f),
+                        Color(0xFF8F49DF).copy(alpha = .01f),
                     )
                 )
             )
