@@ -1,13 +1,21 @@
 package dev.anirban.jetchart.view.screens
 
 
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import dev.anirban.charts.linear.LinearChart
 import dev.anirban.charts.linear.data.LinearDataSet
 import dev.anirban.charts.linear.data.LinearStringData
@@ -18,7 +26,7 @@ import dev.anirban.jetchart.view.components.CustomCard
 
 
 @Composable
-fun LinearChartUI(
+fun LinearChartUIScreen(
     mockLinearData: LinearMockResponse,
     onReload: () -> Unit
 ) {
@@ -51,63 +59,71 @@ fun LinearChartUI(
         it.toLinearDataSet()
     }
 
-    // Reload Button
-    Button(onClick = onReload) {
-        Text(text = "Reload Data Set")
-    }
+    Column(
+        modifier = Modifier
+            .verticalScroll(rememberScrollState())
+            .fillMaxSize()
+            .padding(vertical = 16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+
+        // Reload Button
+        Button(onClick = onReload) {
+            Text(text = "Reload Data Set")
+        }
 
 
-    // Design Pattern Single Line Chart
-    CustomCard(title = "Single Line Chart") {
+        // Design Pattern Single Line Chart
+        CustomCard(title = "Single Line Chart") {
 
-        LinearChart.LineChart(
-            linearData = LinearStringData(
-                linearDataSets = linearDataSet1,
-                xAxisLabels = xReadingMarker
+            LinearChart.LineChart(
+                linearData = LinearStringData(
+                    linearDataSets = linearDataSet1,
+                    xAxisLabels = xReadingMarker
+                )
             )
-        )
-    }
+        }
 
-    // Design Pattern Double Line Chart
-    CustomCard(title = "Double Line Chart") {
+        // Design Pattern Double Line Chart
+        CustomCard(title = "Double Line Chart") {
 
-        LinearChart.LineChart(
-            linearData = LinearStringData(
-                linearDataSets = linearDataSet2,
-                xAxisLabels = xReadingMarker
+            LinearChart.LineChart(
+                linearData = LinearStringData(
+                    linearDataSets = linearDataSet2,
+                    xAxisLabels = xReadingMarker
+                )
             )
-        )
-    }
+        }
 
-    // Design Pattern Triple Line Chart
-    CustomCard(title = "Multiple Line Chart") {
+        // Design Pattern Triple Line Chart
+        CustomCard(title = "Multiple Line Chart") {
 
-        LinearChart.LineChart(
-            linearData = LinearStringData(
-                linearDataSets = linearDataSet3,
-                xAxisLabels = xReadingMarker
+            LinearChart.LineChart(
+                linearData = LinearStringData(
+                    linearDataSets = linearDataSet3,
+                    xAxisLabels = xReadingMarker
+                )
             )
-        )
-    }
+        }
 
-    // Design Pattern String Marker Line Chart
-    CustomCard(title = "String Marker Chart") {
-        LinearChart.LineChart(
-            linearData = LinearStringData(
-                linearDataSets = linearDataSet4,
-                xAxisLabels = xReadingMarker,
-                yAxisLabels = Coordinate.coordinateSetBuilder(
-                    "Very High",
-                    "High",
-                    "Moderate",
-                    "Average",
-                    "Bad"
-                ).toMutableList()
+        // Design Pattern String Marker Line Chart
+        CustomCard(title = "String Marker Chart") {
+            LinearChart.LineChart(
+                linearData = LinearStringData(
+                    linearDataSets = linearDataSet4,
+                    xAxisLabels = xReadingMarker,
+                    yAxisLabels = Coordinate.coordinateSetBuilder(
+                        "Very High",
+                        "High",
+                        "Moderate",
+                        "Average",
+                        "Bad"
+                    ).toMutableList()
+                )
             )
-        )
-    }
+        }
 
-    // Design Pattern String Marker Line Chart
+        // Design Pattern String Marker Line Chart
 //        CustomCard(
 //            title = "Emoji Marker Chart"
 //        ) {
@@ -137,31 +153,31 @@ fun LinearChartUI(
 //            )
 //        }
 
-    // Design Pattern String Marker Gradient Line Chart using plot object
-    CustomCard(title = "Gradient List using Plot Object") {
+        // Design Pattern String Marker Gradient Line Chart using plot object
+        CustomCard(title = "Gradient List using Plot Object") {
 
-        LinearChart.GradientChart(
-            linearData = LinearStringData(
-                linearDataSets = linearDataSet4,
-                xAxisLabels = xReadingMarker,
-                yAxisLabels = Coordinate.coordinateSetBuilder(
-                    "Very High",
-                    "High",
-                    "Moderate",
-                    "Average",
-                    "Bad"
-                ).toMutableList()
-            ),
-            plot = LinearGradientPlot(
-                colorList = listOf(
-                    Color(0xFF4999DF).copy(alpha = .5f),
-                    Color(0xFF4999DF).copy(alpha = .1f),
+            LinearChart.GradientChart(
+                linearData = LinearStringData(
+                    linearDataSets = linearDataSet4,
+                    xAxisLabels = xReadingMarker,
+                    yAxisLabels = Coordinate.coordinateSetBuilder(
+                        "Very High",
+                        "High",
+                        "Moderate",
+                        "Average",
+                        "Bad"
+                    ).toMutableList()
+                ),
+                plot = LinearGradientPlot(
+                    colorList = listOf(
+                        Color(0xFF4999DF).copy(alpha = .5f),
+                        Color(0xFF4999DF).copy(alpha = .1f),
+                    )
                 )
             )
-        )
-    }
+        }
 
-    // Design Pattern Custom Chart
+        // Design Pattern Custom Chart
 //        CustomCard(
 //            title = "Custom Chart"
 //        ) {
@@ -209,18 +225,18 @@ fun LinearChartUI(
 //            )
 //        }
 
-    // Design Pattern Bar Chart
-    CustomCard(title = "Bar Chart") {
+        // Design Pattern Bar Chart
+        CustomCard(title = "Bar Chart") {
 
-        LinearChart.BarChart(
-            linearData = LinearStringData(
-                linearDataSets = linearDataSet4,
-                xAxisLabels = xReadingMarker
+            LinearChart.BarChart(
+                linearData = LinearStringData(
+                    linearDataSets = linearDataSet4,
+                    xAxisLabels = xReadingMarker
+                )
             )
-        )
-    }
+        }
 
-    // Design Pattern Emoji Bar Chart
+        // Design Pattern Emoji Bar Chart
 //        CustomCard(
 //            title = "Emoji Bar Chart"
 //        ) {
@@ -250,4 +266,5 @@ fun LinearChartUI(
 //                )
 //            )
 //        }
+    }
 }

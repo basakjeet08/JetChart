@@ -7,7 +7,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import dev.anirban.jetchart.view.screens.LibraryUIExample
+import androidx.navigation.compose.rememberNavController
+import dev.anirban.jetchart.view.navigation.MainNavGraph
 import dev.anirban.jetchart.view.theme.JetChartTheme
 
 class MainActivity : ComponentActivity() {
@@ -20,7 +21,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    LibraryUIExample()
+
+                    val navHostController = rememberNavController()
+                    MainNavGraph(navHostController = navHostController)
                 }
             }
         }

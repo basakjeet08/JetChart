@@ -1,6 +1,5 @@
 package dev.anirban.jetchart.view.screens
 
-import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,15 +15,10 @@ import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.anirban.charts.circular.CircularChart
@@ -38,34 +32,12 @@ import dev.anirban.charts.circular.data.CircularDonutListData
 import dev.anirban.charts.circular.data.CircularTargetDataBuilder
 import dev.anirban.charts.circular.foreground.CircularDonutForeground
 import dev.anirban.charts.circular.foreground.CircularDonutTargetForeground
-import dev.anirban.jetchart.data.repo.LinearMockDataRepo
 import dev.anirban.jetchart.view.components.CustomCard
-import dev.anirban.jetchart.view.theme.JetChartTheme
-
-
-// Preview Composable Function
-@Preview(
-    "Light",
-    heightDp = 2000,
-    showBackground = true
-)
-@Preview(
-    name = "Dark",
-    heightDp = 2000,
-    uiMode = Configuration.UI_MODE_NIGHT_YES,
-    showBackground = true
-)
-@Composable
-private fun DefaultPreview() {
-    JetChartTheme {
-        LibraryUIExample()
-    }
-}
 
 @Composable
-fun LibraryUIExample() {
+fun CircularChartUIScreen() {
 
-    // Main UI
+    // Column Composable
     Column(
         modifier = Modifier
             .verticalScroll(rememberScrollState())
@@ -73,16 +45,6 @@ fun LibraryUIExample() {
             .padding(vertical = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
-        // Linear Chart Data Sample
-        var linearData by remember {
-            mutableStateOf(LinearMockDataRepo.generateLinearMockDataResponse())
-        }
-
-        // Calling the Linear Chart Data UI
-        LinearChartUI(mockLinearData = linearData) {
-            linearData = LinearMockDataRepo.generateLinearMockDataResponse()
-        }
 
         // Design Pattern Same row Donut Chart
         CustomCard(title = " Row Donut Chart") {
