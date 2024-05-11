@@ -48,10 +48,10 @@ interface LinearChartInterface {
     val plot: LinearPlotInterface
 
     /**
-     * This is the implementation of [LinearLegends]. This provides an implementation for
+     * This is the implementation of [LinearLegendDrawer]. This provides an implementation for
      * drawing the color conventions in the chart
      */
-    val legends: LinearLegends
+    val legendDrawer: LinearLegendDrawer
 
     /**
      * This function draws the margin according to the implementation provided to it
