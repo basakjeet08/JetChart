@@ -3,7 +3,6 @@ package dev.anirban.charts.linear.plots
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
-import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
 import dev.anirban.charts.linear.decoration.LinearDecoration
@@ -18,12 +17,10 @@ import dev.anirban.charts.linear.interfaces.LinearPlotInterface
  *
  * @param lineStroke This defines the stroke of the line
  * @param circleRadius This defines the radius of curve of the Circle
- * @param colorList This is the list of colors for the gradient
  */
 class LinearGradientPlot(
     private val lineStroke: Float = 3f,
-    private val circleRadius: Float = 6f,
-    private val colorList: List<Color>
+    private val circleRadius: Float = 6f
 ) : LinearPlotInterface {
 
 
@@ -113,8 +110,10 @@ class LinearGradientPlot(
 
             // Defining the Brush
             val brush = Brush.verticalGradient(
-                colors = colorList,
-                tileMode = TileMode.Clamp
+                colors = listOf(
+                    decoration.plotPrimaryColor[coordinateSetIndex].copy(alpha = .5f),
+                    Color.Transparent
+                )
             )
 
             // Drawing the gradient of the graph

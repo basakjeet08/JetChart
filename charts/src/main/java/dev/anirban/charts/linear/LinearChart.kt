@@ -250,7 +250,7 @@ open class LinearChart(
             labelDrawer: LinearStringLabelDrawer = LinearStringLabelDrawer(),
             decoration: LinearDecoration = LinearDecoration.lineDecorationColors(),
             linearData: LinearStringData,
-            plot: LinearGradientPlot,
+            plot: LinearGradientPlot = LinearGradientPlot(),
             legendDrawer: LinearLegendDrawer = LinearNoLegend
         ) = LinearChart(
             labelDrawer = labelDrawer,

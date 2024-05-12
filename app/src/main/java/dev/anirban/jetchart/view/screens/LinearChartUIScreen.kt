@@ -14,12 +14,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import dev.anirban.charts.linear.LinearChart
 import dev.anirban.charts.linear.data.LinearDataSet
 import dev.anirban.charts.linear.data.LinearStringData
-import dev.anirban.charts.linear.plots.LinearGradientPlot
 import dev.anirban.charts.util.Coordinate
 import dev.anirban.jetchart.data.model.LinearMockResponse
 import dev.anirban.jetchart.view.components.CustomCard
@@ -137,12 +135,6 @@ fun LinearChartUIScreen(
                         "Average",
                         "Bad"
                     ).toMutableList()
-                ),
-                plot = LinearGradientPlot(
-                    colorList = listOf(
-                        Color(0xFF8F49DF).copy(alpha = .5f),
-                        Color(0xFF8F49DF).copy(alpha = .01f),
-                    )
                 )
             )
         }
