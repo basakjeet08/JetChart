@@ -50,9 +50,63 @@ interface LinearDataInterface {
 
 
     /**
+     * The maximum or peak Y Label of the Graph.
+     */
+    var maxYLabel: Int
+
+
+    /**
+     * The Minimum Y Label Reading of the Graph
+     */
+    var minYLabel: Int
+
+
+    /**
+     * This is the difference between each Y label and its subsequent label.
+     */
+    var yLabelDifference: Int
+
+
+    /**
+     * This is the offset of the X Axis from the initial starting point.
+     */
+    val xAxisOffset: Float
+
+
+    /**
+     * These are the X and Y Scales for the graph.
+     */
+    var xScale: Float
+    var yScale: Float
+
+
+    /**
      * This is the function responsible for all the graph related calculations.
      *
      * @param size This is the size of the whole canvas.
      */
     fun DrawScope.doCalculations(size: Size)
+
+
+    /**
+     * This function calculates the Y axis labels offsets.
+     */
+    fun DrawScope.calculateYLabelsCoordinates(): Int
+
+
+    /**
+     * This function calculates the offset for the markers or observation or data set.
+     *
+     * @param yLabelMaxWidth This is the maximum width of the Y labels.
+     */
+    fun calculateMarkersCoordinates(yLabelMaxWidth: Int)
+
+
+    /**
+     * This function calculates the offset for the X labels
+     *
+     * @param size This is the size of the canvas
+     * @param yLabelsMaxWidth This is the maximum width of the Y labels
+     */
+    fun calculateXLabelsCoordinates(size: Size, yLabelsMaxWidth: Int)
 }

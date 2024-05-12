@@ -35,26 +35,32 @@ class LinearEmojiData(
     /**
      * The maximum or peak Y Label of the Graph.
      */
-    private var maxYLabel: Int = yAxisLabels.size - 1
+    override var maxYLabel: Int = yAxisLabels.size - 1
+
+
+    /**
+     * The Minimum Y Label Reading of the Graph
+     */
+    override var minYLabel: Int = 0
 
 
     /**
      * This is the difference between each Y label and its subsequent label.
      */
-    private var yLabelDifference: Int = 1
+    override var yLabelDifference: Int = 1
 
 
     /**
      * This is the offset of the X Axis from the initial starting point.
      */
-    private val xAxisOffset: Float = 48f
+    override val xAxisOffset: Float = 48f
 
 
     /**
      * These are the X and Y Scales for the graph.
      */
-    private var xScale: Float = 0f
-    private var yScale: Float = 0f
+    override var xScale: Float = 0f
+    override var yScale: Float = 0f
 
 
     /**
@@ -68,7 +74,7 @@ class LinearEmojiData(
         yScale = size.height / numOfYLabels
 
         // Maximum width of the Y labels. Needs y Scale to be calculated beforehand.
-        val yMarkerMaxWidth = calculateYLabelCoordinates()
+        val yMarkerMaxWidth = calculateYLabelsCoordinates()
 
         // X - Axis Scale
         xScale = (size.width - yMarkerMaxWidth) / numOfXLabels
@@ -84,7 +90,7 @@ class LinearEmojiData(
     /**
      * This function calculates the Y axis labels offsets.
      */
-    private fun calculateYLabelCoordinates(): Int {
+    override fun DrawScope.calculateYLabelsCoordinates(): Int {
 
         var maxDimension = 0
 
@@ -116,7 +122,7 @@ class LinearEmojiData(
      *
      * @param yLabelMaxWidth This is the maximum width of the Y labels.
      */
-    private fun calculateMarkersCoordinates(yLabelMaxWidth: Int) {
+    override fun calculateMarkersCoordinates(yLabelMaxWidth: Int) {
 
         // Taking all the observations given and calculating their offset.
         linearDataSets.forEach { pointSet ->
@@ -141,7 +147,7 @@ class LinearEmojiData(
      * @param size This is the size of the canvas
      * @param yLabelsMaxWidth This is the maximum width of the Y labels
      */
-    private fun calculateXLabelsCoordinates(size: Size, yLabelsMaxWidth: Int) {
+    override fun calculateXLabelsCoordinates(size: Size, yLabelsMaxWidth: Int) {
 
         // Calculating all the chart X axis labels offset
         xAxisLabels.forEachIndexed { index, currentMarker ->
