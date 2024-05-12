@@ -1,4 +1,4 @@
-package dev.anirban.charts.linear.margins
+package dev.anirban.charts.linear.labels
 
 import android.graphics.Paint
 import android.graphics.Rect
@@ -10,26 +10,29 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.sp
 import dev.anirban.charts.linear.decoration.LinearDecoration
 import dev.anirban.charts.linear.interfaces.LinearDataInterface
-import dev.anirban.charts.linear.interfaces.LinearMarginInterface
+import dev.anirban.charts.linear.interfaces.LinearLabelDrawerInterface
 
 /**
- * This is one of the implementations of the [LinearMarginInterface] and it provides with a implementation
- * of how we should draw the Margin
+ * This is one of the implementations of the [LinearLabelDrawerInterface] and it provides with
+ * a implementation of how we should draw the labels on the graph
+ *
+ * Other implementation is [LinearEmojiLabelDrawer]
  */
-class LinearStringMargin : LinearMarginInterface {
+class LinearStringLabelDrawer : LinearLabelDrawerInterface {
+
 
     /**
-     * This is the function which contains the actual margin implementation
+     * This function draws the labels in the graph according to the implementation passed
      *
-     * @param linearData This is the data of the Line Chart
-     * @param decoration THis is the decoration of the function
+     * @param linearData The data of the graph [LinearDataInterface] object implementation.
+     * @param decoration The decoration of the graph [LinearDecoration] object implementation.
      */
-    override fun DrawScope.drawMargin(
+    override fun DrawScope.drawLabels(
         linearData: LinearDataInterface,
         decoration: LinearDecoration
     ) {
 
-        linearData.yMarkerList.forEach { point ->
+        linearData.yAxisLabels.forEach { point ->
 
             val bounds = Rect()
             val paint = Paint()
@@ -45,8 +48,8 @@ class LinearStringMargin : LinearMarginInterface {
             // This draws the String Marker
             drawContext.canvas.nativeCanvas.drawText(
                 point.value.toString(),
-                point.xCoordinate,
-                point.yCoordinate,
+                point.x,
+                point.y,
                 paint
             )
 
@@ -54,25 +57,25 @@ class LinearStringMargin : LinearMarginInterface {
             drawLine(
                 start = Offset(
                     x = width.toFloat(),
-                    y = point.yCoordinate - 12f
+                    y = point.y - 12f
                 ),
                 color = decoration.textColor.copy(alpha = 0.8f),
                 end = Offset(
                     x = size.width,
-                    y = point.yCoordinate - 12f
+                    y = point.y - 12f
                 ),
                 strokeWidth = 1f
             )
         }
 
         // This Draws the Y Markers below the Graph
-        linearData.xAxisReadings.forEach { currentMarker ->
+        linearData.xAxisLabels.forEach { currentMarker ->
 
             // This draws the String Marker
             drawContext.canvas.nativeCanvas.drawText(
                 currentMarker.value.toString(),
-                currentMarker.xCoordinate,
-                currentMarker.yCoordinate,
+                currentMarker.x,
+                currentMarker.y,
                 Paint().apply {
                     color = decoration.textColor.toArgb()
                     textSize = 12.sp.toPx()

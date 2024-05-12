@@ -1,4 +1,4 @@
-package dev.anirban.charts.linear.margins
+package dev.anirban.charts.linear.labels
 
 import android.graphics.Bitmap
 import android.graphics.Paint
@@ -13,28 +13,31 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.sp
 import dev.anirban.charts.linear.decoration.LinearDecoration
 import dev.anirban.charts.linear.interfaces.LinearDataInterface
-import dev.anirban.charts.linear.interfaces.LinearMarginInterface
+import dev.anirban.charts.linear.interfaces.LinearLabelDrawerInterface
 import dev.anirban.charts.linear.data.LinearEmojiData
 
 /**
- * This is one of the implementations of the [LinearMarginInterface] and it provides with a implementation
- * of how we should draw the Margin
+ * This is one of the implementations of the [LinearLabelDrawerInterface] and it
+ * provides with a implementation of how we should draw the Labels
+ *
+ * The other implementation is [LinearEmojiLabelDrawer]
  */
-class LinearEmojiMargin : LinearMarginInterface {
+class LinearEmojiLabelDrawer : LinearLabelDrawerInterface {
+
 
     /**
-     * This is the function which contains the actual margin implementation
+     * This function draws the labels in the graph according to the implementation passed
      *
-     * @param linearData This is the data of the Line Chart
-     * @param decoration THis is the decoration of the function
+     * @param linearData The data of the graph [LinearDataInterface] object implementation.
+     * @param decoration The decoration of the graph [LinearDecoration] object implementation.
      */
-    override fun DrawScope.drawMargin(
+    override fun DrawScope.drawLabels(
         linearData: LinearDataInterface,
         decoration: LinearDecoration
     ) {
 
         val dimension = (linearData as LinearEmojiData).dimension
-        linearData.yMarkerList.forEach { point ->
+        linearData.yAxisLabels.forEach { point ->
 
             point.value as BitmapDrawable
 
@@ -42,7 +45,7 @@ class LinearEmojiMargin : LinearMarginInterface {
                 Bitmap.createScaledBitmap(point.value.bitmap, dimension, dimension, true)
             val width = resizedBitmap.width
 
-            translate(point.xCoordinate, point.yCoordinate) {
+            translate(point.x, point.y) {
                 drawImage(image = resizedBitmap.asImageBitmap())
             }
 
@@ -50,25 +53,25 @@ class LinearEmojiMargin : LinearMarginInterface {
             drawLine(
                 start = Offset(
                     x = width.toFloat(),
-                    y = point.yCoordinate + (dimension.toFloat() / 2f)
+                    y = point.y + (dimension.toFloat() / 2f)
                 ),
                 color = decoration.textColor.copy(alpha = 0.8f),
                 end = Offset(
                     x = size.width,
-                    y = point.yCoordinate + (dimension.toFloat() / 2f)
+                    y = point.y + (dimension.toFloat() / 2f)
                 ),
                 strokeWidth = 1f
             )
         }
 
-        // This Draws the Y Markers below the Graph
-        linearData.xAxisReadings.forEach { currentMarker ->
+        // This Draws the Y labels below the Graph
+        linearData.xAxisLabels.forEach { currentMarker ->
 
-            // This draws the String Marker
+            // This draws the String label
             drawContext.canvas.nativeCanvas.drawText(
                 currentMarker.value,
-                currentMarker.xCoordinate,
-                currentMarker.yCoordinate,
+                currentMarker.x,
+                currentMarker.y,
                 Paint().apply {
                     color = decoration.textColor.toArgb()
                     textSize = 12.sp.toPx()

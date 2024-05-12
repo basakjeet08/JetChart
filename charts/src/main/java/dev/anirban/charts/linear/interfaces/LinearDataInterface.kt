@@ -2,45 +2,57 @@ package dev.anirban.charts.linear.interfaces
 
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.drawscope.DrawScope
-import dev.anirban.charts.linear.data.LinearStringData
-import dev.anirban.charts.util.ChartPoint
+import dev.anirban.charts.linear.data.LinearDataSet
+import dev.anirban.charts.linear.data.*
+import dev.anirban.charts.util.Coordinate
+
 
 /**
  * This is the Data Interface which has to be implemented by the class which makes a new
- * Implementation for the handling of data and calculations in the graph
+ * Implementation for the handling of data and calculation of offsets of various observations of
+ * the graph data set.
  *
- * Implementations for this interface are :- [LinearStringData]
+ * Implementations for this interface are :- [LinearStringData] and [LinearEmojiData]
  */
 interface LinearDataInterface {
 
-    /**
-     * These are the readings of the Y - Axis
-     */
-    val yAxisReadings: List<List<ChartPoint<*>>>
 
     /**
-     * These are the readings of the X - Axis
+     * This is the data set of the chart.
+     *
+     * It uses [LinearDataSet] class object for representing the data set.
      */
-    val xAxisReadings: List<ChartPoint<*>>
+    val linearDataSets: List<LinearDataSet>
+
 
     /**
-     * These are the markers needed in X Axis
+     * These are the labels for the X - Axis.
      */
-    val numOfXMarkers: Int
+    val xAxisLabels: List<Coordinate<*>>
+
 
     /**
-     * These are teh num of markers in Y-axis
+     * These are the labels for the Y - Axis.
      */
-    val numOfYMarkers: Int
+    var yAxisLabels: MutableList<Coordinate<*>>
+
 
     /**
-     * List of all the markers in the Y - Axis
+     * These are the count of labels in X-Axis
      */
-    var yMarkerList: MutableList<ChartPoint<*>>
+    val numOfXLabels: Int
+
 
     /**
-     * THis is the function which contains most of the calculation logic of the graph
+     * These are the num of labels in Y-axis
+     */
+    val numOfYLabels: Int
+
+
+    /**
+     * This is the function responsible for all the graph related calculations.
+     *
+     * @param size This is the size of the whole canvas.
      */
     fun DrawScope.doCalculations(size: Size)
-
 }

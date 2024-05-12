@@ -5,158 +5,152 @@ import android.graphics.drawable.BitmapDrawable
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import dev.anirban.charts.linear.interfaces.LinearDataInterface
-import dev.anirban.charts.util.ChartPoint
+import dev.anirban.charts.util.Coordinate
+
 
 /**
- * This is one of the implementation for storing and calculating the data in the chart. It
- * Implements the [LinearDataInterface] Interface
+ * This class implements the [LinearDataInterface] and stores the data necessary for a linear chart.
+ * For other implementations check [LinearStringData].
  *
- * @param xAxisReadings These are the readings of the X - Axis
- * @param yAxisReadings These are the readings of the Y - Axis
- * @param yMarkerList This is the list of marker which are present in the Y - Axis
+ * @param linearDataSets This is the data set of the chart.
+ * @param xAxisLabels These are the labels for the X - Axis.
+ * @param yAxisLabels These are the labels for the Y - Axis.
+ * @param dimension This is the dimension of the label drawable or observations.
  */
 class LinearEmojiData(
-    override val yAxisReadings: List<List<ChartPoint<Float>>>,
-    override val xAxisReadings: List<ChartPoint<String>>,
-    override var yMarkerList: MutableList<ChartPoint<*>> = mutableListOf(),
+    override val linearDataSets: List<LinearDataSet>,
+    override val xAxisLabels: List<Coordinate<String>>,
+    override var yAxisLabels: MutableList<Coordinate<*>> = mutableListOf(),
     val dimension: Int = 50
 ) : LinearDataInterface {
 
+
     /**
-     * These are the num of markers in X-Axis
+     * These are the count of labels in X-Axis and Y - Axis.
      */
-    override val numOfXMarkers: Int = xAxisReadings.size
-    override var numOfYMarkers: Int = yMarkerList.size
+    override val numOfXLabels: Int = xAxisLabels.size
+    override var numOfYLabels: Int = yAxisLabels.size
+
 
     /**
-     * Upper Y - Axis Reading or the Maximum Reading of the Graph
+     * The maximum or peak Y Label of the Graph.
      */
-    private var yUpperReading: Int = Int.MIN_VALUE
+    private var maxYLabel: Int = yAxisLabels.size - 1
+
 
     /**
-     * Lower Y - Axis Reading or the Maximum Reading of the Graph
+     * This is the difference between each Y label and its subsequent label.
      */
-    private var yLowerReading: Int = Int.MAX_VALUE
+    private var yLabelDifference: Int = 1
+
 
     /**
-     * It is the difference of the Upper and Lower Markers divided by the Markers count
+     * This is the offset of the X Axis from the initial starting point.
      */
-    private var yDividend: Int
+    private val xAxisOffset: Float = 48f
 
-    init {
-
-        // Storing the upper Bound and Lower bound of Y Markers
-        yUpperReading = yMarkerList.size - 1
-        yLowerReading = 0
-
-        // Difference between each Y Markers
-        yDividend = 1
-    }
 
     /**
-     * This is the function which is responsible for the calculations of all the graph related stuff
+     * These are the X and Y Scales for the graph.
+     */
+    private var xScale: Float = 0f
+    private var yScale: Float = 0f
+
+
+    /**
+     * This is the function responsible for all the graph related calculations.
      *
-     * @param size This is the size of the whole canvas which also haves the componentSize in it
+     * @param size This is the size of the whole canvas.
      */
     override fun DrawScope.doCalculations(size: Size) {
 
-        // Scale of Y - Axis of the Graph
-        val yScale = size.height / numOfYMarkers
+        // Scale of Y Axis of the graph
+        yScale = size.height / numOfYLabels
 
-        // maximum Width of the Y - Markers
-        val yMarkerMaxWidth = calculateYMarkersCoordinates(yScale = yScale)
+        // Maximum width of the Y labels. Needs y Scale to be calculated beforehand.
+        val yMarkerMaxWidth = calculateYLabelCoordinates()
 
         // X - Axis Scale
-        val xScale = (size.width - yMarkerMaxWidth) / numOfXMarkers
+        xScale = (size.width - yMarkerMaxWidth) / numOfXLabels
 
-        // This function calculates the Coordinates for the Readings
-        calculateReadingsCoordinates(
-            xScale = xScale,
-            yScale = yScale,
-            yMarkerMaxWidth = yMarkerMaxWidth
-        )
+        // This function calculates the offset of the markers/observation in the graph
+        calculateMarkersCoordinates(yLabelMaxWidth = yMarkerMaxWidth)
 
-        // This function calculates the Coordinates for the X - Markers
-        calculateXMarkersCoordinates(
-            size = size,
-            xScale = xScale,
-            yMarkerMaxWidth = yMarkerMaxWidth
-        )
+        // This function calculates the offset for the X labels in the graph
+        calculateXLabelsCoordinates(size = size, yLabelsMaxWidth = yMarkerMaxWidth)
     }
 
+
     /**
-     * This function calculates the Y - Axis Markers Coordinates
-     *
-     * @param yScale This is the scale for the Y - Axis
+     * This function calculates the Y axis labels offsets.
      */
-    private fun calculateYMarkersCoordinates(yScale: Float): Int {
+    private fun calculateYLabelCoordinates(): Int {
 
         var maxDimension = 0
 
-        // Calculating all the chart Y - Axis markers in the chart along with their coordinates
-        yMarkerList.forEachIndexed { index, point ->
+        // Calculating all the Y axis labels in the chart along with their offset.
+        yAxisLabels.forEachIndexed { index, point ->
 
-            point.value as BitmapDrawable
+            with(point) {
+                value as BitmapDrawable
 
-            // Current Y Coordinate for the point
-            val currentYCoordinate = (yScale * index) - (dimension.toFloat() / 2f)
+                // Current Y offset for the point.
+                val currentYOffset = (yScale * index) - (dimension.toFloat() / 2f)
 
-            val resizedBitmap =
-                Bitmap.createScaledBitmap(point.value.bitmap, dimension, dimension, true)
+                val resizedBitmap =
+                    Bitmap.createScaledBitmap(value.bitmap, dimension, dimension, true)
 
-            if (resizedBitmap.width > maxDimension)
-                maxDimension = resizedBitmap.width
+                if (resizedBitmap.width > maxDimension)
+                    maxDimension = resizedBitmap.width
 
-            // Setting the calculated graph coordinates to the object
-            point.setXCoordinate(-24f)
-            point.setYCoordinate(currentYCoordinate)
-
+                // Setting the calculated graph offset of the object.
+                setOffset(x = -24f, y = currentYOffset)
+            }
         }
         return maxDimension
     }
 
-    /**
-     * This function calculates the Coordinates for the Readings
-     *
-     * @param xScale This is the scale for the X - Axis
-     * @param yScale  This is the scale for the Y - Axis
-     * @param yMarkerMaxWidth This is the maximum width of the Y - Markers
-     */
-    private fun calculateReadingsCoordinates(xScale: Float, yScale: Float, yMarkerMaxWidth: Int) {
 
-        // Taking all the points given and calculating where they will stay in the graph
-        yAxisReadings.forEach { pointSet ->
+    /**
+     * This function calculates the offset for the markers or observation or data set.
+     *
+     * @param yLabelMaxWidth This is the maximum width of the Y labels.
+     */
+    private fun calculateMarkersCoordinates(yLabelMaxWidth: Int) {
+
+        // Taking all the observations given and calculating their offset.
+        linearDataSets.forEach { pointSet ->
 
             pointSet.forEachIndexed { index, point ->
+                with(point) {
 
-                val currentYCoordinate = (yUpperReading - point.value) * yScale / yDividend
-                val currentXCoordinate = 48f + (index * xScale) + yMarkerMaxWidth
+                    val currentYCoordinate = (maxYLabel - value) * yScale / yLabelDifference
+                    val currentXCoordinate = xAxisOffset + (index * xScale) + yLabelMaxWidth
 
-                // Setting the calculated graph coordinates to the object
-                point.setXCoordinate(currentXCoordinate)
-                point.setYCoordinate(currentYCoordinate)
+                    // Setting the calculated graph offset to the object
+                    setOffset(x = currentXCoordinate, y = currentYCoordinate)
+                }
             }
         }
     }
 
+
     /**
-     * This Function calculates the coordinates for the X Markers
+     * This function calculates the offset for the X labels
      *
      * @param size This is the size of the canvas
-     * @param xScale This is the scale for the X - Axis
-     * @param yMarkerMaxWidth This is the maximum width of the Y - Markers
+     * @param yLabelsMaxWidth This is the maximum width of the Y labels
      */
-    private fun calculateXMarkersCoordinates(size: Size, xScale: Float, yMarkerMaxWidth: Int) {
+    private fun calculateXLabelsCoordinates(size: Size, yLabelsMaxWidth: Int) {
 
-        // Calculating all the chart X - Axis markers coordinates
-        xAxisReadings.forEachIndexed { index, currentMarker ->
+        // Calculating all the chart X axis labels offset
+        xAxisLabels.forEachIndexed { index, currentMarker ->
 
-            val xCoordinate = (xScale * index) + 48f + yMarkerMaxWidth
+            val xCoordinate = (xScale * index) + xAxisOffset + yLabelsMaxWidth
             val yCoordinate = size.height
 
-            // Setting the calculated graph coordinates to the object
-            currentMarker.setXCoordinate(xCoordinate)
-            currentMarker.setYCoordinate(yCoordinate)
+            // Setting the calculated graph offsets to the object
+            currentMarker.setOffset(x = xCoordinate, y = yCoordinate)
         }
     }
 }

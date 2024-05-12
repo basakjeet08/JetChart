@@ -1,9 +1,10 @@
-package dev.anirban.charts.linear.colorconvention
+package dev.anirban.charts.linear.legends
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -21,41 +22,43 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.anirban.charts.linear.decoration.LinearDecoration
-import dev.anirban.charts.linear.interfaces.LinearColorConventionInterface
+import dev.anirban.charts.linear.interfaces.LinearLegendDrawer
+import dev.anirban.charts.linear.interfaces.LinearDataInterface
+
 
 /**
- * This class is the implementation of [LinearColorConventionInterface] which provides the
- * implementations for drawing the color conventions in the canvas
+ * This class is the implementation of [LinearLegendDrawer] which provides the
+ * functionality of drawing the Legends in the canvas. Here the legends are drawn in a
+ * grid fashion with 2 Items in a Row.
  *
- * @param textList This contains the list of strings which needs to be drawn in the Chart
+ *
  * @param fontSize This defines the size of the font
  * @param fontWeight This Defines the weight of the font
  */
-class LinearGridColorConvention(
-    override val textList: List<String>,
+class LinearGridLegend(
     private val fontSize: TextUnit = 14.sp,
     private val fontWeight: FontWeight = FontWeight.W500
-) : LinearColorConventionInterface {
+) : LinearLegendDrawer {
+
 
     /**
      * This function draws the individual chart details or we can say the color codes along with
      * the text.
      *
      * @param text This is the text that would be shown before the value
-     * @param color to be shown for this color convention
+     * @param color to be shown for this Legend
      * @param textColor This is the color of the text
      *
      */
     @Composable
-    fun ChartDetail(
+    fun RowScope.LegendItem(
         text: String,
         color: Color,
         textColor: Color
     ) {
 
         Row(
-            modifier = Modifier
-                .padding(bottom = 4.dp),
+            modifier = Modifier.weight(1f),
             verticalAlignment = Alignment.CenterVertically
         ) {
 
@@ -91,56 +94,46 @@ class LinearGridColorConvention(
     /**
      * This function draws the color conventions in the canvas
      *
-     * @param decoration THis object contains the decorations of the graph
+     * @param linearData This object contains the data of the graph
+     * @param decoration This object contains the decorations of the graph
      */
     @Composable
-    override fun DrawColorConventions(
+    override fun DrawLegends(
+        linearData: LinearDataInterface,
         decoration: LinearDecoration
     ) {
 
-        Row(
-            modifier = Modifier
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.Start
+        // This contains the Color Conventions in the left side
+        Column(
+            verticalArrangement = Arrangement.spacedBy(4.dp),
+            horizontalAlignment = Alignment.Start
         ) {
 
-            // This contains the Color Conventions in the left side
-            Column(
-                modifier = Modifier
-                    .weight(1f),
-                verticalArrangement = Arrangement.SpaceEvenly,
-                horizontalAlignment = Alignment.Start
-            ) {
+            // Iterating through the whole data set to draw the required Legends
+            for (index in linearData.linearDataSets.indices step 2) {
 
-                // Drawing Left column with the conventions
-                for (index in textList.indices step 2) {
+                // A Row Containing two legend at a Column
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Start
+                ) {
 
-                    // This function draws one of the color code Item details
-                    ChartDetail(
-                        text = textList[index],
+                    // This function draws the Left Column of the Legends
+                    LegendItem(
+                        text = linearData.linearDataSets[index].title,
                         color = decoration.plotPrimaryColor[index],
                         textColor = decoration.textColor
                     )
-                }
-            }
 
-            // This contains the Color Conventions in the right side
-            Column(
-                modifier = Modifier
-                    .weight(1f),
-                verticalArrangement = Arrangement.SpaceEvenly,
-                horizontalAlignment = Alignment.Start
-            ) {
-
-                // Drawing Right column with the conventions
-                for (index in 1 until textList.size step 2) {
-
-                    // This function draws one of the color code Item details
-                    ChartDetail(
-                        text = textList[index],
-                        color = decoration.plotPrimaryColor[index],
-                        textColor = decoration.textColor
-                    )
+                    // This draws the right column of the legends
+                    if (index + 1 < linearData.linearDataSets.size) {
+                        LegendItem(
+                            text = linearData.linearDataSets[index + 1].title,
+                            color = decoration.plotPrimaryColor[index + 1],
+                            textColor = decoration.textColor
+                        )
+                    }
                 }
             }
         }

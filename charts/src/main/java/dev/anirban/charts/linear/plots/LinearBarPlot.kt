@@ -11,8 +11,10 @@ import dev.anirban.charts.linear.interfaces.LinearDataInterface
 import dev.anirban.charts.linear.interfaces.LinearPlotInterface
 
 /**
- * This is the Line Plot class which implements the [LinearPlotInterface] Interface and makes a bar
+ * This is the Bar Plot class which implements the [LinearPlotInterface] Interface and makes a bar
  * Chart
+ *
+ * Other Implementations are [LinearGradientPlot] and [LinearLinePlot]
  *
  * @param barWidth This defines the width of the bars of the bar Chart
  * @param cornerRadius This defines the radius of curve of the corners of the bars
@@ -22,11 +24,12 @@ class LinearBarPlot(
     private val cornerRadius: Float = 12f
 ) : LinearPlotInterface {
 
+
     /**
-     * This function plots the Bar Chart in the canvas
+     * This function plots the graph data sets on the graph
      *
-     * @param linearData This is the data object which contains the data of the whole graph
-     * @param decoration This object contains the decorations for the chart
+     * @param linearData The data of the graph [LinearDataInterface] object implementation.
+     * @param decoration The decoration of the graph [LinearDecoration] object implementation.
      */
     override fun DrawScope.plotChart(
         linearData: LinearDataInterface,
@@ -42,9 +45,9 @@ class LinearBarPlot(
         }
 
         // Adding the Offsets to the Variable
-        linearData.yAxisReadings.forEach { coordinateSet ->
+        linearData.linearDataSets.forEach { coordinateSet ->
 
-            coordinateSet.forEach { point ->
+            coordinateSet.markers.forEach { point ->
 
                 // This function draws the Bars
                 drawRoundRect(
@@ -55,12 +58,12 @@ class LinearBarPlot(
                         )
                     ),
                     topLeft = Offset(
-                        x = point.xCoordinate - barWidth / 2f,
-                        y = point.yCoordinate
+                        x = point.x - barWidth / 2f,
+                        y = point.y
                     ),
                     size = Size(
                         width = barWidth,
-                        height = linearData.yMarkerList.last().yCoordinate - point.yCoordinate - paddingOffset
+                        height = linearData.yAxisLabels.last().y - point.y - paddingOffset
                     ),
                     cornerRadius = CornerRadius(cornerRadius)
                 )

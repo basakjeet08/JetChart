@@ -1,4 +1,4 @@
-package dev.anirban.jetchart.ui.theme
+package dev.anirban.jetchart.view.theme
 
 import android.app.Activity
 import android.os.Build
