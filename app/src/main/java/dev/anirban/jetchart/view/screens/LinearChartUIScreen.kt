@@ -23,7 +23,6 @@ import dev.anirban.charts.linear.plots.LinearGradientPlot
 import dev.anirban.charts.util.Coordinate
 import dev.anirban.jetchart.data.model.LinearMockResponse
 import dev.anirban.jetchart.view.components.CustomCard
-import dev.anirban.jetchart.view.components.TestComponent
 
 
 @Composable
@@ -71,11 +70,6 @@ fun LinearChartUIScreen(
         // Reload Button
         Button(onClick = onReload) {
             Text(text = "Reload Data Set")
-        }
-
-        // Design Pattern Single Line Chart
-        CustomCard(title = "Test Component") {
-            TestComponent(mockLinearData)
         }
 
 
