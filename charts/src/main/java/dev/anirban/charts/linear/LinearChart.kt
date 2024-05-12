@@ -1,6 +1,5 @@
 package dev.anirban.charts.linear
 
-import android.graphics.drawable.BitmapDrawable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,7 +14,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.unit.dp
-import dev.anirban.charts.linear.exceptions.LinearChartTypeMismatch
 import dev.anirban.charts.linear.exceptions.LinearDataMismatch
 import dev.anirban.charts.linear.exceptions.LinearDecorationMismatch
 import dev.anirban.charts.linear.interfaces.LinearChartExceptionHandler
@@ -26,14 +24,13 @@ import dev.anirban.charts.linear.interfaces.LinearLabelDrawerInterface
 import dev.anirban.charts.linear.interfaces.LinearPlotInterface
 import dev.anirban.charts.linear.legends.LinearNoLegend
 import dev.anirban.charts.linear.legends.LinearGridLegend
-import dev.anirban.charts.linear.data.LinearEmojiData
 import dev.anirban.charts.linear.data.LinearStringData
 import dev.anirban.charts.linear.decoration.LinearDecoration
-import dev.anirban.charts.linear.labels.LinearEmojiLabelDrawer
 import dev.anirban.charts.linear.labels.LinearStringLabelDrawer
 import dev.anirban.charts.linear.plots.LinearBarPlot
 import dev.anirban.charts.linear.plots.LinearGradientPlot
 import dev.anirban.charts.linear.plots.LinearLinePlot
+
 
 /**
  * This is the base class which directly implements the [LinearDataInterface] interfaces.
@@ -107,23 +104,6 @@ open class LinearChart(
 
     }
 
-    /**
-     * This function validates if the label and the data passed are supported or not so it can
-     * give a meaningful result to the developer
-     */
-    override fun validateTypeMismatch() {
-        if (linearData is LinearEmojiData && labelDrawer !is LinearEmojiLabelDrawer)
-            throw LinearChartTypeMismatch(
-                "Need to pass a Label of Type LinearEmojiLabelDrawer for a " +
-                        "data of type LinearEmojiData"
-            )
-
-        if (labelDrawer is LinearEmojiLabelDrawer && linearData !is LinearEmojiData)
-            throw LinearChartTypeMismatch(
-                "Need to pass a Data of Type LinearEmojiData for a " +
-                        "margin of type LinearEmojiLabelDrawer"
-            )
-    }
 
     /**
      * This function draws the various labels and the Axis Lines of the graph according to the
@@ -253,44 +233,6 @@ open class LinearChart(
 
         /**
          * This function creates an object of the LinearChart which draws a basic Line chart
-         * It can draw Single Line Charts as well as multiple Line Charts with Drawable Markers or
-         * Emoji Markers but drawables should be converted into [BitmapDrawable] first for this to
-         * work
-         *
-         *              Note :-
-         *                  1. ContextCompat.getDrawable(
-         *                          LocalContext.current,
-         *                          R.drawable.emoji_furious
-         *                     ) as BitmapDrawable
-         *                  It is the code to convert a drawable into a Bitmap Drawable
-         *
-         * @param modifier This is to be passed from the Parent Class for the modifications
-         * @param labelDrawer This is the implementation for drawing the Labels
-         * @param decoration This is the implementation for drawing the Decorations
-         * @param linearData This is the implementation for keeping the Linear Chart data and calculations
-         * @param plot This is the implementation for how shall the plotting be drawn on the graph
-         * @param legendDrawer This is the implementation for how we are going to draw all
-         * the legend in the graph
-         */
-        @Composable
-        fun EmojiLineChart(
-            modifier: Modifier = Modifier,
-            labelDrawer: LinearEmojiLabelDrawer = LinearEmojiLabelDrawer(),
-            decoration: LinearDecoration = LinearDecoration.lineDecorationColors(),
-            linearData: LinearEmojiData,
-            plot: LinearLinePlot = LinearLinePlot(),
-            legendDrawer: LinearLegendDrawer = LinearNoLegend
-        ) = LinearChart(
-            labelDrawer = labelDrawer,
-            decoration = decoration,
-            linearData = linearData,
-            plot = plot,
-            legendDrawer = legendDrawer
-        ).Build(modifier = modifier)
-
-
-        /**
-         * This function creates an object of the LinearChart which draws a basic Line chart
          * It can draw Single Line Charts as well as multiple Line Charts with String Markers and
          * a gradient Plotting
          *
@@ -348,34 +290,6 @@ open class LinearChart(
 
 
         /**
-         * This function creates an object of the LinearChart which draws a basic Bar chart
-         *
-         * @param modifier This is to be passed from the Parent Class for the modifications
-         * @param labelDrawer This is the implementation for drawing the Labels
-         * @param decoration This is the implementation for drawing the Decorations
-         * @param linearData This is the implementation for keeping the Linear Chart data and calculations
-         * @param plot This is the implementation for how shall the plotting be drawn on the graph
-         * @param legendDrawer This is the implementation for how we are going to draw all
-         * the legend in the graph
-         */
-        @Composable
-        fun EmojiBarChart(
-            modifier: Modifier = Modifier,
-            labelDrawer: LinearEmojiLabelDrawer = LinearEmojiLabelDrawer(),
-            decoration: LinearDecoration = LinearDecoration.barDecorationColors(),
-            linearData: LinearEmojiData,
-            plot: LinearBarPlot = LinearBarPlot(),
-            legendDrawer: LinearLegendDrawer = LinearNoLegend
-        ) = LinearChart(
-            labelDrawer = labelDrawer,
-            decoration = decoration,
-            linearData = linearData,
-            plot = plot,
-            legendDrawer = legendDrawer
-        ).Build(modifier = modifier)
-
-
-        /**
          * This function creates an object of the LinearChart which draws a basic Line chart
          * It can draw Single Line Charts as well as multiple Line Charts with custom objects passed
          * by the developer
@@ -391,7 +305,7 @@ open class LinearChart(
         @Composable
         fun CustomLinearChart(
             modifier: Modifier = Modifier,
-            labelDrawer: LinearLabelDrawerInterface = LinearEmojiLabelDrawer(),
+            labelDrawer: LinearLabelDrawerInterface = LinearStringLabelDrawer(),
             decoration: LinearDecoration = LinearDecoration.lineDecorationColors(),
             linearData: LinearDataInterface,
             plot: LinearPlotInterface = LinearLinePlot(),

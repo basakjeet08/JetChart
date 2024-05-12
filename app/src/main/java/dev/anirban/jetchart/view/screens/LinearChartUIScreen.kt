@@ -123,36 +123,6 @@ fun LinearChartUIScreen(
             )
         }
 
-        // Design Pattern String Marker Line Chart
-//        CustomCard(
-//            title = "Emoji Marker Chart"
-//        ) {
-//            LinearChart.EmojiLineChart(
-//                linearData = LinearEmojiData(
-//                    yAxisReadings = dataSet,
-//                    xAxisReadings = xReadingMarker,
-//                    yMarkerList = ChartPoint.pointDataBuilder(
-//                        getDrawable(
-//                            LocalContext.current,
-//                            R.drawable.emoji_furious
-//                        ) as BitmapDrawable,
-//                        getDrawable(LocalContext.current, R.drawable.emoji_angry) as BitmapDrawable,
-//                        getDrawable(LocalContext.current, R.drawable.emoji_sad) as BitmapDrawable,
-//                        getDrawable(
-//                            LocalContext.current,
-//                            R.drawable.emoji_depressed
-//                        ) as BitmapDrawable,
-//                        getDrawable(
-//                            LocalContext.current,
-//                            R.drawable.emoji_confused
-//                        ) as BitmapDrawable,
-//                        getDrawable(LocalContext.current, R.drawable.emoji_calm) as BitmapDrawable,
-//                        getDrawable(LocalContext.current, R.drawable.emoji_happy) as BitmapDrawable
-//                    ).toMutableList()
-//                )
-//            )
-//        }
-
         // Design Pattern String Marker Gradient Line Chart using plot object
         CustomCard(title = "Gradient List using Plot Object") {
 
@@ -177,54 +147,6 @@ fun LinearChartUIScreen(
             )
         }
 
-        // Design Pattern Custom Chart
-//        CustomCard(
-//            title = "Custom Chart"
-//        ) {
-//
-//            LinearChart.CustomLinearChart(
-//                linearData = LinearEmojiData(
-//                    yAxisReadings = listOf(
-//                        ChartPoint.pointDataBuilder(
-//                            6f, 4f, 2f, 0f, 3f, 5f, 6f
-//                        )
-//                    ),
-//                    xAxisReadings = ChartPoint.pointDataBuilder(
-//                        "Jan", "Mar", "May", "Jul", "Sep", "Nov", "Dec"
-//                    ),
-//                    yMarkerList = ChartPoint.pointDataBuilder(
-//                        getDrawable(
-//                            LocalContext.current,
-//                            R.drawable.emoji_furious
-//                        ) as BitmapDrawable,
-//                        getDrawable(LocalContext.current, R.drawable.emoji_angry) as BitmapDrawable,
-//                        getDrawable(LocalContext.current, R.drawable.emoji_sad) as BitmapDrawable,
-//                        getDrawable(
-//                            LocalContext.current,
-//                            R.drawable.emoji_depressed
-//                        ) as BitmapDrawable,
-//                        getDrawable(
-//                            LocalContext.current,
-//                            R.drawable.emoji_confused
-//                        ) as BitmapDrawable,
-//                        getDrawable(LocalContext.current, R.drawable.emoji_calm) as BitmapDrawable,
-//                        getDrawable(LocalContext.current, R.drawable.emoji_happy) as BitmapDrawable
-//                    ).toMutableList()
-//                ),
-//                plot = LinearGradientLinePlot(
-//                    colorList = listOf(
-//                        Color(0xFFE5E787).copy(alpha = .6f),
-//                        Color(0xFF85DE50).copy(alpha = .6f),
-//                        Color(0xFF57D6BF).copy(alpha = .6f),
-//                        Color(0xFF43B4E4).copy(alpha = .6f),
-//                        Color(0xFF3A60E6).copy(alpha = .6f),
-//                        Color(0xFF57D6BF).copy(alpha = .6f),
-//                        Color(0xFFD02596).copy(alpha = .6f)
-//                    )
-//                )
-//            )
-//        }
-
         // Design Pattern Bar Chart
         CustomCard(title = "Bar Chart") {
 
@@ -235,36 +157,5 @@ fun LinearChartUIScreen(
                 )
             )
         }
-
-        // Design Pattern Emoji Bar Chart
-//        CustomCard(
-//            title = "Emoji Bar Chart"
-//        ) {
-//
-//            LinearChart.EmojiBarChart(
-//                linearData = LinearEmojiData(
-//                    yAxisReadings = dataSet1,
-//                    xAxisReadings = xReadingMarker,
-//                    yMarkerList = ChartPoint.pointDataBuilder(
-//                        getDrawable(
-//                            LocalContext.current,
-//                            R.drawable.emoji_furious
-//                        ) as BitmapDrawable,
-//                        getDrawable(LocalContext.current, R.drawable.emoji_angry) as BitmapDrawable,
-//                        getDrawable(LocalContext.current, R.drawable.emoji_sad) as BitmapDrawable,
-//                        getDrawable(
-//                            LocalContext.current,
-//                            R.drawable.emoji_depressed
-//                        ) as BitmapDrawable,
-//                        getDrawable(
-//                            LocalContext.current,
-//                            R.drawable.emoji_confused
-//                        ) as BitmapDrawable,
-//                        getDrawable(LocalContext.current, R.drawable.emoji_calm) as BitmapDrawable,
-//                        getDrawable(LocalContext.current, R.drawable.emoji_happy) as BitmapDrawable
-//                    ).toMutableList()
-//                )
-//            )
-//        }
     }
 }

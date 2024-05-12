@@ -12,7 +12,6 @@ import dev.anirban.charts.util.Coordinate
 
 /**
  * This class implements the [LinearDataInterface] and stores the data necessary for a linear chart.
- * For other implementations check [LinearEmojiData].
  *
  * @param linearDataSets This is the data set of the chart.
  * @param xAxisLabels These are the labels for the X - Axis.

@@ -15,8 +15,6 @@ import dev.anirban.charts.linear.interfaces.LinearLabelDrawerInterface
 /**
  * This is one of the implementations of the [LinearLabelDrawerInterface] and it provides with
  * a implementation of how we should draw the labels on the graph
- *
- * Other implementation is [LinearEmojiLabelDrawer]
  */
 class LinearStringLabelDrawer : LinearLabelDrawerInterface {
 

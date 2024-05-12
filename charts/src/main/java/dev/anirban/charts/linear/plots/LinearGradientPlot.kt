@@ -6,7 +6,6 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
-import dev.anirban.charts.linear.data.LinearEmojiData
 import dev.anirban.charts.linear.decoration.LinearDecoration
 import dev.anirban.charts.linear.interfaces.LinearDataInterface
 import dev.anirban.charts.linear.interfaces.LinearPlotInterface
@@ -40,12 +39,7 @@ class LinearGradientPlot(
     ) {
 
         // Padding Offset that would be negated from the bar height to make it align with the chart
-        var paddingOffset = 12f
-
-        // If the data are in form of emoji's then the padding offset will change
-        if (linearData is LinearEmojiData) {
-            paddingOffset = -(linearData.dimension.toFloat() / 2f)
-        }
+        val paddingOffset = 12f
 
         // This loop makes the curved line between two points
         linearData.linearDataSets.forEachIndexed { coordinateSetIndex, dataSet ->

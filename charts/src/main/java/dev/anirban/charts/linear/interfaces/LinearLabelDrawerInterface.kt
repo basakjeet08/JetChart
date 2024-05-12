@@ -8,7 +8,7 @@ import dev.anirban.charts.linear.labels.*
  * Abstraction over the Linear Labels are made using this interface. Any new implementation for
  * drawing the axis labels needs to implement this interface.
  *
- * Implementations for this interface are :- [LinearStringLabelDrawer], [LinearEmojiLabelDrawer]
+ * Implementations for this interface are :- [LinearStringLabelDrawer]
  */
 interface LinearLabelDrawerInterface {
 

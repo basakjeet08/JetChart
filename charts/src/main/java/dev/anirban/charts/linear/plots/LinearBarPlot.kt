@@ -5,7 +5,6 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.drawscope.DrawScope
-import dev.anirban.charts.linear.data.LinearEmojiData
 import dev.anirban.charts.linear.decoration.LinearDecoration
 import dev.anirban.charts.linear.interfaces.LinearDataInterface
 import dev.anirban.charts.linear.interfaces.LinearPlotInterface
@@ -37,12 +36,7 @@ class LinearBarPlot(
     ) {
 
         // Padding Offset that would be negated from the bar height to make it align with the chart
-        var paddingOffset = 12f
-
-        // If the data are in form of emoji's then the padding offset will change
-        if (linearData is LinearEmojiData) {
-            paddingOffset = -(linearData.dimension.toFloat() / 2f)
-        }
+        val paddingOffset = 12f
 
         // Adding the Offsets to the Variable
         linearData.linearDataSets.forEach { coordinateSet ->
