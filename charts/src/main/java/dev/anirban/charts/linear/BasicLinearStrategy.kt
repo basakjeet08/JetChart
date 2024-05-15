@@ -14,49 +14,49 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.unit.dp
-import dev.anirban.charts.linear.exceptions.LinearDataMismatch
-import dev.anirban.charts.linear.exceptions.LinearDecorationMismatch
-import dev.anirban.charts.linear.interfaces.LinearChartExceptionHandler
-import dev.anirban.charts.linear.interfaces.LinearChartInterface
-import dev.anirban.charts.linear.interfaces.LinearLegendDrawer
-import dev.anirban.charts.linear.interfaces.LinearDataInterface
-import dev.anirban.charts.linear.interfaces.LinearLabelDrawerInterface
-import dev.anirban.charts.linear.interfaces.LinearPlotInterface
-import dev.anirban.charts.linear.legends.LinearNoLegend
-import dev.anirban.charts.linear.legends.LinearGridLegend
-import dev.anirban.charts.linear.data.LinearStringData
+import dev.anirban.charts.linear.exceptions.DataMismatchStrategy
+import dev.anirban.charts.linear.exceptions.DecorationMismatchStrategy
+import dev.anirban.charts.linear.interfaces.LinearExceptionStrategy
+import dev.anirban.charts.linear.interfaces.LinearChartStrategy
+import dev.anirban.charts.linear.interfaces.LinearLegendStrategy
+import dev.anirban.charts.linear.interfaces.LinearDataStrategy
+import dev.anirban.charts.linear.interfaces.LinearLabelStrategy
+import dev.anirban.charts.linear.interfaces.LinearPlotterStrategy
+import dev.anirban.charts.linear.legends.NoLegendStrategy
+import dev.anirban.charts.linear.legends.GridLegendStrategy
+import dev.anirban.charts.linear.data.BasicDataStrategy
 import dev.anirban.charts.linear.decoration.LinearDecoration
-import dev.anirban.charts.linear.labels.LinearStringLabelDrawer
-import dev.anirban.charts.linear.plots.LinearBarPlot
-import dev.anirban.charts.linear.plots.LinearGradientPlot
-import dev.anirban.charts.linear.plots.LinearLinePlot
+import dev.anirban.charts.linear.labels.StringLabelStrategy
+import dev.anirban.charts.linear.plots.BarPlotStrategy
+import dev.anirban.charts.linear.plots.GradientPlotStrategy
+import dev.anirban.charts.linear.plots.LinePlotStrategy
 
 
 /**
- * This is the base class which directly implements the [LinearDataInterface] interfaces.
+ * This is the base class which directly implements the [LinearDataStrategy] interfaces.
  *
- * @param labelDrawer This is the implementation of the [LinearLabelDrawerInterface]. The labels
+ * @param labelDrawer This is the implementation of the [LinearLabelStrategy]. The labels
  * will be drawn in the graph according to the implementation
  * @param decoration This is the implementation of the [LinearDecoration]. The decoration of
  * different elements will be provided by this object
- * @param linearData This is the implementation of the [LinearDataInterface]. The data along with
+ * @param linearData This is the implementation of the [LinearDataStrategy]. The data along with
  * the chart offsets will be calculated according to this Login
- * @param plot This is the implementation of the [LinearPlotInterface]. This is responsible for
+ * @param plot This is the implementation of the [LinearPlotterStrategy]. This is responsible for
  * providing the logic to draw plots in the chart.
- * @param legendDrawer This is the implementation of [LinearLegendDrawer]. This provides an
+ * @param legendDrawer This is the implementation of [LinearLegendStrategy]. This provides an
  * implementation for drawing the legends of the chart
  */
-open class LinearChart(
-    override val labelDrawer: LinearLabelDrawerInterface,
+open class BasicLinearStrategy(
+    override val labelDrawer: LinearLabelStrategy,
     override val decoration: LinearDecoration,
-    override val linearData: LinearDataInterface,
-    override val plot: LinearPlotInterface,
-    override val legendDrawer: LinearLegendDrawer
-) : LinearChartInterface, LinearChartExceptionHandler {
+    override val linearData: LinearDataStrategy,
+    override val plot: LinearPlotterStrategy,
+    override val legendDrawer: LinearLegendStrategy
+) : LinearChartStrategy, LinearExceptionStrategy {
 
 
     /**
-     * This functions validates the [LinearDataInterface] is implemented properly and all the
+     * This functions validates the [LinearDataStrategy] is implemented properly and all the
      * data is given properly over there
      */
     override fun validateDataInput() {
@@ -71,7 +71,7 @@ open class LinearChart(
 
         // Comparing the num of max Y - Axis Readings to X - Axis Readings/Markers
         if (linearData.xAxisLabels.size < maxSize)
-            throw LinearDataMismatch("X - Axis Labels Size is less than Number of observations")
+            throw DataMismatchStrategy("X - Axis Labels Size is less than Number of observations")
     }
 
     /**
@@ -82,21 +82,21 @@ open class LinearChart(
 
         // checking if we have enough Primary Color for the plots
         if (decoration.plotPrimaryColor.size < linearData.linearDataSets.size) {
-            if (plot is LinearBarPlot && decoration.plotPrimaryColor.isEmpty())
+            if (plot is BarPlotStrategy && decoration.plotPrimaryColor.isEmpty())
                 throw Exception(
                     "plotPrimaryColor for the decoration have 0 Colors whereas at least " +
                             "one color needs to be provided"
                 )
             else
-                throw LinearDecorationMismatch(
+                throw DecorationMismatchStrategy(
                     "Need to provide ${linearData.linearDataSets.size} number of colors for the " +
                             "plotPrimaryColor"
                 )
         }
 
         // checking if we have enough Secondary Color for the plots
-        if (decoration.plotSecondaryColor.size < linearData.linearDataSets.size && plot !is LinearBarPlot)
-            throw LinearDecorationMismatch(
+        if (decoration.plotSecondaryColor.size < linearData.linearDataSets.size && plot !is BarPlotStrategy)
+            throw DecorationMismatchStrategy(
                 "Secondary Color of Decoration Class needs " +
                         "${linearData.linearDataSets.size} colors but it has " +
                         "${decoration.plotSecondaryColor.size} colors"
@@ -107,7 +107,7 @@ open class LinearChart(
 
     /**
      * This function draws the various labels and the Axis Lines of the graph according to the
-     * [LinearChartInterface.labelDrawer] implementation.
+     * [LinearChartStrategy.labelDrawer] implementation.
      */
     override fun DrawScope.drawLabels() {
         labelDrawer.apply {
@@ -119,7 +119,7 @@ open class LinearChart(
     }
 
     /**
-     * This function draws the plots of the graph according to the [LinearChartInterface.plot]
+     * This function draws the plots of the graph according to the [LinearChartStrategy.plot]
      * implementation.
      */
     override fun DrawScope.drawPlot() {
@@ -132,7 +132,7 @@ open class LinearChart(
     }
 
     /**
-     * This function draws the legends of the graph according to the [LinearChartInterface.legendDrawer]
+     * This function draws the legends of the graph according to the [LinearChartStrategy.legendDrawer]
      * implementation
      */
     @Composable
@@ -180,7 +180,7 @@ open class LinearChart(
             )
 
             // Checking if the implementation is the default one
-            if (legendDrawer !is LinearNoLegend) {
+            if (legendDrawer !is NoLegendStrategy) {
                 Spacer(modifier = Modifier.height(16.dp))
 
                 HorizontalDivider(
@@ -197,7 +197,7 @@ open class LinearChart(
 
 
     /**
-     * Builder Composable Functions which makes the objects of [LinearChart] and these are
+     * Builder Composable Functions which makes the objects of [BasicLinearStrategy] and these are
      * actually called by the users to make charts
      */
     companion object {
@@ -217,12 +217,12 @@ open class LinearChart(
         @Composable
         fun LineChart(
             modifier: Modifier = Modifier,
-            labelDrawer: LinearStringLabelDrawer = LinearStringLabelDrawer(),
+            labelDrawer: StringLabelStrategy = StringLabelStrategy(),
             decoration: LinearDecoration = LinearDecoration.lineDecorationColors(),
-            linearData: LinearStringData,
-            plot: LinearLinePlot = LinearLinePlot(),
-            legendDrawer: LinearLegendDrawer = LinearGridLegend()
-        ) = LinearChart(
+            linearData: BasicDataStrategy,
+            plot: LinePlotStrategy = LinePlotStrategy(),
+            legendDrawer: LinearLegendStrategy = GridLegendStrategy()
+        ) = BasicLinearStrategy(
             labelDrawer = labelDrawer,
             decoration = decoration,
             linearData = linearData,
@@ -247,12 +247,12 @@ open class LinearChart(
         @Composable
         fun GradientChart(
             modifier: Modifier = Modifier,
-            labelDrawer: LinearStringLabelDrawer = LinearStringLabelDrawer(),
+            labelDrawer: StringLabelStrategy = StringLabelStrategy(),
             decoration: LinearDecoration = LinearDecoration.lineDecorationColors(),
-            linearData: LinearStringData,
-            plot: LinearGradientPlot = LinearGradientPlot(),
-            legendDrawer: LinearLegendDrawer = LinearNoLegend
-        ) = LinearChart(
+            linearData: BasicDataStrategy,
+            plot: GradientPlotStrategy = GradientPlotStrategy(),
+            legendDrawer: LinearLegendStrategy = NoLegendStrategy
+        ) = BasicLinearStrategy(
             labelDrawer = labelDrawer,
             decoration = decoration,
             linearData = linearData,
@@ -275,12 +275,12 @@ open class LinearChart(
         @Composable
         fun BarChart(
             modifier: Modifier = Modifier,
-            labelDrawer: LinearStringLabelDrawer = LinearStringLabelDrawer(),
+            labelDrawer: StringLabelStrategy = StringLabelStrategy(),
             decoration: LinearDecoration = LinearDecoration.barDecorationColors(),
-            linearData: LinearStringData,
-            plot: LinearBarPlot = LinearBarPlot(),
-            legendDrawer: LinearLegendDrawer = LinearGridLegend()
-        ) = LinearChart(
+            linearData: BasicDataStrategy,
+            plot: BarPlotStrategy = BarPlotStrategy(),
+            legendDrawer: LinearLegendStrategy = GridLegendStrategy()
+        ) = BasicLinearStrategy(
             labelDrawer = labelDrawer,
             decoration = decoration,
             linearData = linearData,
@@ -305,12 +305,12 @@ open class LinearChart(
         @Composable
         fun CustomLinearChart(
             modifier: Modifier = Modifier,
-            labelDrawer: LinearLabelDrawerInterface = LinearStringLabelDrawer(),
+            labelDrawer: LinearLabelStrategy = StringLabelStrategy(),
             decoration: LinearDecoration = LinearDecoration.lineDecorationColors(),
-            linearData: LinearDataInterface,
-            plot: LinearPlotInterface = LinearLinePlot(),
-            legendDrawer: LinearLegendDrawer = LinearNoLegend
-        ) = LinearChart(
+            linearData: LinearDataStrategy,
+            plot: LinearPlotterStrategy = LinePlotStrategy(),
+            legendDrawer: LinearLegendStrategy = NoLegendStrategy
+        ) = BasicLinearStrategy(
             labelDrawer = labelDrawer,
             decoration = decoration,
             linearData = linearData,

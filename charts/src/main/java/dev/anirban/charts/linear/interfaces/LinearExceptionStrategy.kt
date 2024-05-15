@@ -7,12 +7,12 @@ import dev.anirban.charts.linear.decoration.LinearDecoration
  * library and hence custom Exceptions are made for the ease of developers to understand the
  * exceptions and fix them accordingly
  *
- * @property validateDataInput This functions validates the [LinearDataInterface] is implemented
+ * @property validateDataInput This functions validates the [LinearDataStrategy] is implemented
  * properly and all the data is given properly over there
  * @property validateDecorationInput This function validates the [LinearDecoration] is implemented
  * properly and all the data needed for the Linear Decoration are provided properly
  */
-interface LinearChartExceptionHandler {
+interface LinearExceptionStrategy {
 
     fun validateDataInput()
 

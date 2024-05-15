@@ -12,9 +12,9 @@ import dev.anirban.charts.util.Coordinate
  * Implementation for the handling of data and calculation of offsets of various observations of
  * the graph data set.
  *
- * Implementations for this interface are :- [LinearStringData]
+ * Implementations for this interface are :- [BasicDataStrategy]
  */
-interface LinearDataInterface {
+interface LinearDataStrategy {
 
 
     /**

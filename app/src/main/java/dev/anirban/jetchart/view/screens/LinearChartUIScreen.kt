@@ -15,9 +15,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import dev.anirban.charts.linear.LinearChart
+import dev.anirban.charts.linear.BasicLinearStrategy
 import dev.anirban.charts.linear.data.LinearDataSet
-import dev.anirban.charts.linear.data.LinearStringData
+import dev.anirban.charts.linear.data.BasicDataStrategy
 import dev.anirban.charts.util.Coordinate
 import dev.anirban.jetchart.data.model.LinearMockResponse
 import dev.anirban.jetchart.view.components.CustomCard
@@ -74,8 +74,8 @@ fun LinearChartUIScreen(
         // Design Pattern Single Line Chart
         CustomCard(title = "Single Line Chart") {
 
-            LinearChart.LineChart(
-                linearData = LinearStringData(
+            BasicLinearStrategy.LineChart(
+                linearData = BasicDataStrategy(
                     linearDataSets = linearDataSet1,
                     xAxisLabels = xReadingMarker
                 )
@@ -85,8 +85,8 @@ fun LinearChartUIScreen(
         // Design Pattern Double Line Chart
         CustomCard(title = "Double Line Chart") {
 
-            LinearChart.LineChart(
-                linearData = LinearStringData(
+            BasicLinearStrategy.LineChart(
+                linearData = BasicDataStrategy(
                     linearDataSets = linearDataSet2,
                     xAxisLabels = xReadingMarker
                 )
@@ -96,8 +96,8 @@ fun LinearChartUIScreen(
         // Design Pattern Triple Line Chart
         CustomCard(title = "Multiple Line Chart") {
 
-            LinearChart.LineChart(
-                linearData = LinearStringData(
+            BasicLinearStrategy.LineChart(
+                linearData = BasicDataStrategy(
                     linearDataSets = linearDataSet3,
                     xAxisLabels = xReadingMarker
                 )
@@ -106,8 +106,8 @@ fun LinearChartUIScreen(
 
         // Design Pattern String Marker Line Chart
         CustomCard(title = "String Marker Chart") {
-            LinearChart.LineChart(
-                linearData = LinearStringData(
+            BasicLinearStrategy.LineChart(
+                linearData = BasicDataStrategy(
                     linearDataSets = linearDataSet4,
                     xAxisLabels = xReadingMarker,
                     yAxisLabels = Coordinate.coordinateSetBuilder(
@@ -124,8 +124,8 @@ fun LinearChartUIScreen(
         // Design Pattern String Marker Gradient Line Chart using plot object
         CustomCard(title = "Gradient List using Plot Object") {
 
-            LinearChart.GradientChart(
-                linearData = LinearStringData(
+            BasicLinearStrategy.GradientChart(
+                linearData = BasicDataStrategy(
                     linearDataSets = linearDataSet4,
                     xAxisLabels = xReadingMarker,
                     yAxisLabels = Coordinate.coordinateSetBuilder(
@@ -142,8 +142,8 @@ fun LinearChartUIScreen(
         // Design Pattern Bar Chart
         CustomCard(title = "Bar Chart") {
 
-            LinearChart.BarChart(
-                linearData = LinearStringData(
+            BasicLinearStrategy.BarChart(
+                linearData = BasicDataStrategy(
                     linearDataSets = linearDataSet4,
                     xAxisLabels = xReadingMarker
                 )

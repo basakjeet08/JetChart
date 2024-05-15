@@ -9,24 +9,24 @@ import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.sp
 import dev.anirban.charts.linear.decoration.LinearDecoration
-import dev.anirban.charts.linear.interfaces.LinearDataInterface
-import dev.anirban.charts.linear.interfaces.LinearLabelDrawerInterface
+import dev.anirban.charts.linear.interfaces.LinearDataStrategy
+import dev.anirban.charts.linear.interfaces.LinearLabelStrategy
 
 /**
- * This is one of the implementations of the [LinearLabelDrawerInterface] and it provides with
+ * This is one of the implementations of the [LinearLabelStrategy] and it provides with
  * a implementation of how we should draw the labels on the graph
  */
-class LinearStringLabelDrawer : LinearLabelDrawerInterface {
+class StringLabelStrategy : LinearLabelStrategy {
 
 
     /**
      * This function draws the labels in the graph according to the implementation passed
      *
-     * @param linearData The data of the graph [LinearDataInterface] object implementation.
+     * @param linearData The data of the graph [LinearDataStrategy] object implementation.
      * @param decoration The decoration of the graph [LinearDecoration] object implementation.
      */
     override fun DrawScope.drawLabels(
-        linearData: LinearDataInterface,
+        linearData: LinearDataStrategy,
         decoration: LinearDecoration
     ) {
 

@@ -4,23 +4,23 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import dev.anirban.charts.linear.decoration.LinearDecoration
-import dev.anirban.charts.linear.LinearChart
+import dev.anirban.charts.linear.BasicLinearStrategy
 
 /**
  * This is the interface that needs to be implemented by any chart object to work with the Library.
  *
- * Implementations for this interface are :- [LinearChart]
+ * Implementations for this interface are :- [BasicLinearStrategy]
  */
-interface LinearChartInterface {
+interface LinearChartStrategy {
 
 
     /**
-     * This is the implementation of the [LinearLabelDrawerInterface]. The labels will be drawn
+     * This is the implementation of the [LinearLabelStrategy]. The labels will be drawn
      * in the graph according to the implementation
      *
-     * @see LinearLabelDrawerInterface
+     * @see LinearLabelStrategy
      */
-    val labelDrawer: LinearLabelDrawerInterface
+    val labelDrawer: LinearLabelStrategy
 
 
     /**
@@ -33,46 +33,46 @@ interface LinearChartInterface {
 
 
     /**
-     * This is the implementation of the [LinearDataInterface]. The data along with the chart
+     * This is the implementation of the [LinearDataStrategy]. The data along with the chart
      * offsets will be calculated according to this Login
      *
-     * @see LinearDataInterface
+     * @see LinearDataStrategy
      */
-    val linearData: LinearDataInterface
+    val linearData: LinearDataStrategy
 
 
     /**
-     * This is the implementation of the [LinearPlotInterface]. This is responsible for providing
+     * This is the implementation of the [LinearPlotterStrategy]. This is responsible for providing
      * the logic to draw plots in the chart.
      *
-     * @see LinearPlotInterface
+     * @see LinearPlotterStrategy
      */
-    val plot: LinearPlotInterface
+    val plot: LinearPlotterStrategy
 
 
     /**
-     * This is the implementation of [LinearLegendDrawer]. This provides an implementation for
+     * This is the implementation of [LinearLegendStrategy]. This provides an implementation for
      * drawing the legends of the chart
      */
-    val legendDrawer: LinearLegendDrawer
+    val legendDrawer: LinearLegendStrategy
 
 
     /**
      * This function draws the various labels and the Axis Lines of the graph according to the
-     * [LinearChartInterface.labelDrawer] implementation.
+     * [LinearChartStrategy.labelDrawer] implementation.
      */
     fun DrawScope.drawLabels()
 
 
     /**
-     * This function draws the plots of the graph according to the [LinearChartInterface.plot]
+     * This function draws the plots of the graph according to the [LinearChartStrategy.plot]
      * implementation.
      */
     fun DrawScope.drawPlot()
 
 
     /**
-     * This function draws the legends of the graph according to the [LinearChartInterface.legendDrawer]
+     * This function draws the legends of the graph according to the [LinearChartStrategy.legendDrawer]
      * implementation
      */
     @Composable

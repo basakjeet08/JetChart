@@ -6,24 +6,24 @@ import android.graphics.Typeface
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.unit.sp
-import dev.anirban.charts.linear.interfaces.LinearDataInterface
+import dev.anirban.charts.linear.interfaces.LinearDataStrategy
 import dev.anirban.charts.util.Coordinate
 
 
 /**
- * This class implements the [LinearDataInterface] and stores the data necessary for a linear chart.
+ * This class implements the [LinearDataStrategy] and stores the data necessary for a linear chart.
  *
  * @param linearDataSets This is the data set of the chart.
  * @param xAxisLabels These are the labels for the X - Axis.
  * @param yAxisLabels These are the labels for the Y - Axis.
  * @param numOfYLabels These are the num of labels in Y-axis
  */
-class LinearStringData(
+class BasicDataStrategy(
     override val linearDataSets: List<LinearDataSet>,
     override val xAxisLabels: List<Coordinate<String>>,
     override var yAxisLabels: MutableList<Coordinate<*>> = mutableListOf(),
     override var numOfYLabels: Int = 5
-) : LinearDataInterface {
+) : LinearDataStrategy {
 
 
     /**
