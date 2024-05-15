@@ -35,6 +35,9 @@ class LinearDecoration(
          *
          * Needs a Composable function to get the color from the material Theme since its
          * a composable function
+         *
+         * @param textColor this is the text color for all the margins and other things
+         * @param plotPrimaryColor THis is the plot color for all the plotted Lines in the graph
          */
         @Composable
         fun lineDecorationColors(
@@ -56,6 +59,9 @@ class LinearDecoration(
          *
          * Needs a Composable function to get the color from the material Theme since its
          * a composable function
+         *
+         * @param textColor this is the text color for all the margins and other things
+         * @param plotPrimaryColor THis is the plot color for all the plotted Lines in the graph
          */
         @Composable
         fun barDecorationColors(
