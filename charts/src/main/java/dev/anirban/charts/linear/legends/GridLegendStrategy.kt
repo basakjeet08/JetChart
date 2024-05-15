@@ -22,12 +22,11 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.anirban.charts.linear.decoration.LinearDecoration
-import dev.anirban.charts.linear.interfaces.LinearLegendDrawer
-import dev.anirban.charts.linear.interfaces.LinearDataInterface
+import dev.anirban.charts.linear.data.LinearDataStrategy
 
 
 /**
- * This class is the implementation of [LinearLegendDrawer] which provides the
+ * This class is the implementation of [LinearLegendStrategy] which provides the
  * functionality of drawing the Legends in the canvas. Here the legends are drawn in a
  * grid fashion with 2 Items in a Row.
  *
@@ -35,10 +34,10 @@ import dev.anirban.charts.linear.interfaces.LinearDataInterface
  * @param fontSize This defines the size of the font
  * @param fontWeight This Defines the weight of the font
  */
-class LinearGridLegend(
+class GridLegendStrategy(
     private val fontSize: TextUnit = 14.sp,
     private val fontWeight: FontWeight = FontWeight.W500
-) : LinearLegendDrawer {
+) : LinearLegendStrategy {
 
 
     /**
@@ -99,7 +98,7 @@ class LinearGridLegend(
      */
     @Composable
     override fun DrawLegends(
-        linearData: LinearDataInterface,
+        linearData: LinearDataStrategy,
         decoration: LinearDecoration
     ) {
 

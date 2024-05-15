@@ -1,28 +1,29 @@
-package dev.anirban.charts.linear.interfaces
+package dev.anirban.charts.linear.legends
 
 import androidx.compose.runtime.Composable
+import dev.anirban.charts.linear.data.LinearDataStrategy
 import dev.anirban.charts.linear.decoration.LinearDecoration
-import dev.anirban.charts.linear.legends.*
+
 
 /**
  * This is the abstraction interface for the legends made in the graph. Every new legend logic
  * implementation should implement this interface..
  *
- * Implementations for this interface are :- [LinearNoLegend], [LinearGridLegend],
- * [LinearCustomLegend]
+ * Implementations for this interface are :- [NoLegendStrategy], [GridLegendStrategy],
+ * [CustomLegendStrategy]
  */
-interface LinearLegendDrawer {
+interface LinearLegendStrategy {
 
 
     /**
      * This function implements the logic for drawing the legends.
      *
-     * @param linearData The data of the graph [LinearDataInterface] object implementation.
+     * @param linearData The data of the graph [LinearDataStrategy] object implementation.
      * @param decoration The decoration of the graph [LinearDecoration] object implementation.
      */
     @Composable
     fun DrawLegends(
-        linearData: LinearDataInterface,
+        linearData: LinearDataStrategy,
         decoration: LinearDecoration
     )
 }

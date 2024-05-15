@@ -6,25 +6,23 @@ import android.graphics.Typeface
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.unit.sp
-import dev.anirban.charts.linear.interfaces.LinearDataInterface
 import dev.anirban.charts.util.Coordinate
 
 
 /**
- * This class implements the [LinearDataInterface] and stores the data necessary for a linear chart.
- * For other implementations check [LinearEmojiData].
+ * This class implements the [LinearDataStrategy] and stores the data necessary for a linear chart.
  *
  * @param linearDataSets This is the data set of the chart.
  * @param xAxisLabels These are the labels for the X - Axis.
  * @param yAxisLabels These are the labels for the Y - Axis.
  * @param numOfYLabels These are the num of labels in Y-axis
  */
-class LinearStringData(
+class BasicDataStrategy(
     override val linearDataSets: List<LinearDataSet>,
     override val xAxisLabels: List<Coordinate<String>>,
     override var yAxisLabels: MutableList<Coordinate<*>> = mutableListOf(),
     override var numOfYLabels: Int = 5
-) : LinearDataInterface {
+) : LinearDataStrategy {
 
 
     /**
@@ -36,32 +34,32 @@ class LinearStringData(
     /**
      * The maximum or peak Y Label of the Graph.
      */
-    private var maxYLabel: Int = Int.MIN_VALUE
+    override var maxYLabel: Int = Int.MIN_VALUE
 
 
     /**
      * The Minimum Y Label Reading of the Graph
      */
-    private var minYLabel: Int = Int.MAX_VALUE
+    override var minYLabel: Int = Int.MAX_VALUE
 
 
     /**
      * This is the difference between each Y label and its subsequent label.
      */
-    private var yLabelDifference: Int
+    override var yLabelDifference: Int
 
 
     /**
      * This is the offset of the X Axis from the initial starting point.
      */
-    private val xAxisOffset: Float = 48f
+    override val xAxisOffset: Float = 48f
 
 
     /**
      * These are the X and Y Scales for the graph.
      */
-    private var xScale: Float = 0f
-    private var yScale: Float = 0f
+    override var xScale: Float = 0f
+    override var yScale: Float = 0f
 
 
     init {
@@ -140,7 +138,7 @@ class LinearStringData(
     /**
      * This function calculates the Y axis labels offsets.
      */
-    private fun DrawScope.calculateYLabelsCoordinates(): Int {
+    override fun DrawScope.calculateYLabelsCoordinates(): Int {
 
         var yLabelMaxWidth = 0
 
@@ -175,7 +173,7 @@ class LinearStringData(
      *
      * @param yLabelMaxWidth This is the maximum width of the Y labels.
      */
-    private fun calculateMarkersCoordinates(yLabelMaxWidth: Int) {
+    override fun calculateMarkersCoordinates(yLabelMaxWidth: Int) {
 
         // Taking all the observations given and calculating their offset.
         linearDataSets.forEach { pointSet ->
@@ -200,7 +198,7 @@ class LinearStringData(
      * @param size This is the size of the canvas
      * @param yLabelsMaxWidth This is the maximum width of the Y labels
      */
-    private fun calculateXLabelsCoordinates(size: Size, yLabelsMaxWidth: Int) {
+    override fun calculateXLabelsCoordinates(size: Size, yLabelsMaxWidth: Int) {
 
         // Calculating all the chart X axis labels offset
         xAxisLabels.forEachIndexed { index, currentMarker ->

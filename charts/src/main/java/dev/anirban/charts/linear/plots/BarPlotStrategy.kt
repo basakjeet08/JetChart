@@ -5,47 +5,40 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.drawscope.DrawScope
-import dev.anirban.charts.linear.data.LinearEmojiData
 import dev.anirban.charts.linear.decoration.LinearDecoration
-import dev.anirban.charts.linear.interfaces.LinearDataInterface
-import dev.anirban.charts.linear.interfaces.LinearPlotInterface
+import dev.anirban.charts.linear.data.LinearDataStrategy
 
 /**
- * This is the Bar Plot class which implements the [LinearPlotInterface] Interface and makes a bar
+ * This is the Bar Plot class which implements the [LinearPlotterStrategy] Interface and makes a bar
  * Chart
  *
- * Other Implementations are [LinearGradientPlot] and [LinearLinePlot]
+ * Other Implementations are [GradientPlotStrategy] and [LinePlotStrategy]
  *
  * @param barWidth This defines the width of the bars of the bar Chart
  * @param cornerRadius This defines the radius of curve of the corners of the bars
  */
-class LinearBarPlot(
+class BarPlotStrategy(
     private val barWidth: Float = 30f,
     private val cornerRadius: Float = 12f
-) : LinearPlotInterface {
+) : LinearPlotterStrategy {
 
 
     /**
      * This function plots the graph data sets on the graph
      *
-     * @param linearData The data of the graph [LinearDataInterface] object implementation.
+     * @param linearData The data of the graph [LinearDataStrategy] object implementation.
      * @param decoration The decoration of the graph [LinearDecoration] object implementation.
      */
     override fun DrawScope.plotChart(
-        linearData: LinearDataInterface,
+        linearData: LinearDataStrategy,
         decoration: LinearDecoration
     ) {
 
         // Padding Offset that would be negated from the bar height to make it align with the chart
-        var paddingOffset = 12f
-
-        // If the data are in form of emoji's then the padding offset will change
-        if (linearData is LinearEmojiData) {
-            paddingOffset = -(linearData.dimension.toFloat() / 2f)
-        }
+        val paddingOffset = 12f
 
         // Adding the Offsets to the Variable
-        linearData.linearDataSets.forEach { coordinateSet ->
+        linearData.linearDataSets.forEachIndexed { index, coordinateSet ->
 
             coordinateSet.markers.forEach { point ->
 
@@ -53,9 +46,10 @@ class LinearBarPlot(
                 drawRoundRect(
                     brush = Brush.verticalGradient(
                         listOf(
-                            decoration.plotPrimaryColor.first(),
-                            decoration.plotPrimaryColor.last()
-                        )
+                            decoration.plotPrimaryColor[index],
+                            decoration.plotPrimaryColor[index].copy(alpha = .1f)
+                        ),
+                        startY = point.y
                     ),
                     topLeft = Offset(
                         x = point.x - barWidth / 2f,

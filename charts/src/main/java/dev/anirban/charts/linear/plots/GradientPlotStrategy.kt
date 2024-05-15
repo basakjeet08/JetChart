@@ -3,49 +3,39 @@ package dev.anirban.charts.linear.plots
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
-import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
-import dev.anirban.charts.linear.data.LinearEmojiData
 import dev.anirban.charts.linear.decoration.LinearDecoration
-import dev.anirban.charts.linear.interfaces.LinearDataInterface
-import dev.anirban.charts.linear.interfaces.LinearPlotInterface
+import dev.anirban.charts.linear.data.LinearDataStrategy
 
 /**
- * This is the gradient plot class which implements the [LinearPlotInterface] Interface and makes
+ * This is the gradient plot class which implements the [LinearPlotterStrategy] Interface and makes
  * a gradient line chart.
  *
- * Other implementation are [LinearBarPlot] and [LinearLinePlot]
+ * Other implementation are [BarPlotStrategy] and [LinePlotStrategy]
  *
  * @param lineStroke This defines the stroke of the line
  * @param circleRadius This defines the radius of curve of the Circle
- * @param colorList This is the list of colors for the gradient
  */
-class LinearGradientPlot(
+class GradientPlotStrategy(
     private val lineStroke: Float = 3f,
-    private val circleRadius: Float = 6f,
-    private val colorList: List<Color>
-) : LinearPlotInterface {
+    private val circleRadius: Float = 6f
+) : LinearPlotterStrategy {
 
 
     /**
      * This function plots the graph data sets on the graph
      *
-     * @param linearData The data of the graph [LinearDataInterface] object implementation.
+     * @param linearData The data of the graph [LinearDataStrategy] object implementation.
      * @param decoration The decoration of the graph [LinearDecoration] object implementation.
      */
     override fun DrawScope.plotChart(
-        linearData: LinearDataInterface,
+        linearData: LinearDataStrategy,
         decoration: LinearDecoration
     ) {
 
         // Padding Offset that would be negated from the bar height to make it align with the chart
-        var paddingOffset = 12f
-
-        // If the data are in form of emoji's then the padding offset will change
-        if (linearData is LinearEmojiData) {
-            paddingOffset = -(linearData.dimension.toFloat() / 2f)
-        }
+        val paddingOffset = 12f
 
         // This loop makes the curved line between two points
         linearData.linearDataSets.forEachIndexed { coordinateSetIndex, dataSet ->
@@ -119,8 +109,10 @@ class LinearGradientPlot(
 
             // Defining the Brush
             val brush = Brush.verticalGradient(
-                colors = colorList,
-                tileMode = TileMode.Clamp
+                colors = listOf(
+                    decoration.plotPrimaryColor[coordinateSetIndex].copy(alpha = .5f),
+                    Color.Transparent
+                )
             )
 
             // Drawing the gradient of the graph
@@ -136,9 +128,9 @@ class LinearGradientPlot(
 
                 // This function draws the Circle points
                 drawCircle(
-                    color = decoration.plotSecondaryColor[index],
+                    color = decoration.plotPrimaryColor[index],
                     radius = circleRadius,
-                    center = point.offset()
+                    center = point.offset
                 )
             }
         }

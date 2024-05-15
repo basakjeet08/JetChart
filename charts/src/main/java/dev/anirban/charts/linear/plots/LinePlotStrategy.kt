@@ -4,31 +4,30 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
 import dev.anirban.charts.linear.decoration.LinearDecoration
-import dev.anirban.charts.linear.interfaces.LinearDataInterface
-import dev.anirban.charts.linear.interfaces.LinearPlotInterface
+import dev.anirban.charts.linear.data.LinearDataStrategy
 
 /**
- * This is the Line Plot class which implements the [LinearPlotInterface] Interface and makes a Line
+ * This is the Line Plot class which implements the [LinearPlotterStrategy] Interface and makes a Line
  * Chart.
  *
- * Other implementation are [LinearBarPlot] and [LinearGradientPlot].
+ * Other implementation are [BarPlotStrategy] and [GradientPlotStrategy].
  *
  * @param lineStroke This defines the stroke of the line
  * @param circleRadius This defines the radius of curve of the Circle
  */
-class LinearLinePlot(
+class LinePlotStrategy(
     private val lineStroke: Float = 3f,
     private val circleRadius: Float = 6f
-) : LinearPlotInterface {
+) : LinearPlotterStrategy {
 
     /**
      * This function plots the graph data sets on the graph
      *
-     * @param linearData The data of the graph [LinearDataInterface] object implementation.
+     * @param linearData The data of the graph [LinearDataStrategy] object implementation.
      * @param decoration The decoration of the graph [LinearDecoration] object implementation.
      */
     override fun DrawScope.plotChart(
-        linearData: LinearDataInterface,
+        linearData: LinearDataStrategy,
         decoration: LinearDecoration
     ) {
 
@@ -83,9 +82,9 @@ class LinearLinePlot(
             offsets.markers.forEach {
                 // This function draws the Circle points
                 drawCircle(
-                    color = decoration.plotSecondaryColor[index],
+                    color = decoration.plotPrimaryColor[index],
                     radius = circleRadius,
-                    center = it.offset()
+                    center = it.offset
                 )
             }
         }

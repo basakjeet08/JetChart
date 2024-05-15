@@ -31,6 +31,13 @@ data class Coordinate<T>(val value: T) {
 
 
     /**
+     * This is the graphical offset of the object combining the x and y coordinates
+     */
+    val offset: Offset
+        get() = Offset(x, y)
+
+
+    /**
      * This function sets the graphical offset of the object
      *
      * @param x The graphical x offset of the object
@@ -51,12 +58,6 @@ data class Coordinate<T>(val value: T) {
         this.x = offset.x
         this.y = offset.y
     }
-
-
-    /**
-     * This is the graphical offset of the object combining the x and y coordinates
-     */
-    fun offset(): Offset = Offset(x, y)
 
 
     companion object {
