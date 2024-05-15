@@ -131,7 +131,7 @@ class LinearGradientPlot(
                 drawCircle(
                     color = decoration.plotSecondaryColor[index],
                     radius = circleRadius,
-                    center = point.offset()
+                    center = point.offset
                 )
             }
         }

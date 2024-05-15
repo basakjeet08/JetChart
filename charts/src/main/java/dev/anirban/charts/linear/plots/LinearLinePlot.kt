@@ -85,7 +85,7 @@ class LinearLinePlot(
                 drawCircle(
                     color = decoration.plotSecondaryColor[index],
                     radius = circleRadius,
-                    center = it.offset()
+                    center = it.offset
                 )
             }
         }
