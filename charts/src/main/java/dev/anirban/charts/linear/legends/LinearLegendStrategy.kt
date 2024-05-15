@@ -1,8 +1,9 @@
-package dev.anirban.charts.linear.interfaces
+package dev.anirban.charts.linear.legends
 
 import androidx.compose.runtime.Composable
+import dev.anirban.charts.linear.data.LinearDataStrategy
 import dev.anirban.charts.linear.decoration.LinearDecoration
-import dev.anirban.charts.linear.legends.*
+
 
 /**
  * This is the abstraction interface for the legends made in the graph. Every new legend logic

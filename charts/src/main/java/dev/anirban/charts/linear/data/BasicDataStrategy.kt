@@ -6,7 +6,6 @@ import android.graphics.Typeface
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.unit.sp
-import dev.anirban.charts.linear.interfaces.LinearDataStrategy
 import dev.anirban.charts.util.Coordinate
 
 

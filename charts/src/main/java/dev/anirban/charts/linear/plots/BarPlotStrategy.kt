@@ -6,8 +6,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import dev.anirban.charts.linear.decoration.LinearDecoration
-import dev.anirban.charts.linear.interfaces.LinearDataStrategy
-import dev.anirban.charts.linear.interfaces.LinearPlotterStrategy
+import dev.anirban.charts.linear.data.LinearDataStrategy
 
 /**
  * This is the Bar Plot class which implements the [LinearPlotterStrategy] Interface and makes a bar

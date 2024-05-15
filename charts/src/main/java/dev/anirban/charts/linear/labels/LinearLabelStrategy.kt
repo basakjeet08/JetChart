@@ -1,8 +1,9 @@
-package dev.anirban.charts.linear.interfaces
+package dev.anirban.charts.linear.labels
 
 import androidx.compose.ui.graphics.drawscope.DrawScope
+import dev.anirban.charts.linear.data.LinearDataStrategy
 import dev.anirban.charts.linear.decoration.LinearDecoration
-import dev.anirban.charts.linear.labels.*
+
 
 /**
  * Abstraction over the Linear Labels are made using this interface. Any new implementation for

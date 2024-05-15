@@ -1,6 +1,7 @@
-package dev.anirban.charts.linear.interfaces
+package dev.anirban.charts.linear.exceptions
 
 import dev.anirban.charts.linear.decoration.LinearDecoration
+import dev.anirban.charts.linear.data.LinearDataStrategy
 
 /**
  * This implementation is for handling all the possible exceptions that may cause while running the

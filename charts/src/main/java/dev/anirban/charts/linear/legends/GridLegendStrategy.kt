@@ -22,8 +22,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.anirban.charts.linear.decoration.LinearDecoration
-import dev.anirban.charts.linear.interfaces.LinearLegendStrategy
-import dev.anirban.charts.linear.interfaces.LinearDataStrategy
+import dev.anirban.charts.linear.data.LinearDataStrategy
 
 
 /**

@@ -2,8 +2,7 @@ package dev.anirban.charts.linear.legends
 
 import androidx.compose.runtime.Composable
 import dev.anirban.charts.linear.decoration.LinearDecoration
-import dev.anirban.charts.linear.interfaces.LinearLegendStrategy
-import dev.anirban.charts.linear.interfaces.LinearDataStrategy
+import dev.anirban.charts.linear.data.LinearDataStrategy
 
 /**
  * This class is the implementation of [LinearLegendStrategy] which provides the

@@ -1,10 +1,14 @@
-package dev.anirban.charts.linear.interfaces
+package dev.anirban.charts.linear
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import dev.anirban.charts.linear.decoration.LinearDecoration
-import dev.anirban.charts.linear.BasicLinearStrategy
+import dev.anirban.charts.linear.data.LinearDataStrategy
+import dev.anirban.charts.linear.labels.LinearLabelStrategy
+import dev.anirban.charts.linear.legends.LinearLegendStrategy
+import dev.anirban.charts.linear.plots.LinearPlotterStrategy
+
 
 /**
  * This is the interface that needs to be implemented by any chart object to work with the Library.

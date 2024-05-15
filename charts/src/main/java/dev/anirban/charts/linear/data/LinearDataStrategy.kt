@@ -1,9 +1,7 @@
-package dev.anirban.charts.linear.interfaces
+package dev.anirban.charts.linear.data
 
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.drawscope.DrawScope
-import dev.anirban.charts.linear.data.LinearDataSet
-import dev.anirban.charts.linear.data.*
 import dev.anirban.charts.util.Coordinate
 
 

@@ -16,12 +16,11 @@ import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.unit.dp
 import dev.anirban.charts.linear.exceptions.DataMismatchStrategy
 import dev.anirban.charts.linear.exceptions.DecorationMismatchStrategy
-import dev.anirban.charts.linear.interfaces.LinearExceptionStrategy
-import dev.anirban.charts.linear.interfaces.LinearChartStrategy
-import dev.anirban.charts.linear.interfaces.LinearLegendStrategy
-import dev.anirban.charts.linear.interfaces.LinearDataStrategy
-import dev.anirban.charts.linear.interfaces.LinearLabelStrategy
-import dev.anirban.charts.linear.interfaces.LinearPlotterStrategy
+import dev.anirban.charts.linear.exceptions.LinearExceptionStrategy
+import dev.anirban.charts.linear.legends.LinearLegendStrategy
+import dev.anirban.charts.linear.data.LinearDataStrategy
+import dev.anirban.charts.linear.labels.LinearLabelStrategy
+import dev.anirban.charts.linear.plots.LinearPlotterStrategy
 import dev.anirban.charts.linear.legends.NoLegendStrategy
 import dev.anirban.charts.linear.legends.GridLegendStrategy
 import dev.anirban.charts.linear.data.BasicDataStrategy

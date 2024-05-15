@@ -1,8 +1,9 @@
-package dev.anirban.charts.linear.interfaces
+package dev.anirban.charts.linear.plots
 
 import androidx.compose.ui.graphics.drawscope.DrawScope
+import dev.anirban.charts.linear.data.LinearDataStrategy
 import dev.anirban.charts.linear.decoration.LinearDecoration
-import dev.anirban.charts.linear.plots.*
+
 
 /**
  * This is the abstraction of graph's plot logic. This class shall be implemented by all the

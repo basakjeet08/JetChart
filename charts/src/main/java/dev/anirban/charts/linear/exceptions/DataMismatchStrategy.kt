@@ -1,6 +1,6 @@
 package dev.anirban.charts.linear.exceptions
 
-import dev.anirban.charts.linear.interfaces.LinearDataStrategy
+import dev.anirban.charts.linear.data.LinearDataStrategy
 
 /**
  * This exception is thrown when the x axis labels [LinearDataStrategy.xAxisLabels]

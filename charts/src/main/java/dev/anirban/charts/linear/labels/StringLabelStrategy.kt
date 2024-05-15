@@ -9,8 +9,7 @@ import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.sp
 import dev.anirban.charts.linear.decoration.LinearDecoration
-import dev.anirban.charts.linear.interfaces.LinearDataStrategy
-import dev.anirban.charts.linear.interfaces.LinearLabelStrategy
+import dev.anirban.charts.linear.data.LinearDataStrategy
 
 /**
  * This is one of the implementations of the [LinearLabelStrategy] and it provides with
