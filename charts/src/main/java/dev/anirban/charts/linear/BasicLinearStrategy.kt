@@ -92,15 +92,6 @@ open class BasicLinearStrategy(
                             "plotPrimaryColor"
                 )
         }
-
-        // checking if we have enough Secondary Color for the plots
-        if (decoration.plotSecondaryColor.size < linearData.linearDataSets.size && plot !is BarPlotStrategy)
-            throw DecorationMismatchStrategy(
-                "Secondary Color of Decoration Class needs " +
-                        "${linearData.linearDataSets.size} colors but it has " +
-                        "${decoration.plotSecondaryColor.size} colors"
-            )
-
     }
 
 

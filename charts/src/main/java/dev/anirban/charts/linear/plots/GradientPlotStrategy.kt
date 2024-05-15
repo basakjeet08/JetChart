@@ -128,7 +128,7 @@ class GradientPlotStrategy(
 
                 // This function draws the Circle points
                 drawCircle(
-                    color = decoration.plotSecondaryColor[index],
+                    color = decoration.plotPrimaryColor[index],
                     radius = circleRadius,
                     center = point.offset
                 )

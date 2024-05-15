@@ -38,7 +38,7 @@ class BarPlotStrategy(
         val paddingOffset = 12f
 
         // Adding the Offsets to the Variable
-        linearData.linearDataSets.forEach { coordinateSet ->
+        linearData.linearDataSets.forEachIndexed { index, coordinateSet ->
 
             coordinateSet.markers.forEach { point ->
 
@@ -46,9 +46,10 @@ class BarPlotStrategy(
                 drawRoundRect(
                     brush = Brush.verticalGradient(
                         listOf(
-                            decoration.plotPrimaryColor.first(),
-                            decoration.plotPrimaryColor.last()
-                        )
+                            decoration.plotPrimaryColor[index],
+                            decoration.plotPrimaryColor[index].copy(alpha = .1f)
+                        ),
+                        startY = point.y
                     ),
                     topLeft = Offset(
                         x = point.x - barWidth / 2f,
