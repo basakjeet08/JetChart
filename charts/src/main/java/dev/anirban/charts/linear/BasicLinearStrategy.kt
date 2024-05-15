@@ -176,7 +176,7 @@ open class BasicLinearStrategy(
                 HorizontalDivider(
                     modifier = Modifier.padding(vertical = 4.dp),
                     thickness = 2.dp,
-                    color = decoration.plotPrimaryColor.first()
+                    color = decoration.textColor
                 )
 
                 // Draws the color conventions for the chart
