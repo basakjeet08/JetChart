@@ -3,13 +3,16 @@ package dev.anirban.jetchart.view.screens
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import dev.anirban.jetchart.view.components.CustomButton
 import dev.anirban.jetchart.view.navigation.CIRCULAR_CHART_UI_ROUTE
 import dev.anirban.jetchart.view.navigation.LINEAR_CHART_UI_ROUTE
 import dev.anirban.jetchart.view.theme.JetChartTheme
@@ -39,23 +42,25 @@ fun HomeScreen(navigateTo: (String) -> Unit) {
 
     // Main UI
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .padding(32.dp)
+            .fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
         // Button to navigate to Linear Chart UI
-        Button(
+        CustomButton(
+            text = "Linear Chart Examples",
             onClick = { navigateTo(LINEAR_CHART_UI_ROUTE) }
-        ) {
-            Text(text = "Linear Chart UI")
-        }
+        )
+
+        Spacer(Modifier.height(16.dp))
 
         // Button to navigate to Circular Chart UI
-        Button(
+        CustomButton(
+            text = "Circular Chart Examples",
             onClick = { navigateTo(CIRCULAR_CHART_UI_ROUTE) }
-        ) {
-            Text(text = "Circular Chart UI")
-        }
+        )
     }
 }
