@@ -70,7 +70,7 @@ class GridLegendStrategy(
 
                 drawRoundRect(
                     color = color,
-                    cornerRadius = CornerRadius(12f)
+                    cornerRadius = CornerRadius(8f)
                 )
             }
 
