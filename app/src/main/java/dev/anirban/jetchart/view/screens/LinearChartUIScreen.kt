@@ -213,8 +213,22 @@ fun LinearChartUIScreen(
 
                     BasicLinearStrategy.BarChart(
                         linearData = BasicDataStrategy(
-                            linearDataSets = linearDataSet5,
+                            linearDataSets = linearDataSet1,
                             xAxisLabels = xReadingMarker
+                        )
+                    )
+                }
+            }
+
+            // Design Pattern Bar Chart
+            item {
+                CustomCard(title = "Bar Chart") {
+
+                    BasicLinearStrategy.BarChart(
+                        linearData = BasicDataStrategy(
+                            linearDataSets = linearDataSet6,
+                            xAxisLabels = xReadingMarker,
+                            yAxisLabels = yReadingMarker.toMutableList()
                         )
                     )
                 }
