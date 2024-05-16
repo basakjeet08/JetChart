@@ -25,7 +25,7 @@ import java.text.DecimalFormat
  */
 class CircularTargetLegend(
     private val fontSize: TextUnit = 14.sp,
-    private val fontWeight: FontWeight = FontWeight.W500
+    private val fontWeight: FontWeight = FontWeight.W400
 ) : CircularLegendInterface {
 
     /**

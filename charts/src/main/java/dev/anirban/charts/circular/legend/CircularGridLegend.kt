@@ -32,7 +32,7 @@ import java.text.DecimalFormat
  */
 class CircularGridLegend(
     private val fontSize: TextUnit = 14.sp,
-    private val fontWeight: FontWeight = FontWeight.W500
+    private val fontWeight: FontWeight = FontWeight.W400
 ) : CircularLegendInterface {
 
     /**

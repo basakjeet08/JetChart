@@ -11,7 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.center
+import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -31,7 +31,7 @@ import java.text.DecimalFormat
  */
 class CircularListLegend(
     private val fontSize: TextUnit = 14.sp,
-    private val fontWeight: FontWeight = FontWeight.W500
+    private val fontWeight: FontWeight = FontWeight.W400
 ) : CircularLegendInterface {
 
     /**
@@ -103,10 +103,9 @@ class CircularListLegend(
             ) {
 
                 // This function draws the Color codes circles
-                drawCircle(
-                    colorConvention,
-                    radius = 20f,
-                    center = size.center
+                drawRoundRect(
+                    color = colorConvention,
+                    cornerRadius = CornerRadius(12f)
                 )
             }
 

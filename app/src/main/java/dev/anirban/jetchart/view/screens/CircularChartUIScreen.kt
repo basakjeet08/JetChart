@@ -22,12 +22,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.anirban.charts.circular.CircularChart
 import dev.anirban.charts.circular.center.CircularImageCenter
-import dev.anirban.charts.circular.center.CircularTargetTextCenter
 import dev.anirban.charts.circular.charts.CircularDonutChartColumn
 import dev.anirban.charts.circular.charts.CircularDonutChartRow
 import dev.anirban.charts.circular.data.CircularDonutListData
 import dev.anirban.charts.circular.data.CircularTargetDataBuilder
-import dev.anirban.charts.circular.foreground.CircularDonutForeground
 import dev.anirban.charts.circular.foreground.CircularDonutTargetForeground
 import dev.anirban.jetchart.view.components.CustomButton
 import dev.anirban.jetchart.view.components.CustomCard
@@ -64,11 +62,6 @@ fun CircularChartUIScreen() {
                             siUnit = "Kcal",
                             cgsUnit = "cal",
                             conversionRate = { it / 1000f }
-                        ),
-                        circularForeground = CircularDonutForeground(
-                            radiusMultiplier = 1.7f,
-                            strokeWidth = 15f,
-                            startAngle = 30f
                         )
                     )
                 }
@@ -107,10 +100,6 @@ fun CircularChartUIScreen() {
                             siUnit = "Km",
                             cgsUnit = "m",
                             conversionRate = { it / 1000f }
-                        ),
-                        circularCenter = CircularTargetTextCenter(
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.W700
                         )
                     )
                 }
