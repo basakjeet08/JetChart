@@ -33,17 +33,4 @@ class CircularTargetDataBuilder(
         cgsUnit = cgsUnit,
         conversionRate = conversionRate
     )
-
-    /**
-     * This function converts the [CircularTargetDataBuilder] class object into [CircularRingTargetData] class object
-     */
-    fun toCircularRingTargetData() = CircularRingTargetData(
-        itemsList = listOf(
-            Pair("Target", target),
-            Pair("Achieved", achieved)
-        ),
-        siUnit = siUnit,
-        cgsUnit = cgsUnit,
-        conversionRate = conversionRate
-    )
 }

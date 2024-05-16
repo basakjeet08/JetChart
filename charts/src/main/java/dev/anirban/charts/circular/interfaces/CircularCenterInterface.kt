@@ -7,7 +7,7 @@ import dev.anirban.charts.circular.decoration.CircularDecoration
 /**
  * This interface implements a function to draw the center of the circular chart
  *
- * Different Implementations for the interface are [CircularDefaultCenter],
+ * Different Implementations for the interface are [CircularNoCenter],
  * [CircularRingTextCenter],[CircularTargetTextCenter]
  */
 interface CircularCenterInterface {

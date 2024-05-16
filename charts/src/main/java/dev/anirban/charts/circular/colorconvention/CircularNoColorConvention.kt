@@ -10,7 +10,7 @@ import dev.anirban.charts.circular.interfaces.CircularDataInterface
  * This class is the implementation of [CircularColorConventionInterface] which provides the
  * implementations for drawing the color conventions in the canvas
  */
-class CircularDefaultColorConvention : CircularColorConventionInterface {
+class CircularNoColorConvention : CircularColorConventionInterface {
 
 
     /**
@@ -24,7 +24,5 @@ class CircularDefaultColorConvention : CircularColorConventionInterface {
     override fun DrawColorConventions(
         circularData: CircularDataInterface,
         decoration: CircularDecoration
-    ) {
-        // Do Nothing
-    }
+    ) = Unit
 }

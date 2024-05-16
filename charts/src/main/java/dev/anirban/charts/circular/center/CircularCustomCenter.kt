@@ -30,7 +30,5 @@ class CircularCustomCenter(
     override fun DrawCenter(
         circularData: CircularDataInterface,
         decoration: CircularDecoration
-    ) {
-        body()
-    }
+    ) = body()
 }

@@ -8,7 +8,7 @@ import dev.anirban.charts.circular.decoration.CircularDecoration
  * This implementation shall be implemented by all the classes which are making color convention
  * implementation
  *
- * Implementations for this interface are :- [CircularDefaultColorConvention],
+ * Implementations for this interface are :- [CircularNoColorConvention],
  * [CircularGridColorConvention],[CircularListColorConvention],[CircularTargetColorConvention]
 
  *

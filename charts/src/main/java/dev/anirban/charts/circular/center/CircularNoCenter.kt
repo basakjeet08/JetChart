@@ -5,6 +5,7 @@ import dev.anirban.charts.circular.decoration.CircularDecoration
 import dev.anirban.charts.circular.interfaces.CircularCenterInterface
 import dev.anirban.charts.circular.interfaces.CircularDataInterface
 
+
 /**
  * This class is the implementation of [CircularCenterInterface] which focuses on providing an
  * implementation to draw something on the center of the Circular Chart
@@ -12,7 +13,7 @@ import dev.anirban.charts.circular.interfaces.CircularDataInterface
  * This Class in particular is the implementation to draw nothing and it is served as a Default
  * implementation
  */
-class CircularDefaultCenter : CircularCenterInterface {
+class CircularNoCenter : CircularCenterInterface {
 
     /**
      * This function does nothing which is fine since we want the default Circle Center to be nothing
@@ -21,7 +22,5 @@ class CircularDefaultCenter : CircularCenterInterface {
     override fun DrawCenter(
         circularData: CircularDataInterface,
         decoration: CircularDecoration
-    ) {
-        // Does Nothing
-    }
+    ) = Unit
 }

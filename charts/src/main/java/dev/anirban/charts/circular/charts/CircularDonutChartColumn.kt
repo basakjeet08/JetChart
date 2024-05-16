@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.unit.dp
 import dev.anirban.charts.circular.CircularChart
-import dev.anirban.charts.circular.center.CircularDefaultCenter
+import dev.anirban.charts.circular.center.CircularNoCenter
 import dev.anirban.charts.circular.colorconvention.CircularGridColorConvention
 import dev.anirban.charts.circular.decoration.CircularDecoration
 import dev.anirban.charts.circular.foreground.CircularDonutForeground
@@ -120,7 +120,7 @@ class CircularDonutChartColumn(
         @Composable
         fun DonutChartColumn(
             modifier: Modifier = Modifier,
-            circularCenter: CircularCenterInterface = CircularDefaultCenter(),
+            circularCenter: CircularCenterInterface = CircularNoCenter(),
             circularData: CircularDataInterface,
             circularDecoration: CircularDecoration = CircularDecoration.donutChartDecorations(),
             circularForeground: CircularForegroundInterface = CircularDonutForeground(),

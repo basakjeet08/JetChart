@@ -22,11 +22,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.anirban.charts.circular.CircularChart
 import dev.anirban.charts.circular.center.CircularImageCenter
-import dev.anirban.charts.circular.center.CircularRingTextCenter
 import dev.anirban.charts.circular.center.CircularTargetTextCenter
 import dev.anirban.charts.circular.charts.CircularDonutChartColumn
 import dev.anirban.charts.circular.charts.CircularDonutChartRow
-import dev.anirban.charts.circular.charts.CircularRingChart
 import dev.anirban.charts.circular.data.CircularDonutListData
 import dev.anirban.charts.circular.data.CircularTargetDataBuilder
 import dev.anirban.charts.circular.foreground.CircularDonutForeground
@@ -117,64 +115,7 @@ fun CircularChartUIScreen() {
                     )
                 }
             }
-
-
-            // Design Pattern Single Ring Chart
-            item {
-                CustomCard(title = "Single Ring Chart") {
-                    CircularRingChart.SingleRingChart(
-                        circularData = CircularTargetDataBuilder(
-                            target = 500f,
-                            achieved = 489f,
-                            siUnit = "",
-                            cgsUnit = "",
-                            conversionRate = { it }
-                        ),
-                        circularCenter = CircularRingTextCenter(
-                            title = "Title 1",
-                            centerValue = "value",
-                            status = "status Value"
-                        )
-                    )
-                }
-            }
-
-
-            // Design Pattern Double Ring Chart
-            item {
-                CustomCard(title = "Double Ring Chart") {
-                    CircularRingChart.MultipleRingChart(
-                        circularData = listOf(
-                            CircularTargetDataBuilder(
-                                target = 100f,
-                                achieved = 81f,
-                                siUnit = "bpm",
-                                cgsUnit = "bpm",
-                                conversionRate = { it }
-                            ),
-                            CircularTargetDataBuilder(
-                                target = 160f,
-                                achieved = 112f,
-                                siUnit = "mm",
-                                cgsUnit = "mm",
-                                conversionRate = { it }
-                            )
-                        ),
-                        circularCenter = listOf(
-                            CircularRingTextCenter(
-                                title = "Title 1",
-                                centerValue = "center value",
-                                status = "Not Good"
-                            ),
-                            CircularRingTextCenter(
-                                title = "Title 2",
-                                centerValue = "center value",
-                                status = "Great"
-                            )
-                        )
-                    )
-                }
-            }
+            
 
             // weekly Progress Graph
             item {

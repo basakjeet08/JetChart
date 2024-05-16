@@ -12,7 +12,7 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.unit.dp
 import dev.anirban.charts.circular.center.CircularImageCenter
-import dev.anirban.charts.circular.colorconvention.CircularDefaultColorConvention
+import dev.anirban.charts.circular.colorconvention.CircularNoColorConvention
 import dev.anirban.charts.circular.data.CircularTargetDataBuilder
 import dev.anirban.charts.circular.exceptions.CircularDecorationMismatch
 import dev.anirban.charts.circular.foreground.CircularDonutTargetForeground
@@ -23,7 +23,6 @@ import dev.anirban.charts.circular.interfaces.CircularDataInterface
 import dev.anirban.charts.circular.interfaces.CircularExceptionHandler
 import dev.anirban.charts.circular.interfaces.CircularForegroundInterface
 import dev.anirban.charts.circular.decoration.CircularDecoration
-import dev.anirban.charts.circular.foreground.CircularRingForeground
 
 /**
  * This class extends from the [CircularChartInterface] which means its the root level class and it
@@ -54,18 +53,14 @@ open class CircularChart(
      * This validates that the decoration stuffs are given correctly or not
      */
     override fun validateDecoration() {
-        if (circularForeground !is CircularRingForeground) {
-            if (circularDecoration.colorList.size < circularData.itemsList.size)
-                throw CircularDecorationMismatch(
-                    "Need at least ${circularData.itemsList.size} amount" +
-                            " of Colors for ${circularData.itemsList.size} number of Items in List" +
-                            " where only ${circularDecoration.colorList.size} is passed"
-                )
-        } else {
-            if (circularDecoration.colorList.isEmpty())
-                throw CircularDecorationMismatch("Need at least two color for the Ring Chart Gradients")
-        }
+        if (circularDecoration.colorList.size < circularData.itemsList.size)
+            throw CircularDecorationMismatch(
+                "Need at least ${circularData.itemsList.size} amount" +
+                        " of Colors for ${circularData.itemsList.size} number of Items in List" +
+                        " where only ${circularDecoration.colorList.size} is passed"
+            )
     }
+
 
     /**
      * This checks and validates all the Exceptions and see if all of them are okay before letting
@@ -183,7 +178,7 @@ open class CircularChart(
             circularData: CircularTargetDataBuilder,
             circularDecoration: CircularDecoration = CircularDecoration.donutChartDecorations(),
             circularForeground: CircularForegroundInterface = CircularDonutTargetForeground(),
-            circularColorConvention: CircularColorConventionInterface = CircularDefaultColorConvention()
+            circularColorConvention: CircularColorConventionInterface = CircularNoColorConvention()
         ) = CircularChart(
             circularCenter = circularCenter,
             circularData = circularData.toCircularDonutTargetData(),

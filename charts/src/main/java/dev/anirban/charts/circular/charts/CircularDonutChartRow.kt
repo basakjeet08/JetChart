@@ -14,7 +14,7 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.unit.dp
 import dev.anirban.charts.circular.colorconvention.CircularTargetColorConvention
 import dev.anirban.charts.circular.CircularChart
-import dev.anirban.charts.circular.center.CircularDefaultCenter
+import dev.anirban.charts.circular.center.CircularNoCenter
 import dev.anirban.charts.circular.center.CircularTargetTextCenter
 import dev.anirban.charts.circular.colorconvention.CircularListColorConvention
 import dev.anirban.charts.circular.data.CircularTargetDataBuilder
@@ -131,7 +131,7 @@ open class CircularDonutChartRow(
         @Composable
         fun DonutChartRow(
             modifier: Modifier = Modifier,
-            circularCenter: CircularCenterInterface = CircularDefaultCenter(),
+            circularCenter: CircularCenterInterface = CircularNoCenter(),
             circularData: CircularDataInterface,
             circularDecoration: CircularDecoration = CircularDecoration.donutChartDecorations(),
             circularForeground: CircularForegroundInterface = CircularDonutForeground(),

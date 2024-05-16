@@ -13,6 +13,7 @@ import dev.anirban.charts.circular.interfaces.CircularCenterInterface
 import dev.anirban.charts.circular.interfaces.CircularDataInterface
 import java.text.DecimalFormat
 
+
 /**
  * This class is the implementation of [CircularCenterInterface] which focuses on providing an
  * implementation to draw something on the center of the Circular Chart
