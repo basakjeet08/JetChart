@@ -1,10 +1,13 @@
-package dev.anirban.charts.circular.interfaces
+package dev.anirban.charts.circular
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.drawscope.DrawScope
-import dev.anirban.charts.circular.CircularChart
+import dev.anirban.charts.circular.center.CircularCenterInterface
 import dev.anirban.charts.circular.decoration.CircularDecoration
+import dev.anirban.charts.circular.colorconvention.CircularColorConventionInterface
+import dev.anirban.charts.circular.data.CircularDataInterface
+import dev.anirban.charts.circular.foreground.CircularForegroundInterface
 
 /**
  * This is the interface which is implemented by the [CircularChart] Class which is the root class

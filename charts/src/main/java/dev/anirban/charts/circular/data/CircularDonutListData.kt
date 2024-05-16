@@ -1,7 +1,5 @@
 package dev.anirban.charts.circular.data
 
-import dev.anirban.charts.circular.interfaces.CircularDataInterface
-
 /**
  * This class is the implementation of [CircularDataInterface] class which is responsible for
  * providing the implementation of business login and calculation logic behind the chart

@@ -9,8 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import dev.anirban.charts.circular.decoration.CircularDecoration
-import dev.anirban.charts.circular.interfaces.CircularCenterInterface
-import dev.anirban.charts.circular.interfaces.CircularDataInterface
+import dev.anirban.charts.circular.data.CircularDataInterface
 
 
 /**

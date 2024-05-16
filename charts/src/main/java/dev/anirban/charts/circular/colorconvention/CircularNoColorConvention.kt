@@ -2,8 +2,7 @@ package dev.anirban.charts.circular.colorconvention
 
 import androidx.compose.runtime.Composable
 import dev.anirban.charts.circular.decoration.CircularDecoration
-import dev.anirban.charts.circular.interfaces.CircularColorConventionInterface
-import dev.anirban.charts.circular.interfaces.CircularDataInterface
+import dev.anirban.charts.circular.data.CircularDataInterface
 
 
 /**

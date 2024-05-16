@@ -1,4 +1,4 @@
-package dev.anirban.charts.circular.interfaces
+package dev.anirban.charts.circular.exceptions
 
 import dev.anirban.charts.circular.decoration.CircularDecoration
 

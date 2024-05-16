@@ -1,8 +1,8 @@
-package dev.anirban.charts.circular.interfaces
+package dev.anirban.charts.circular.colorconvention
 
 import androidx.compose.runtime.Composable
-import dev.anirban.charts.circular.colorconvention.*
 import dev.anirban.charts.circular.decoration.CircularDecoration
+import dev.anirban.charts.circular.data.CircularDataInterface
 
 /**
  * This implementation shall be implemented by all the classes which are making color convention

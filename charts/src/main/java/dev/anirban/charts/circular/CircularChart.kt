@@ -16,12 +16,11 @@ import dev.anirban.charts.circular.colorconvention.CircularNoColorConvention
 import dev.anirban.charts.circular.data.CircularTargetDataBuilder
 import dev.anirban.charts.circular.exceptions.CircularDecorationMismatch
 import dev.anirban.charts.circular.foreground.CircularDonutTargetForeground
-import dev.anirban.charts.circular.interfaces.CircularCenterInterface
-import dev.anirban.charts.circular.interfaces.CircularChartInterface
-import dev.anirban.charts.circular.interfaces.CircularColorConventionInterface
-import dev.anirban.charts.circular.interfaces.CircularDataInterface
-import dev.anirban.charts.circular.interfaces.CircularExceptionHandler
-import dev.anirban.charts.circular.interfaces.CircularForegroundInterface
+import dev.anirban.charts.circular.center.CircularCenterInterface
+import dev.anirban.charts.circular.colorconvention.CircularColorConventionInterface
+import dev.anirban.charts.circular.data.CircularDataInterface
+import dev.anirban.charts.circular.exceptions.CircularExceptionHandler
+import dev.anirban.charts.circular.foreground.CircularForegroundInterface
 import dev.anirban.charts.circular.decoration.CircularDecoration
 
 /**

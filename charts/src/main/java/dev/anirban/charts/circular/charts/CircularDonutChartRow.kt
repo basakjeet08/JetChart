@@ -21,10 +21,10 @@ import dev.anirban.charts.circular.data.CircularTargetDataBuilder
 import dev.anirban.charts.circular.decoration.CircularDecoration
 import dev.anirban.charts.circular.foreground.CircularDonutForeground
 import dev.anirban.charts.circular.foreground.CircularDonutTargetForeground
-import dev.anirban.charts.circular.interfaces.CircularCenterInterface
-import dev.anirban.charts.circular.interfaces.CircularColorConventionInterface
-import dev.anirban.charts.circular.interfaces.CircularDataInterface
-import dev.anirban.charts.circular.interfaces.CircularForegroundInterface
+import dev.anirban.charts.circular.center.CircularCenterInterface
+import dev.anirban.charts.circular.colorconvention.CircularColorConventionInterface
+import dev.anirban.charts.circular.data.CircularDataInterface
+import dev.anirban.charts.circular.foreground.CircularForegroundInterface
 
 
 /**

@@ -20,8 +20,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.anirban.charts.circular.decoration.CircularDecoration
-import dev.anirban.charts.circular.interfaces.CircularColorConventionInterface
-import dev.anirban.charts.circular.interfaces.CircularDataInterface
+import dev.anirban.charts.circular.data.CircularDataInterface
 import java.text.DecimalFormat
 
 /**

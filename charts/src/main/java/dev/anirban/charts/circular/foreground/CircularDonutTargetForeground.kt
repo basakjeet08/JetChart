@@ -5,8 +5,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
 import dev.anirban.charts.circular.decoration.CircularDecoration
-import dev.anirban.charts.circular.interfaces.CircularDataInterface
-import dev.anirban.charts.circular.interfaces.CircularForegroundInterface
+import dev.anirban.charts.circular.data.CircularDataInterface
 
 /**
  * This class implements the [CircularForegroundInterface] which is responsible for making the

@@ -1,6 +1,7 @@
-package dev.anirban.charts.circular.interfaces
+package dev.anirban.charts.circular.foreground
 
 import androidx.compose.ui.graphics.drawscope.DrawScope
+import dev.anirban.charts.circular.data.CircularDataInterface
 import dev.anirban.charts.circular.decoration.CircularDecoration
 import dev.anirban.charts.circular.foreground.*
 
@@ -10,7 +11,7 @@ import dev.anirban.charts.circular.foreground.*
  * implementations for drawing the readings in the chart
  *
  * Implementations for this interface are :- [CircularDonutForeground],
- * [CircularDonutTargetForeground],[CircularRingForeground]
+ * [CircularDonutTargetForeground]
  *
  * @property drawForeground This function draws the foreground using its own implementation
  */
