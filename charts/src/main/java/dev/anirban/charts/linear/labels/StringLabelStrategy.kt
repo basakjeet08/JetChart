@@ -34,37 +34,37 @@ class StringLabelStrategy : LinearLabelStrategy {
         // Padding from the Y Axis Labels to the Dashed Line
         val yLabelPadding = 24f
 
-        linearData.yAxisLabels.forEach { point ->
+        val paint = Paint().apply {
+            color = decoration.textColor.copy(alpha = 0.7f).toArgb()
+            textSize = 12.sp.toPx()
+            typeface = Typeface.create(Typeface.DEFAULT, Typeface.NORMAL)
+        }
+
+        linearData.yAxisLabels.forEach { label ->
 
             val bounds = Rect()
-            val paint = Paint()
-
-            paint.color = decoration.textColor.toArgb()
-            paint.textSize = 12.sp.toPx()
-            paint.textAlign = Paint.Align.LEFT
-            paint.typeface = Typeface.create(Typeface.DEFAULT, Typeface.NORMAL)
-            paint.getTextBounds(point.value.toString(), 0, point.value.toString().length, bounds)
+            paint.getTextBounds(label.value.toString(), 0, label.value.toString().length, bounds)
 
             val width = bounds.width()
 
-            // This draws the String Marker
+            // This draws the String Labels on the Graph
             drawContext.canvas.nativeCanvas.drawText(
-                point.value.toString(),
-                point.x,
-                point.y,
-                paint
+                label.value.toString(),
+                label.x,
+                label.y,
+                paint.apply { textAlign = Paint.Align.LEFT }
             )
 
             // This draws the Lines for the readings parallel to X Axis
             drawLine(
                 start = Offset(
                     x = width.toFloat() + yLabelPadding,
-                    y = point.y - bounds.height() / 2f
+                    y = label.y - bounds.height() / 2f
                 ),
                 color = decoration.textColor.copy(alpha = 0.8f),
                 end = Offset(
                     x = size.width,
-                    y = point.y - bounds.height() / 2f
+                    y = label.y - bounds.height() / 2f
                 ),
                 strokeWidth = .7f,
                 pathEffect = PathEffect.dashPathEffect(
@@ -74,20 +74,15 @@ class StringLabelStrategy : LinearLabelStrategy {
             )
         }
 
-        // This Draws the Y Markers below the Graph
-        linearData.xAxisLabels.forEach { currentMarker ->
+        // This Draws the X Labels below the Graph
+        linearData.xAxisLabels.forEach { label ->
 
             // This draws the String Marker
             drawContext.canvas.nativeCanvas.drawText(
-                currentMarker.value.toString(),
-                currentMarker.x,
-                currentMarker.y,
-                Paint().apply {
-                    color = decoration.textColor.toArgb()
-                    textSize = 12.sp.toPx()
-                    textAlign = Paint.Align.CENTER
-                    typeface = Typeface.create(Typeface.DEFAULT, Typeface.NORMAL)
-                }
+                label.value.toString(),
+                label.x,
+                label.y,
+                paint.apply { textAlign = Paint.Align.CENTER }
             )
         }
     }
