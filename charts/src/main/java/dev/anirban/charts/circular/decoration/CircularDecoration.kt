@@ -4,6 +4,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
+
 /**
  * This is the class which contains the circular decoration data
  *
@@ -20,10 +21,11 @@ class CircularDecoration(
      */
     companion object {
 
-        private val colorBlue = Color(0xFF0088FF)
+        private val colorPurple = Color(0xFF7979FE)
+        private val colorRed = Color(0xFFFC3B75)
+        private val colorBlue = Color(0xFF3AAAFE)
         private val colorGreen = Color(0xFF2AD200)
-        private val colorYellow = Color(0xFFEEE73B)
-        private val colorRed = Color(0xFFFF2E2E)
+        private val colorYellow = Color(0xFFE2B93B)
 
         /**
          * Provides [CircularDecoration] Objects for the circular Donut Charts
@@ -38,10 +40,11 @@ class CircularDecoration(
         fun donutChartDecorations(
             textColor: Color = MaterialTheme.colorScheme.onSurface,
             colorList: List<Color> = listOf(
+                colorPurple,
+                colorRed,
                 colorBlue,
                 colorGreen,
-                colorYellow,
-                colorRed
+                colorYellow
             )
         ) = CircularDecoration(
             textColor = textColor,
