@@ -4,12 +4,14 @@ import android.graphics.Paint
 import android.graphics.Rect
 import android.graphics.Typeface
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.sp
 import dev.anirban.charts.linear.decoration.LinearDecoration
 import dev.anirban.charts.linear.data.LinearDataStrategy
+
 
 /**
  * This is one of the implementations of the [LinearLabelStrategy] and it provides with
@@ -28,6 +30,9 @@ class StringLabelStrategy : LinearLabelStrategy {
         linearData: LinearDataStrategy,
         decoration: LinearDecoration
     ) {
+
+        // Padding from the Y Axis Labels to the Dashed Line
+        val yLabelPadding = 24f
 
         linearData.yAxisLabels.forEach { point ->
 
@@ -53,15 +58,19 @@ class StringLabelStrategy : LinearLabelStrategy {
             // This draws the Lines for the readings parallel to X Axis
             drawLine(
                 start = Offset(
-                    x = width.toFloat(),
-                    y = point.y - 12f
+                    x = width.toFloat() + yLabelPadding,
+                    y = point.y - bounds.height() / 2f
                 ),
                 color = decoration.textColor.copy(alpha = 0.8f),
                 end = Offset(
                     x = size.width,
-                    y = point.y - 12f
+                    y = point.y - bounds.height() / 2f
                 ),
-                strokeWidth = 1f
+                strokeWidth = .7f,
+                pathEffect = PathEffect.dashPathEffect(
+                    intervals = floatArrayOf(10f, 10f),
+                    phase = 0f
+                )
             )
         }
 

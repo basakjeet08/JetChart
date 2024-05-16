@@ -158,7 +158,7 @@ class BasicDataStrategy(
                 val currentYCoordinate = (yScale * index) + 12f
 
                 // Setting the calculated graph offset of the object.
-                setOffset(x = -24f, currentYCoordinate)
+                setOffset(x = 0f, currentYCoordinate)
 
                 val width = bounds.width()
                 yLabelMaxWidth = if (yLabelMaxWidth < width) width else yLabelMaxWidth
