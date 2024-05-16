@@ -14,7 +14,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -59,9 +58,7 @@ class CircularListLegend(
                     pair = pair,
                     colorConvention = decoration.colorList[index],
                     textColor = decoration.textColor,
-                    siUnit = circularData.siUnit,
-                    cgsUnit = circularData.cgsUnit,
-                    conversionRate = circularData.conversionRate
+                    unit = circularData.unit
                 )
             }
         }
@@ -73,19 +70,14 @@ class CircularListLegend(
      * @param pair This contains the data of the String and the value to be shown to the user
      * @param colorConvention This is the color which denotes this value in the graph
      * @param textColor This is the Color of the text
-     * @param siUnit This is the SI Unit to be shown for SI Value
-     * @param cgsUnit This is the CGS unit to be shown for CGS Value
-     * @param conversionRate THis is the conversion rate according to which the values can
-     * be changed from CGS to SI unit
+     * @param unit This is the SI Unit to be shown for SI Value
      */
     @Composable
     private fun DrawConvention(
         pair: Pair<String, Float>,
         colorConvention: Color,
         textColor: Color,
-        siUnit: String,
-        cgsUnit: String,
-        conversionRate: (Float) -> Float
+        unit: String
     ) {
 
         Row(
@@ -109,21 +101,15 @@ class CircularListLegend(
                 )
             }
 
-            // This is the value in SI Unit
-            val convertedValue = conversionRate(pair.second)
-
             // Determining the text to be shown. Would it be in SI or CGS
-            val textToBeShown = "${pair.first} - " + if (convertedValue < 1f)
-                "${DecimalFormat("#.##").format(pair.second)} $cgsUnit"
-            else
-                "${DecimalFormat("#.##").format(convertedValue)} $siUnit"
+            val textToShow = "${pair.first} - " +
+                    "${DecimalFormat("#.##").format(pair.second)} $unit"
 
             // Item Value
             Text(
-                text = textToBeShown,
+                text = textToShow,
 
                 // Text Features
-                textAlign = TextAlign.Center,
                 fontSize = fontSize,
                 fontWeight = fontWeight,
                 color = textColor

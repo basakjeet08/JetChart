@@ -4,18 +4,13 @@ package dev.anirban.charts.circular.data
  * This class is the implementation of [CircularDataInterface] class which is responsible for
  * providing the implementation of business login and calculation logic behind the chart
  *
- * @param siUnit This is the SI Unit text
- * @param cgsUnit This is the CGS Unit text
- * @param conversionRate This is the conversion rate according to which the CGS values can be
- * transformed into SI Unit
+ * @param unit This is the SI Unit text
  *
  * @property sweepAngles This is the list of sweep angles which could be calculated
  */
 class CircularDonutTargetData(
     override val itemsList: List<Pair<String, Float>>,
-    override val siUnit: String,
-    override val cgsUnit: String,
-    override val conversionRate: (Float) -> Float
+    override val unit: String
 ) : CircularDataInterface {
 
     override var sweepAngles: MutableList<Float> = mutableListOf()

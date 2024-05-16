@@ -43,10 +43,7 @@ class CircularGridLegend(
      * @param value This is the value
      * @param color to be shown for this color convention
      * @param textColor This is the color of the text
-     * @param siUnit This is the SI Unit of the value
-     * @param cgsUnit This is the CGS Unit of the value
-     * @param conversionRate This is the conversion Rate according to which the data will
-     * be converted from CGS to SI
+     * @param unit This is the SI Unit of the value
      */
     @Composable
     fun ChartDetail(
@@ -54,9 +51,7 @@ class CircularGridLegend(
         value: Float,
         color: Color,
         textColor: Color,
-        siUnit: String,
-        cgsUnit: String,
-        conversionRate: (Float) -> Float
+        unit: String
     ) {
 
         Row(
@@ -80,14 +75,8 @@ class CircularGridLegend(
 
             Spacer(modifier = Modifier.width(4.dp))
 
-            // This is the SI Value according to the conversion rate
-            val convertedValue = conversionRate(value)
-
             // This is the output to be shown to the users
-            val textToShow = "$text - " + if (convertedValue < 1f)
-                "${DecimalFormat("#.##").format(value)} $cgsUnit"
-            else
-                "${DecimalFormat("#.##").format(convertedValue)} $siUnit"
+            val textToShow = "$text - ${DecimalFormat("#.##").format(value)} $unit"
 
             // Item Value
             Text(
@@ -132,9 +121,7 @@ class CircularGridLegend(
                     value = circularData.itemsList[index].second,
                     color = decoration.colorList[index],
                     textColor = decoration.textColor,
-                    siUnit = circularData.siUnit,
-                    cgsUnit = circularData.cgsUnit,
-                    conversionRate = circularData.conversionRate
+                    unit = circularData.unit
                 )
             }
         }
@@ -156,9 +143,7 @@ class CircularGridLegend(
                     value = circularData.itemsList[index].second,
                     color = decoration.colorList[index],
                     textColor = decoration.textColor,
-                    siUnit = circularData.siUnit,
-                    cgsUnit = circularData.cgsUnit,
-                    conversionRate = circularData.conversionRate
+                    unit = circularData.unit
                 )
             }
         }

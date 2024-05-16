@@ -59,9 +59,7 @@ fun CircularChartUIScreen() {
                                 Pair("Junk Food", 300.0f),
                                 Pair("Protein", 500.0f)
                             ),
-                            siUnit = "Kcal",
-                            cgsUnit = "cal",
-                            conversionRate = { it / 1000f }
+                            unit = "Kcal"
                         )
                     )
                 }
@@ -80,9 +78,7 @@ fun CircularChartUIScreen() {
                                 Pair("Social", 30f),
                                 Pair("Others", 60f)
                             ),
-                            siUnit = "Hrs",
-                            cgsUnit = "Min",
-                            conversionRate = { it / 60f }
+                            unit = "Min"
                         )
                     )
                 }
@@ -97,14 +93,12 @@ fun CircularChartUIScreen() {
                         circularData = CircularTargetDataBuilder(
                             target = 4340f,
                             achieved = 2823f,
-                            siUnit = "Km",
-                            cgsUnit = "m",
-                            conversionRate = { it / 1000f }
+                            unit = "m"
                         )
                     )
                 }
             }
-            
+
 
             // weekly Progress Graph
             item {
@@ -126,9 +120,7 @@ fun CircularChartUIScreen() {
                                     circularData = CircularTargetDataBuilder(
                                         target = 100f,
                                         achieved = 81f,
-                                        siUnit = "",
-                                        cgsUnit = "",
-                                        conversionRate = { it }
+                                        unit = ""
                                     ),
                                     circularCenter = CircularImageCenter(
                                         image = Icons.Default.Check,

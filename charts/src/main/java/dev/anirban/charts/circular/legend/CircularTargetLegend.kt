@@ -28,6 +28,7 @@ class CircularTargetLegend(
     private val fontWeight: FontWeight = FontWeight.W400
 ) : CircularLegendInterface {
 
+
     /**
      * This function draws the color conventions in the canvas
      *
@@ -49,21 +50,15 @@ class CircularTargetLegend(
 
             circularData.itemsList.forEach {
 
-                // This is the converted Value which is to be shown for SI Unit
-                val convertedValue = circularData.conversionRate(it.second)
-
                 // This is the output to be shown to the user
-                val textToShow = "${it.first} - " + if (convertedValue < 1f)
-                    "${DecimalFormat("#.##").format(it.second)} ${circularData.cgsUnit}"
-                else
-                    "${DecimalFormat("#.##").format(convertedValue)} ${circularData.siUnit}"
+                val textToShow = "${it.first} - " +
+                        "${DecimalFormat("#.##").format(it.second)} ${circularData.unit}"
 
                 // Item and Value
                 Text(
                     text = textToShow,
 
-                    modifier = Modifier
-                        .padding(vertical = 4.dp),
+                    modifier = Modifier.padding(vertical = 4.dp),
 
                     // Text Features
                     textAlign = TextAlign.Start,
