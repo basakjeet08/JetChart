@@ -1,25 +1,21 @@
 package dev.anirban.jetchart.view.screens
 
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.anirban.charts.linear.BasicLinearStrategy
 import dev.anirban.charts.linear.data.LinearDataSet
 import dev.anirban.charts.linear.data.BasicDataStrategy
-import dev.anirban.charts.util.Coordinate
+import dev.anirban.charts.util.Coordinate.Companion.toCoordinateSet
 import dev.anirban.jetchart.data.model.LinearMockResponse
+import dev.anirban.jetchart.view.components.CustomButton
 import dev.anirban.jetchart.view.components.CustomCard
 
 
@@ -30,9 +26,8 @@ fun LinearChartUIScreen(
 ) {
 
     // Example Data Sets
-    val xReadingMarker by remember {
-        mutableStateOf(Coordinate.coordinateSetBuilder("A", "B", "C", "D", "E", "F", "G"))
-    }
+    val xReadingMarker = mockLinearData.xAxisLabels.toCoordinateSet()
+    val yReadingMarker = mockLinearData.yAxisLabels.toCoordinateSet()
 
     // Data Set Samples and various ways to create them
     val linearDataSet1 = mockLinearData.dataSet1.map {
@@ -53,101 +48,198 @@ fun LinearChartUIScreen(
             markers = it.dataSet
         )
     }
+
     val linearDataSet4 = mockLinearData.dataSet4.map {
+        it.toLinearDataSet()
+    }
+
+    val linearDataSet5 = mockLinearData.dataSet5.map {
+        it.toLinearDataSet()
+    }
+
+    // Data Set Samples and various ways to create them
+    val linearDataSet6 = mockLinearData.dataSet6.map {
+        it.toLinearDataSet()
+    }
+
+    val linearDataSet7 = mockLinearData.dataSet7.map {
+        it.toLinearDataSet()
+    }
+    val linearDataSet8 = mockLinearData.dataSet8.map {
+        it.toLinearDataSet()
+    }
+    val linearDataSet9 = mockLinearData.dataSet9.map {
         it.toLinearDataSet()
     }
 
     Column(
         modifier = Modifier
-            .verticalScroll(rememberScrollState())
             .fillMaxSize()
-            .padding(vertical = 16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
 
+        LazyColumn(
+            modifier = Modifier.weight(1f),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+
+            // Design Pattern Single Line Chart
+            item {
+                CustomCard(title = "Single Line Chart") {
+
+                    BasicLinearStrategy.LineChart(
+                        linearData = BasicDataStrategy(
+                            linearDataSets = linearDataSet1,
+                            xAxisLabels = xReadingMarker
+                        )
+                    )
+                }
+            }
+
+            // Design Pattern Double Line Chart
+            item {
+                CustomCard(title = "Double Line Chart") {
+
+                    BasicLinearStrategy.LineChart(
+                        linearData = BasicDataStrategy(
+                            linearDataSets = linearDataSet2,
+                            xAxisLabels = xReadingMarker
+                        )
+                    )
+                }
+            }
+
+            // Design Pattern Multiple Line Chart
+            item {
+                CustomCard(title = "Multiple Line Chart") {
+
+                    BasicLinearStrategy.LineChart(
+                        linearData = BasicDataStrategy(
+                            linearDataSets = linearDataSet3,
+                            xAxisLabels = xReadingMarker
+                        )
+                    )
+                }
+            }
+
+
+            // Design Pattern Multiple Line Chart
+            item {
+                CustomCard(title = "Multiple Line Chart") {
+
+                    BasicLinearStrategy.LineChart(
+                        linearData = BasicDataStrategy(
+                            linearDataSets = linearDataSet4,
+                            xAxisLabels = xReadingMarker
+                        )
+                    )
+                }
+            }
+
+
+            // Design Pattern String Marker Gradient Line Chart
+            item {
+                CustomCard(title = "Gradient List using Plot Object") {
+
+                    BasicLinearStrategy.GradientChart(
+                        linearData = BasicDataStrategy(
+                            linearDataSets = linearDataSet5,
+                            xAxisLabels = xReadingMarker,
+                            yAxisLabels = yReadingMarker.toMutableList()
+                        )
+                    )
+                }
+            }
+
+
+            // Design Pattern String Marker Line Chart
+            item {
+                CustomCard(title = "Solo Custom Label Chart") {
+                    BasicLinearStrategy.LineChart(
+                        linearData = BasicDataStrategy(
+                            linearDataSets = linearDataSet6,
+                            xAxisLabels = xReadingMarker,
+                            yAxisLabels = yReadingMarker.toMutableList()
+                        )
+                    )
+                }
+            }
+
+            // Design Pattern String Marker Line Chart
+            item {
+                CustomCard(title = "Double Custom Label Chart") {
+                    BasicLinearStrategy.LineChart(
+                        linearData = BasicDataStrategy(
+                            linearDataSets = linearDataSet7,
+                            xAxisLabels = xReadingMarker,
+                            yAxisLabels = yReadingMarker.toMutableList()
+                        )
+                    )
+                }
+            }
+
+            // Design Pattern String Marker Line Chart
+            item {
+                CustomCard(title = "Multiple Custom Label Chart") {
+                    BasicLinearStrategy.LineChart(
+                        linearData = BasicDataStrategy(
+                            linearDataSets = linearDataSet8,
+                            xAxisLabels = xReadingMarker,
+                            yAxisLabels = yReadingMarker.toMutableList()
+                        )
+                    )
+                }
+            }
+
+            // Design Pattern String Marker Line Chart
+            item {
+                CustomCard(title = "Multiple Custom Label Chart") {
+                    BasicLinearStrategy.LineChart(
+                        linearData = BasicDataStrategy(
+                            linearDataSets = linearDataSet9,
+                            xAxisLabels = xReadingMarker,
+                            yAxisLabels = yReadingMarker.toMutableList()
+                        )
+                    )
+                }
+            }
+
+
+            // Design Pattern Bar Chart
+            item {
+                CustomCard(title = "Bar Chart") {
+
+                    BasicLinearStrategy.BarChart(
+                        linearData = BasicDataStrategy(
+                            linearDataSets = linearDataSet1,
+                            xAxisLabels = xReadingMarker
+                        )
+                    )
+                }
+            }
+
+            // Design Pattern Bar Chart
+            item {
+                CustomCard(title = "Bar Chart") {
+
+                    BasicLinearStrategy.BarChart(
+                        linearData = BasicDataStrategy(
+                            linearDataSets = linearDataSet6,
+                            xAxisLabels = xReadingMarker,
+                            yAxisLabels = yReadingMarker.toMutableList()
+                        )
+                    )
+                }
+            }
+        }
+
         // Reload Button
-        Button(onClick = onReload) {
-            Text(text = "Reload Data Set")
-        }
-
-
-        // Design Pattern Single Line Chart
-        CustomCard(title = "Single Line Chart") {
-
-            BasicLinearStrategy.LineChart(
-                linearData = BasicDataStrategy(
-                    linearDataSets = linearDataSet1,
-                    xAxisLabels = xReadingMarker
-                )
-            )
-        }
-
-        // Design Pattern Double Line Chart
-        CustomCard(title = "Double Line Chart") {
-
-            BasicLinearStrategy.LineChart(
-                linearData = BasicDataStrategy(
-                    linearDataSets = linearDataSet2,
-                    xAxisLabels = xReadingMarker
-                )
-            )
-        }
-
-        // Design Pattern Triple Line Chart
-        CustomCard(title = "Multiple Line Chart") {
-
-            BasicLinearStrategy.LineChart(
-                linearData = BasicDataStrategy(
-                    linearDataSets = linearDataSet3,
-                    xAxisLabels = xReadingMarker
-                )
-            )
-        }
-
-        // Design Pattern String Marker Line Chart
-        CustomCard(title = "String Marker Chart") {
-            BasicLinearStrategy.LineChart(
-                linearData = BasicDataStrategy(
-                    linearDataSets = linearDataSet4,
-                    xAxisLabels = xReadingMarker,
-                    yAxisLabels = Coordinate.coordinateSetBuilder(
-                        "Very High",
-                        "High",
-                        "Moderate",
-                        "Average",
-                        "Bad"
-                    ).toMutableList()
-                )
-            )
-        }
-
-        // Design Pattern String Marker Gradient Line Chart using plot object
-        CustomCard(title = "Gradient List using Plot Object") {
-
-            BasicLinearStrategy.GradientChart(
-                linearData = BasicDataStrategy(
-                    linearDataSets = linearDataSet4,
-                    xAxisLabels = xReadingMarker,
-                    yAxisLabels = Coordinate.coordinateSetBuilder(
-                        "Very High",
-                        "High",
-                        "Moderate",
-                        "Average",
-                        "Bad"
-                    ).toMutableList()
-                )
-            )
-        }
-
-        // Design Pattern Bar Chart
-        CustomCard(title = "Bar Chart") {
-
-            BasicLinearStrategy.BarChart(
-                linearData = BasicDataStrategy(
-                    linearDataSets = linearDataSet4,
-                    xAxisLabels = xReadingMarker
-                )
-            )
-        }
+        CustomButton(
+            modifier = Modifier,
+            text = "Reload Data Set",
+            onClick = onReload
+        )
     }
 }

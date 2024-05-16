@@ -23,10 +23,10 @@ class LinearDecoration(
      */
     companion object {
 
-        private val colorBlue = Color(0xFF0088FF)
+        private val colorPurple = Color(0xFF7979FE)
+        private val colorRed = Color(0xFFFC3B75)
+        private val colorBlue = Color(0xFF3AAAFE)
         private val colorGreen = Color(0xFF2AD200)
-        private val colorRed = Color(0xFFEC407A)
-        private val colorPurple = Color(0xFF8312D3)
         private val colorYellow = Color(0xFFE2B93B)
 
 
@@ -43,10 +43,10 @@ class LinearDecoration(
         fun lineDecorationColors(
             textColor: Color = MaterialTheme.colorScheme.onSurface,
             plotPrimaryColor: List<Color> = listOf(
+                colorPurple,
+                colorRed,
                 colorBlue,
                 colorGreen,
-                colorRed,
-                colorPurple,
                 colorYellow
             )
         ) = LinearDecoration(
@@ -67,10 +67,10 @@ class LinearDecoration(
         fun barDecorationColors(
             textColor: Color = MaterialTheme.colorScheme.onSurface,
             plotPrimaryColor: List<Color> = listOf(
+                colorPurple,
+                colorRed,
                 colorBlue,
                 colorGreen,
-                colorRed,
-                colorPurple,
                 colorYellow
             )
         ) = LinearDecoration(

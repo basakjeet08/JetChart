@@ -38,7 +38,7 @@ class GradientPlotStrategy(
         val paddingOffset = 12f
 
         // This loop makes the curved line between two points
-        linearData.linearDataSets.forEachIndexed { coordinateSetIndex, dataSet ->
+        linearData.linearDataSets.forEachIndexed { dataSetIndex, dataSet ->
 
             // Path Variables
             val linePath = Path()
@@ -97,7 +97,7 @@ class GradientPlotStrategy(
             // Drawing the Lines of the graph
             drawPath(
                 path = linePath,
-                color = decoration.plotPrimaryColor[coordinateSetIndex],
+                color = decoration.plotPrimaryColor[dataSetIndex],
                 style = Stroke(width = lineStroke)
             )
 
@@ -110,7 +110,7 @@ class GradientPlotStrategy(
             // Defining the Brush
             val brush = Brush.verticalGradient(
                 colors = listOf(
-                    decoration.plotPrimaryColor[coordinateSetIndex].copy(alpha = .5f),
+                    decoration.plotPrimaryColor[dataSetIndex].copy(alpha = .5f),
                     Color.Transparent
                 )
             )
@@ -124,13 +124,13 @@ class GradientPlotStrategy(
 
         // Drawing all the Circles in this pass
         linearData.linearDataSets.forEachIndexed { index, dataSet ->
-            dataSet.markers.forEach { point ->
+            dataSet.markers.forEach { marker ->
 
                 // This function draws the Circle points
                 drawCircle(
                     color = decoration.plotPrimaryColor[index],
                     radius = circleRadius,
-                    center = point.offset
+                    center = marker.offset
                 )
             }
         }

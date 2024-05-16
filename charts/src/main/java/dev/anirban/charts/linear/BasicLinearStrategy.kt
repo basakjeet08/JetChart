@@ -3,7 +3,6 @@ package dev.anirban.charts.linear
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -146,9 +145,7 @@ open class BasicLinearStrategy(
         validateDecorationInput()
 
         Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 24.dp, start = 24.dp, bottom = 18.dp, end = 24.dp),
+            modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -171,16 +168,20 @@ open class BasicLinearStrategy(
 
             // Checking if the implementation is the default one
             if (legendDrawer !is NoLegendStrategy) {
-                Spacer(modifier = Modifier.height(16.dp))
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 8.dp),
+                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                ) {
+                    HorizontalDivider(
+                        thickness = 2.dp,
+                        color = decoration.textColor
+                    )
 
-                HorizontalDivider(
-                    modifier = Modifier.padding(vertical = 4.dp),
-                    thickness = 2.dp,
-                    color = decoration.textColor
-                )
-
-                // Draws the color conventions for the chart
-                DrawLegends()
+                    // Draws the color conventions for the chart
+                    DrawLegends()
+                }
             }
         }
     }
