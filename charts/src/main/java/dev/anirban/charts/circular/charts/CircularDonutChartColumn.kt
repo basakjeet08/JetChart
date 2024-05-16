@@ -14,11 +14,11 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.unit.dp
 import dev.anirban.charts.circular.CircularChart
 import dev.anirban.charts.circular.center.CircularNoCenter
-import dev.anirban.charts.circular.colorconvention.CircularGridColorConvention
+import dev.anirban.charts.circular.legend.CircularGridLegend
 import dev.anirban.charts.circular.decoration.CircularDecoration
 import dev.anirban.charts.circular.foreground.CircularDonutForeground
 import dev.anirban.charts.circular.center.CircularCenterInterface
-import dev.anirban.charts.circular.colorconvention.CircularColorConventionInterface
+import dev.anirban.charts.circular.legend.CircularLegendInterface
 import dev.anirban.charts.circular.data.CircularDataInterface
 import dev.anirban.charts.circular.foreground.CircularForegroundInterface
 
@@ -40,7 +40,7 @@ class CircularDonutChartColumn(
     override val circularData: CircularDataInterface,
     override val circularDecoration: CircularDecoration,
     override val circularForeground: CircularForegroundInterface,
-    override val circularColorConvention: CircularColorConventionInterface
+    override val circularColorConvention: CircularLegendInterface
 ) : CircularChart(
     circularCenter,
     circularData,
@@ -124,7 +124,7 @@ class CircularDonutChartColumn(
             circularData: CircularDataInterface,
             circularDecoration: CircularDecoration = CircularDecoration.donutChartDecorations(),
             circularForeground: CircularForegroundInterface = CircularDonutForeground(),
-            circularColorConvention: CircularColorConventionInterface = CircularGridColorConvention()
+            circularColorConvention: CircularLegendInterface = CircularGridLegend()
         ) {
             CircularDonutChartColumn(
                 circularCenter = circularCenter,

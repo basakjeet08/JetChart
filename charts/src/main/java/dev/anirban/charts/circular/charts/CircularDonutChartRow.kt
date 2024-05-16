@@ -12,17 +12,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.unit.dp
-import dev.anirban.charts.circular.colorconvention.CircularTargetColorConvention
+import dev.anirban.charts.circular.legend.CircularTargetLegend
 import dev.anirban.charts.circular.CircularChart
 import dev.anirban.charts.circular.center.CircularNoCenter
 import dev.anirban.charts.circular.center.CircularTargetTextCenter
-import dev.anirban.charts.circular.colorconvention.CircularListColorConvention
+import dev.anirban.charts.circular.legend.CircularListLegend
 import dev.anirban.charts.circular.data.CircularTargetDataBuilder
 import dev.anirban.charts.circular.decoration.CircularDecoration
 import dev.anirban.charts.circular.foreground.CircularDonutForeground
 import dev.anirban.charts.circular.foreground.CircularDonutTargetForeground
 import dev.anirban.charts.circular.center.CircularCenterInterface
-import dev.anirban.charts.circular.colorconvention.CircularColorConventionInterface
+import dev.anirban.charts.circular.legend.CircularLegendInterface
 import dev.anirban.charts.circular.data.CircularDataInterface
 import dev.anirban.charts.circular.foreground.CircularForegroundInterface
 
@@ -45,7 +45,7 @@ open class CircularDonutChartRow(
     override val circularData: CircularDataInterface,
     override val circularDecoration: CircularDecoration,
     override val circularForeground: CircularForegroundInterface,
-    override val circularColorConvention: CircularColorConventionInterface
+    override val circularColorConvention: CircularLegendInterface
 ) : CircularChart(
     circularCenter,
     circularData,
@@ -135,7 +135,7 @@ open class CircularDonutChartRow(
             circularData: CircularDataInterface,
             circularDecoration: CircularDecoration = CircularDecoration.donutChartDecorations(),
             circularForeground: CircularForegroundInterface = CircularDonutForeground(),
-            circularColorConvention: CircularColorConventionInterface = CircularListColorConvention()
+            circularColorConvention: CircularLegendInterface = CircularListLegend()
         ) = CircularDonutChartRow(
             circularCenter = circularCenter,
             circularData = circularData,
@@ -164,7 +164,7 @@ open class CircularDonutChartRow(
             circularData: CircularTargetDataBuilder,
             circularDecoration: CircularDecoration = CircularDecoration.donutChartDecorations(),
             circularForeground: CircularForegroundInterface = CircularDonutTargetForeground(),
-            circularColorConvention: CircularColorConventionInterface = CircularTargetColorConvention()
+            circularColorConvention: CircularLegendInterface = CircularTargetLegend()
         ) = CircularDonutChartRow(
             circularCenter = circularCenter,
             circularData = circularData.toCircularDonutTargetData(),

@@ -1,4 +1,4 @@
-package dev.anirban.charts.circular.colorconvention
+package dev.anirban.charts.circular.legend
 
 import androidx.compose.runtime.Composable
 import dev.anirban.charts.circular.decoration.CircularDecoration
@@ -6,10 +6,10 @@ import dev.anirban.charts.circular.data.CircularDataInterface
 
 
 /**
- * This class is the implementation of [CircularColorConventionInterface] which provides the
+ * This class is the implementation of [CircularLegendInterface] which provides the
  * implementations for drawing the color conventions in the canvas
  */
-class CircularNoColorConvention : CircularColorConventionInterface {
+class CircularNoLegend : CircularLegendInterface {
 
 
     /**

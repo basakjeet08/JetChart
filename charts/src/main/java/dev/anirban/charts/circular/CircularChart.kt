@@ -12,12 +12,12 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.unit.dp
 import dev.anirban.charts.circular.center.CircularImageCenter
-import dev.anirban.charts.circular.colorconvention.CircularNoColorConvention
+import dev.anirban.charts.circular.legend.CircularNoLegend
 import dev.anirban.charts.circular.data.CircularTargetDataBuilder
 import dev.anirban.charts.circular.exceptions.CircularDecorationMismatch
 import dev.anirban.charts.circular.foreground.CircularDonutTargetForeground
 import dev.anirban.charts.circular.center.CircularCenterInterface
-import dev.anirban.charts.circular.colorconvention.CircularColorConventionInterface
+import dev.anirban.charts.circular.legend.CircularLegendInterface
 import dev.anirban.charts.circular.data.CircularDataInterface
 import dev.anirban.charts.circular.exceptions.CircularExceptionHandler
 import dev.anirban.charts.circular.foreground.CircularForegroundInterface
@@ -45,7 +45,7 @@ open class CircularChart(
     override val circularData: CircularDataInterface,
     override val circularDecoration: CircularDecoration,
     override val circularForeground: CircularForegroundInterface,
-    override val circularColorConvention: CircularColorConventionInterface
+    override val circularColorConvention: CircularLegendInterface
 ) : CircularChartInterface, CircularExceptionHandler {
 
     /**
@@ -177,7 +177,7 @@ open class CircularChart(
             circularData: CircularTargetDataBuilder,
             circularDecoration: CircularDecoration = CircularDecoration.donutChartDecorations(),
             circularForeground: CircularForegroundInterface = CircularDonutTargetForeground(),
-            circularColorConvention: CircularColorConventionInterface = CircularNoColorConvention()
+            circularColorConvention: CircularLegendInterface = CircularNoLegend()
         ) = CircularChart(
             circularCenter = circularCenter,
             circularData = circularData.toCircularDonutTargetData(),

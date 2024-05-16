@@ -1,4 +1,4 @@
-package dev.anirban.charts.circular.colorconvention
+package dev.anirban.charts.circular.legend
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Arrangement
@@ -24,16 +24,16 @@ import dev.anirban.charts.circular.data.CircularDataInterface
 import java.text.DecimalFormat
 
 /**
- * This class is the implementation of [CircularColorConventionInterface] which provides the
+ * This class is the implementation of [CircularLegendInterface] which provides the
  * implementations for drawing the color conventions in the canvas
  *
  * @param fontSize This defines the size of the font
  * @param fontWeight This Defines the weight of the font
  */
-class CircularGridColorConvention(
+class CircularGridLegend(
     private val fontSize: TextUnit = 14.sp,
     private val fontWeight: FontWeight = FontWeight.W500
-) : CircularColorConventionInterface {
+) : CircularLegendInterface {
 
     /**
      * This function draws the individual chart details or we can say the color codes along with
