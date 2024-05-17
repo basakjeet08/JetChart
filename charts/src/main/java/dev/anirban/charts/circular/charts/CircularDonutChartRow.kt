@@ -162,7 +162,7 @@ open class CircularDonutChartRow(
             modifier: Modifier = Modifier,
             circularCenter: CircularCenterInterface = CircularTargetTextCenter(),
             circularData: CircularTargetDataBuilder,
-            circularDecoration: CircularDecoration = CircularDecoration.donutChartDecorations(),
+            circularDecoration: CircularDecoration = CircularDecoration.targetChartColor(),
             circularForeground: CircularForegroundInterface = CircularDonutTargetForeground(),
             circularColorConvention: CircularLegendInterface = CircularTargetLegend()
         ) = CircularDonutChartRow(

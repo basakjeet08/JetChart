@@ -1,7 +1,6 @@
 package dev.anirban.charts.circular.foreground
 
 import androidx.compose.ui.geometry.Rect
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
 import dev.anirban.charts.circular.decoration.CircularDecoration
@@ -46,7 +45,7 @@ class CircularDonutTargetForeground(
 
         //This function draws the Background Arc
         drawArc(
-            color = Color.LightGray.copy(alpha = .2f),
+            color = decoration.colorList[1],
             startAngle = startAngle,
             sweepAngle = 360f,
             useCenter = false,

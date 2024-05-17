@@ -175,7 +175,7 @@ open class CircularChart(
             modifier: Modifier = Modifier,
             circularCenter: CircularCenterInterface = CircularImageCenter(),
             circularData: CircularTargetDataBuilder,
-            circularDecoration: CircularDecoration = CircularDecoration.donutChartDecorations(),
+            circularDecoration: CircularDecoration = CircularDecoration.targetChartColor(),
             circularForeground: CircularForegroundInterface = CircularDonutTargetForeground(),
             circularColorConvention: CircularLegendInterface = CircularNoLegend()
         ) = CircularChart(
