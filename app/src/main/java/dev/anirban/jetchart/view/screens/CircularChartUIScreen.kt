@@ -1,41 +1,55 @@
 package dev.anirban.jetchart.view.screens
 
+import android.icu.text.DecimalFormat
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Check
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import dev.anirban.charts.circular.CircularChart
-import dev.anirban.charts.circular.center.CircularImageCenter
-import dev.anirban.charts.circular.center.CircularRingTextCenter
-import dev.anirban.charts.circular.center.CircularTargetTextCenter
-import dev.anirban.charts.circular.charts.CircularDonutChartColumn
-import dev.anirban.charts.circular.charts.CircularDonutChartRow
-import dev.anirban.charts.circular.charts.CircularRingChart
-import dev.anirban.charts.circular.data.CircularDonutListData
-import dev.anirban.charts.circular.data.CircularTargetDataBuilder
-import dev.anirban.charts.circular.foreground.CircularDonutForeground
-import dev.anirban.charts.circular.foreground.CircularDonutTargetForeground
+import dev.anirban.charts.circular.BasicCircularStrategy.Companion.WeeklyProgressChart
+import dev.anirban.charts.circular.center.TextCenterStrategy
+import dev.anirban.charts.circular.charts.DonutColumnChartStrategy
+import dev.anirban.charts.circular.charts.DonutRowChartStrategy
+import dev.anirban.charts.circular.data.ListDataStrategy
+import dev.anirban.charts.circular.data.TargetDataStrategy
+import dev.anirban.jetchart.data.model.circular.CircularMockResponse
 import dev.anirban.jetchart.view.components.CustomButton
 import dev.anirban.jetchart.view.components.CustomCard
 
+
 @Composable
-fun CircularChartUIScreen() {
+fun CircularChartUIScreen(
+    circularMockData: CircularMockResponse,
+    onReloadClick: () -> Unit
+) {
+
+    val dataSet1 = ListDataStrategy(
+        itemsList = circularMockData.dataSet1.itemList,
+        unit = circularMockData.dataSet1.unit
+    )
+
+    val dataSet2 = ListDataStrategy(
+        itemsList = circularMockData.dataSet2.itemList,
+        unit = circularMockData.dataSet2.unit
+    )
+
+    val dataSet3 = TargetDataStrategy(
+        achieved = circularMockData.dataSet3.achieved,
+        target = circularMockData.dataSet3.target,
+        unit = circularMockData.dataSet3.unit
+    )
+
+    val dataSet4 = circularMockData.dataSet4.map {
+        TargetDataStrategy(
+            achieved = it.achieved,
+            target = it.target,
+            unit = it.unit
+        )
+    }
 
     // Column Composable
     Column(
@@ -55,24 +69,7 @@ fun CircularChartUIScreen() {
             // Design Pattern Same row Donut Chart
             item {
                 CustomCard(title = " Row Donut Chart") {
-
-                    CircularDonutChartRow.DonutChartRow(
-                        circularData = CircularDonutListData(
-                            itemsList = listOf(
-                                Pair("Fruit", 1500.0f),
-                                Pair("Junk Food", 300.0f),
-                                Pair("Protein", 500.0f)
-                            ),
-                            siUnit = "Kcal",
-                            cgsUnit = "cal",
-                            conversionRate = { it / 1000f }
-                        ),
-                        circularForeground = CircularDonutForeground(
-                            radiusMultiplier = 1.7f,
-                            strokeWidth = 15f,
-                            startAngle = 30f
-                        )
-                    )
+                    DonutRowChartStrategy.DonutChartRow(circularData = dataSet1)
                 }
             }
 
@@ -81,19 +78,7 @@ fun CircularChartUIScreen() {
             item {
                 CustomCard(title = "Column Donut Chart") {
 
-                    CircularDonutChartColumn.DonutChartColumn(
-                        circularData = CircularDonutListData(
-                            itemsList = listOf(
-                                Pair("Study", 450f),
-                                Pair("Sport", 180f),
-                                Pair("Social", 30f),
-                                Pair("Others", 60f)
-                            ),
-                            siUnit = "Hrs",
-                            cgsUnit = "Min",
-                            conversionRate = { it / 60f }
-                        )
-                    )
+                    DonutColumnChartStrategy.DonutChartColumn(circularData = dataSet2)
                 }
             }
 
@@ -102,124 +87,25 @@ fun CircularChartUIScreen() {
             item {
                 CustomCard(title = "Target Donut Chart") {
 
-                    CircularDonutChartRow.TargetDonutChart(
-                        circularData = CircularTargetDataBuilder(
-                            target = 4340f,
-                            achieved = 2823f,
-                            siUnit = "Km",
-                            cgsUnit = "m",
-                            conversionRate = { it / 1000f }
-                        ),
-                        circularCenter = CircularTargetTextCenter(
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.W700
-                        )
-                    )
-                }
-            }
 
-
-            // Design Pattern Single Ring Chart
-            item {
-                CustomCard(title = "Single Ring Chart") {
-                    CircularRingChart.SingleRingChart(
-                        circularData = CircularTargetDataBuilder(
-                            target = 500f,
-                            achieved = 489f,
-                            siUnit = "",
-                            cgsUnit = "",
-                            conversionRate = { it }
-                        ),
-                        circularCenter = CircularRingTextCenter(
-                            title = "Title 1",
-                            centerValue = "value",
-                            status = "status Value"
-                        )
-                    )
-                }
-            }
-
-
-            // Design Pattern Double Ring Chart
-            item {
-                CustomCard(title = "Double Ring Chart") {
-                    CircularRingChart.MultipleRingChart(
-                        circularData = listOf(
-                            CircularTargetDataBuilder(
-                                target = 100f,
-                                achieved = 81f,
-                                siUnit = "bpm",
-                                cgsUnit = "bpm",
-                                conversionRate = { it }
-                            ),
-                            CircularTargetDataBuilder(
-                                target = 160f,
-                                achieved = 112f,
-                                siUnit = "mm",
-                                cgsUnit = "mm",
-                                conversionRate = { it }
-                            )
-                        ),
-                        circularCenter = listOf(
-                            CircularRingTextCenter(
-                                title = "Title 1",
-                                centerValue = "center value",
-                                status = "Not Good"
-                            ),
-                            CircularRingTextCenter(
-                                title = "Title 2",
-                                centerValue = "center value",
-                                status = "Great"
+                    with(circularMockData.dataSet3) {
+                        val percentage = DecimalFormat("#.##").format(achieved / target * 100)
+                        DonutRowChartStrategy.TargetDonutChartRow(
+                            circularData = dataSet3,
+                            circularCenter = TextCenterStrategy(
+                                text = "$percentage %"
                             )
                         )
-                    )
+                    }
                 }
             }
+
 
             // weekly Progress Graph
             item {
                 CustomCard(title = "Weekly Progress") {
-                    Row {
 
-                        listOf("M", "T", "W", "T", "F", "S", "S").forEach {
-
-                            Column(
-                                modifier = Modifier
-                                    .weight(1f),
-                                verticalArrangement = Arrangement.Center,
-                                horizontalAlignment = Alignment.CenterHorizontally
-                            ) {
-
-                                CircularChart.DonutChartImage(
-                                    modifier = Modifier
-                                        .size(55.dp),
-                                    circularData = CircularTargetDataBuilder(
-                                        target = 100f,
-                                        achieved = 81f,
-                                        siUnit = "",
-                                        cgsUnit = "",
-                                        conversionRate = { it }
-                                    ),
-                                    circularCenter = CircularImageCenter(
-                                        image = Icons.Default.Check,
-                                        contentDescription = "Achieved"
-                                    ),
-                                    circularForeground = CircularDonutTargetForeground(strokeWidth = 10f)
-                                )
-
-                                Text(
-                                    text = it,
-
-                                    // Text Features
-                                    textAlign = TextAlign.Start,
-                                    fontSize = 14.sp,
-                                    fontWeight = FontWeight.W700,
-                                    color = MaterialTheme.colorScheme.onSurface,
-                                )
-                                Spacer(modifier = Modifier.height(8.dp))
-                            }
-                        }
-                    }
+                    WeeklyProgressChart(weeklyData = dataSet4)
                 }
             }
         }
@@ -228,7 +114,7 @@ fun CircularChartUIScreen() {
         CustomButton(
             modifier = Modifier,
             text = "Reload Data Set",
-            onClick = {}
+            onClick = onReloadClick
         )
     }
 }

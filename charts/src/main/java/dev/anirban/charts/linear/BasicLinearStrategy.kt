@@ -13,8 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.unit.dp
-import dev.anirban.charts.linear.exceptions.DataMismatchStrategy
-import dev.anirban.charts.linear.exceptions.DecorationMismatchStrategy
+import dev.anirban.charts.linear.exceptions.DataMismatch
+import dev.anirban.charts.linear.exceptions.DecorationMismatch
 import dev.anirban.charts.linear.exceptions.LinearExceptionStrategy
 import dev.anirban.charts.linear.legends.LinearLegendStrategy
 import dev.anirban.charts.linear.data.LinearDataStrategy
@@ -69,7 +69,7 @@ open class BasicLinearStrategy(
 
         // Comparing the num of max Y - Axis Readings to X - Axis Readings/Markers
         if (linearData.xAxisLabels.size < maxSize)
-            throw DataMismatchStrategy("X - Axis Labels Size is less than Number of observations")
+            throw DataMismatch("X - Axis Labels Size is less than Number of observations")
     }
 
     /**
@@ -86,7 +86,7 @@ open class BasicLinearStrategy(
                             "one color needs to be provided"
                 )
             else
-                throw DecorationMismatchStrategy(
+                throw DecorationMismatch(
                     "Need to provide ${linearData.linearDataSets.size} number of colors for the " +
                             "plotPrimaryColor"
                 )
