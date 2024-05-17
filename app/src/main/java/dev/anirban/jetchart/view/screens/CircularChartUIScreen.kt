@@ -1,5 +1,6 @@
 package dev.anirban.jetchart.view.screens
 
+import android.icu.text.DecimalFormat
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,8 +9,10 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.PlaceholderVerticalAlign.Companion.TextCenter
 import androidx.compose.ui.unit.dp
 import dev.anirban.charts.circular.BasicCircularStrategy.Companion.WeeklyProgressChart
+import dev.anirban.charts.circular.center.TextCenterStrategy
 import dev.anirban.charts.circular.charts.DonutColumnChartStrategy
 import dev.anirban.charts.circular.charts.DonutRowChartStrategy
 import dev.anirban.charts.circular.data.ListDataStrategy
@@ -85,7 +88,16 @@ fun CircularChartUIScreen(
             item {
                 CustomCard(title = "Target Donut Chart") {
 
-                    DonutRowChartStrategy.TargetDonutChartRow(circularData = dataSet3)
+
+                    with(circularMockData.dataSet3) {
+                        val percentage = DecimalFormat("#.##").format(achieved / target * 100)
+                        DonutRowChartStrategy.TargetDonutChartRow(
+                            circularData = dataSet3,
+                            circularCenter = TextCenterStrategy(
+                                text = "$percentage %"
+                            )
+                        )
+                    }
                 }
             }
 

@@ -163,7 +163,7 @@ open class DonutRowChartStrategy(
         @Composable
         fun TargetDonutChartRow(
             modifier: Modifier = Modifier,
-            circularCenter: NoCenterStrategy = NoCenterStrategy,
+            circularCenter: CircularCenterStrategy = NoCenterStrategy,
             circularData: TargetDataStrategy,
             circularDecoration: CircularDecoration = CircularDecoration.targetChartColor(),
             circularForeground: DonutTargetForegroundStrategy = DonutTargetForegroundStrategy(),
