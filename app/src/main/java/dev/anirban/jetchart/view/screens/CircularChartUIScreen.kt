@@ -9,8 +9,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,11 +19,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.anirban.charts.circular.CircularChart
-import dev.anirban.charts.circular.center.CircularImageCenter
 import dev.anirban.charts.circular.charts.CircularDonutChartColumn
 import dev.anirban.charts.circular.charts.CircularDonutChartRow
 import dev.anirban.charts.circular.data.CircularDonutListData
-import dev.anirban.charts.circular.data.CircularTargetDataBuilder
+import dev.anirban.charts.circular.data.CircularDonutTargetData
 import dev.anirban.charts.circular.foreground.CircularDonutTargetForeground
 import dev.anirban.jetchart.view.components.CustomButton
 import dev.anirban.jetchart.view.components.CustomCard
@@ -90,7 +87,7 @@ fun CircularChartUIScreen() {
                 CustomCard(title = "Target Donut Chart") {
 
                     CircularDonutChartRow.TargetDonutChart(
-                        circularData = CircularTargetDataBuilder(
+                        circularData = CircularDonutTargetData(
                             target = 4340f,
                             achieved = 2823f,
                             unit = "m"
@@ -115,16 +112,11 @@ fun CircularChartUIScreen() {
                             ) {
 
                                 CircularChart.DonutChartImage(
-                                    modifier = Modifier
-                                        .size(55.dp),
-                                    circularData = CircularTargetDataBuilder(
+                                    modifier = Modifier.size(55.dp),
+                                    circularData = CircularDonutTargetData(
                                         target = 100f,
                                         achieved = 81f,
                                         unit = ""
-                                    ),
-                                    circularCenter = CircularImageCenter(
-                                        image = Icons.Default.Check,
-                                        contentDescription = "Achieved"
                                     ),
                                     circularForeground = CircularDonutTargetForeground(strokeWidth = 10f)
                                 )

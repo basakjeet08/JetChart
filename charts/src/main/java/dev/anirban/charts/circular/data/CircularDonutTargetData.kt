@@ -9,21 +9,29 @@ package dev.anirban.charts.circular.data
  * @property sweepAngles This is the list of sweep angles which could be calculated
  */
 class CircularDonutTargetData(
-    override val itemsList: List<Pair<String, Float>>,
+    target: Float,
+    achieved: Float,
     override val unit: String
 ) : CircularDataInterface {
 
+    override val itemsList: List<Pair<String, Float>> = listOf(
+        Pair("Achieved", achieved),
+        Pair("Target", target)
+    )
     override var sweepAngles: MutableList<Float> = mutableListOf()
+
+    var percentage = achieved / target
+        private set
 
     /**
      * This function calculates the sweep Angles
      */
     override fun doCalculations() {
 
-        // Percentage of the target achieved by the user
-        var percentage = itemsList[1].second / itemsList[0].second
-
         // Checking if the percentage is above 100 % or not
+        if (percentage.isNaN())
+            percentage = 0f
+
         if (percentage > 1)
             percentage = 1f
 

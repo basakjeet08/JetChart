@@ -9,7 +9,7 @@ import dev.anirban.charts.circular.data.CircularDataInterface
  * implementation
  *
  * Implementations for this interface are :- [CircularNoLegend],
- * [CircularGridLegend],[CircularListLegend],[CircularTargetLegend]
+ * [CircularGridLegend],[CircularListLegend]
 
  *
  * @property DrawColorConventions THis function draws the desired color Convention

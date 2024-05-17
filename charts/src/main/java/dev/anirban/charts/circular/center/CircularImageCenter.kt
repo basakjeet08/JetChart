@@ -10,6 +10,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import dev.anirban.charts.circular.decoration.CircularDecoration
 import dev.anirban.charts.circular.data.CircularDataInterface
+import dev.anirban.charts.circular.data.CircularDonutTargetData
 
 
 /**
@@ -38,19 +39,18 @@ class CircularImageCenter(
         decoration: CircularDecoration
     ) {
 
-        // Percentage to be shown
-        var percentage = circularData.itemsList[1].second / circularData.itemsList[0].second * 100
-
-        if (percentage.isNaN())
-            percentage = 0f
-
-        if (percentage >= 100f) {
+        if (circularData is CircularDonutTargetData) {
+            if (circularData.percentage >= 1f)
+                Icon(
+                    imageVector = image,
+                    contentDescription = contentDescription,
+                    modifier = Modifier.size(24.dp)
+                )
+        } else
             Icon(
                 imageVector = image,
                 contentDescription = contentDescription,
-                modifier = Modifier
-                    .size(24.dp)
+                modifier = Modifier.size(24.dp)
             )
-        }
     }
 }

@@ -12,18 +12,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.unit.dp
-import dev.anirban.charts.circular.legend.CircularTargetLegend
 import dev.anirban.charts.circular.CircularChart
 import dev.anirban.charts.circular.center.CircularNoCenter
 import dev.anirban.charts.circular.center.CircularTargetTextCenter
 import dev.anirban.charts.circular.legend.CircularListLegend
-import dev.anirban.charts.circular.data.CircularTargetDataBuilder
 import dev.anirban.charts.circular.decoration.CircularDecoration
 import dev.anirban.charts.circular.foreground.CircularDonutForeground
 import dev.anirban.charts.circular.foreground.CircularDonutTargetForeground
 import dev.anirban.charts.circular.center.CircularCenterInterface
 import dev.anirban.charts.circular.legend.CircularLegendInterface
 import dev.anirban.charts.circular.data.CircularDataInterface
+import dev.anirban.charts.circular.data.CircularDonutTargetData
 import dev.anirban.charts.circular.foreground.CircularForegroundInterface
 
 
@@ -161,13 +160,13 @@ open class CircularDonutChartRow(
         fun TargetDonutChart(
             modifier: Modifier = Modifier,
             circularCenter: CircularCenterInterface = CircularTargetTextCenter(),
-            circularData: CircularTargetDataBuilder,
+            circularData: CircularDonutTargetData,
             circularDecoration: CircularDecoration = CircularDecoration.targetChartColor(),
             circularForeground: CircularForegroundInterface = CircularDonutTargetForeground(),
-            circularColorConvention: CircularLegendInterface = CircularTargetLegend()
+            circularColorConvention: CircularLegendInterface = CircularListLegend()
         ) = CircularDonutChartRow(
             circularCenter = circularCenter,
-            circularData = circularData.toCircularDonutTargetData(),
+            circularData = circularData,
             circularDecoration = circularDecoration,
             circularForeground = circularForeground,
             circularColorConvention = circularColorConvention

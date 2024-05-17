@@ -10,6 +10,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.anirban.charts.circular.decoration.CircularDecoration
 import dev.anirban.charts.circular.data.CircularDataInterface
+import dev.anirban.charts.circular.data.CircularDonutTargetData
 import java.text.DecimalFormat
 
 
@@ -27,6 +28,7 @@ class CircularTargetTextCenter(
     private val fontWeight: FontWeight = FontWeight.W500
 ) : CircularCenterInterface {
 
+
     /**
      * This function Draws the % achieved in the Center of the Chart
      *
@@ -40,20 +42,13 @@ class CircularTargetTextCenter(
     ) {
 
         // Percentage to be shown
-        var percentage = circularData.itemsList[1].second / circularData.itemsList[0].second * 100
-
-        if (percentage.isNaN())
-            percentage = 0f
-
-        if (percentage > 100f)
-            percentage = 100f
+        val percentage = (circularData as CircularDonutTargetData).percentage * 100
 
         // Item and Value
         Text(
             text = "${DecimalFormat("#.##").format(percentage)} %",
 
-            modifier = Modifier
-                .padding(vertical = 4.dp),
+            modifier = Modifier.padding(vertical = 4.dp),
 
             // Text Features
             fontSize = fontSize,

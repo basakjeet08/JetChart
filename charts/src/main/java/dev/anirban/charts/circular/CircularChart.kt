@@ -13,12 +13,12 @@ import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.unit.dp
 import dev.anirban.charts.circular.center.CircularImageCenter
 import dev.anirban.charts.circular.legend.CircularNoLegend
-import dev.anirban.charts.circular.data.CircularTargetDataBuilder
 import dev.anirban.charts.circular.exceptions.CircularDecorationMismatch
 import dev.anirban.charts.circular.foreground.CircularDonutTargetForeground
 import dev.anirban.charts.circular.center.CircularCenterInterface
 import dev.anirban.charts.circular.legend.CircularLegendInterface
 import dev.anirban.charts.circular.data.CircularDataInterface
+import dev.anirban.charts.circular.data.CircularDonutTargetData
 import dev.anirban.charts.circular.exceptions.CircularExceptionHandler
 import dev.anirban.charts.circular.foreground.CircularForegroundInterface
 import dev.anirban.charts.circular.decoration.CircularDecoration
@@ -174,13 +174,13 @@ open class CircularChart(
         fun DonutChartImage(
             modifier: Modifier = Modifier,
             circularCenter: CircularCenterInterface = CircularImageCenter(),
-            circularData: CircularTargetDataBuilder,
+            circularData: CircularDonutTargetData,
             circularDecoration: CircularDecoration = CircularDecoration.targetChartColor(),
             circularForeground: CircularForegroundInterface = CircularDonutTargetForeground(),
             circularColorConvention: CircularLegendInterface = CircularNoLegend()
         ) = CircularChart(
             circularCenter = circularCenter,
-            circularData = circularData.toCircularDonutTargetData(),
+            circularData = circularData,
             circularDecoration = circularDecoration,
             circularForeground = circularForeground,
             circularColorConvention = circularColorConvention
