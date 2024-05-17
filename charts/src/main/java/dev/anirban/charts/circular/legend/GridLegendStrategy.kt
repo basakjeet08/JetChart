@@ -16,12 +16,12 @@ import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.anirban.charts.circular.decoration.CircularDecoration
 import dev.anirban.charts.circular.data.CircularDataStrategy
 import java.text.DecimalFormat
+
 
 /**
  * This class is the implementation of [CircularLegendStrategy] which provides a strategy to draw
@@ -87,7 +87,6 @@ class GridLegendStrategy(
                 text = textToShow,
 
                 // Text Features
-                textAlign = TextAlign.Center,
                 style = style.copy(color = textColor)
             )
         }
