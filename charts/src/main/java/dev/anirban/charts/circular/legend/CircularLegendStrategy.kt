@@ -4,18 +4,23 @@ import androidx.compose.runtime.Composable
 import dev.anirban.charts.circular.decoration.CircularDecoration
 import dev.anirban.charts.circular.data.CircularDataStrategy
 
-/**
- * This implementation shall be implemented by all the classes which are making color convention
- * implementation
- *
- * Implementations for this interface are :- [NoLegendStrategy],
- * [GridLegendStrategy],[ListLegendStrategy]
 
+/**
+ * This is a strategy prototype for the color convention implementation logic and must be
+ * implemented by all the classes providing strategy to draw the legend.
  *
- * @property DrawColorConventions THis function draws the desired color Convention
+ * Strategies of this interface are :- [NoLegendStrategy],
+ * [GridLegendStrategy],[ListLegendStrategy]
  */
 interface CircularLegendStrategy {
 
+
+    /**
+     * This function draws the desired color Convention
+     *
+     * @param circularData This is the data of the chart
+     * @param decoration This is the decoration of the chart
+     */
     @Composable
     fun DrawColorConventions(
         circularData: CircularDataStrategy,

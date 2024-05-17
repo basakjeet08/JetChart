@@ -7,11 +7,12 @@ import dev.anirban.charts.circular.decoration.CircularDecoration
 import dev.anirban.charts.circular.data.CircularDataStrategy
 
 /**
- * This class implements the [CircularForegroundStrategy] which is responsible for making the
- * foreground reading of the chart
+ * This class implements the [CircularForegroundStrategy] which provides a strategy for creation of
+ * a basic donut Chart with a target foreground.
  *
- * @param radiusMultiplier This is the multiplier to radius of the circle to make the Arcs a bit
- * bigger... Note :- Higher this value bigger the radius
+ * For other implementations see [DonutForegroundStrategy]
+ *
+ * @param radiusMultiplier This is the multiplier to radius of the circle to make the Arcs bigger.
  * @param strokeWidth This is the width of the stroke of the Arc
  * @param startAngle This defines the starting angle of the Chart Arc
  */
@@ -21,8 +22,9 @@ class DonutTargetForegroundStrategy(
     private val startAngle: Float = 270f
 ) : CircularForegroundStrategy {
 
+
     /**
-     * This is the function which draws all the readings
+     * This function draws the foreground according to the strategy
      *
      * @param circularData This is the data of the chart
      * @param decoration This is the decoration of the chart

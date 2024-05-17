@@ -28,25 +28,22 @@ import dev.anirban.charts.circular.decoration.CircularDecoration
  * also implements [CircularExceptionStrategy] implementation which provides an implementation for
  * handling all the Exceptions
  *
- * @property circularCenter Implementation for the center of the chart
- * @property circularData Implementation for the data of the chart
- * @property circularDecoration Implementation for the decoration of the chart
- * @property circularForeground Implementation for the foreground of the chart
- * @property circularColorConvention Implementation for the color convention of the chart
- *
- * @property DrawCenter This function draws the center of the chart
- * @property doCalculations This function does the calculation of the chart
- * @property drawForeground This function draws the foreground of the chart
- * @property DrawColorConventions This function draws the Color Convention of the chart
- * @property Build This function starts building the circular Chart
+ * @param circularCenter This is the strategy to draw the center of the chart.
+ * @param circularData This is the strategy to store and manipulate the circular chart data.
+ * @param circularDecoration This contains the details of the decorations for the
+ * color and all those color related Stuff
+ * @param circularForeground This is the strategy to draw the main plot or the foreground of
+ * the chart.
+ * @param circularLegend This strategy draws the legends for the Chart
  */
 open class BasicCircularStrategy(
     override val circularCenter: CircularCenterStrategy,
     override val circularData: CircularDataStrategy,
     override val circularDecoration: CircularDecoration,
     override val circularForeground: CircularForegroundStrategy,
-    override val circularColorConvention: CircularLegendStrategy
+    override val circularLegend: CircularLegendStrategy
 ) : CircularChartStrategy, CircularExceptionStrategy {
+
 
     /**
      * This validates that the decoration stuffs are given correctly or not
@@ -69,8 +66,9 @@ open class BasicCircularStrategy(
         validateDecoration()
     }
 
+
     /**
-     * Function to draw something on the center
+     * This function draws the center of the Chart
      */
     @Composable
     override fun DrawCenter() {
@@ -80,15 +78,17 @@ open class BasicCircularStrategy(
         )
     }
 
+
     /**
-     * This function does mostly handle business and calculation related
+     * This function calculates the data for the Chart
      */
     override fun doCalculations() {
         circularData.doCalculations()
     }
 
+
     /**
-     * This function draws the foreground
+     * This function draws the main plots and the foreground of the Chart
      */
     override fun DrawScope.drawForeground() {
         circularForeground.apply {
@@ -99,16 +99,18 @@ open class BasicCircularStrategy(
         }
     }
 
+
     /**
-     * This function draws the Color Convention in the chart
+     * This function draws the legends of the Chart
      */
     @Composable
-    override fun DrawColorConventions() {
-        circularColorConvention.DrawColorConventions(
+    override fun DrawLegends() {
+        circularLegend.DrawColorConventions(
             circularData = circularData,
             decoration = circularDecoration
         )
     }
+
 
     /**
      * This is the Build Function which starts composing the Charts and composes the Charts
@@ -146,7 +148,7 @@ open class BasicCircularStrategy(
             }
 
             // This function draws the color convention
-            DrawColorConventions()
+            DrawLegends()
         }
 
     }
@@ -183,7 +185,7 @@ open class BasicCircularStrategy(
             circularData = circularData,
             circularDecoration = circularDecoration,
             circularForeground = circularForeground,
-            circularColorConvention = circularColorConvention
+            circularLegend = circularColorConvention
         ).Build(modifier = modifier)
     }
 }

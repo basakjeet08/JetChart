@@ -2,25 +2,33 @@ package dev.anirban.charts.circular.data
 
 
 /**
- * This implementation needs to be implemented by all the classes which provide an implementation to
- * handle data
+ * A strategy prototype for calculating data and angles for a circular chart plot.
  *
  * Implementations for this interface is :- [ListDataStrategy],[TargetDataStrategy]
- *
- * @property itemsList This is the list of items which are shown in the readings
- * @property sweepAngles This is the list of sweep angles which would be used to draw the readings
- * in the canvas
- *
- * @property unit This is the SI Unit text
- *
- * @property doCalculations This function performs the calculation login in the class
  */
 interface CircularDataStrategy {
 
+
+    /**
+     * This is the list of items which are shown in the readings
+     */
     val itemsList: List<Pair<String, Float>>
+
+
+    /**
+     * This is the list of sweep angles calculated using [itemsList] and are used to draw plot
+     */
     var sweepAngles: MutableList<Float>
 
+
+    /**
+     * This is the unit of the item in [itemsList]
+     */
     val unit: String
 
+
+    /**
+     * This function performs the calculation logic in the class
+     */
     fun doCalculations()
 }

@@ -19,6 +19,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.anirban.charts.circular.BasicCircularStrategy
+import dev.anirban.charts.circular.center.TextCenterStrategy
 import dev.anirban.charts.circular.charts.DonutColumnChartStrategy
 import dev.anirban.charts.circular.charts.DonutRowChartStrategy
 import dev.anirban.charts.circular.data.ListDataStrategy
@@ -91,6 +92,9 @@ fun CircularChartUIScreen() {
                             target = 4340f,
                             achieved = 2823f,
                             unit = "m"
+                        ),
+                        circularCenter = TextCenterStrategy(
+                            text = ((2823f / 4340f) * 100f).toString()
                         )
                     )
                 }

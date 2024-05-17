@@ -13,31 +13,36 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.anirban.charts.circular.decoration.CircularDecoration
 import dev.anirban.charts.circular.data.CircularDataStrategy
 import java.text.DecimalFormat
 
+
 /**
- * This class is the implementation of [CircularLegendStrategy] which provides the
- * implementations for drawing the color conventions in the canvas
+ * This class is the implementation of [CircularLegendStrategy] which provides a strategy to draw
+ * the legends in a lis fashion
  *
- * @param fontSize This defines the size of the font
- * @param fontWeight This Defines the weight of the font
+ * For other implementations see [GridLegendStrategy], [NoLegendStrategy]
+ *
+ * @param style This is the style of the text to be drawn on the legends
  */
 class ListLegendStrategy(
-    private val fontSize: TextUnit = 14.sp,
-    private val fontWeight: FontWeight = FontWeight.W400
+    private val style: TextStyle = TextStyle(
+        fontSize = 14.sp,
+        fontWeight = FontWeight.W400
+    )
 ) : CircularLegendStrategy {
 
+
     /**
-     * This function draws the color conventions in the canvas
+     * This function draws the desired color Convention
      *
-     * @param circularData This object contains the data of the graph
-     * @param decoration THis object contains the decorations of the graph
+     * @param circularData This is the data of the chart
+     * @param decoration This is the decoration of the chart
      */
     @Composable
     override fun DrawColorConventions(
@@ -63,6 +68,7 @@ class ListLegendStrategy(
             }
         }
     }
+
 
     /**
      * This function draws individual Color Convention
@@ -110,9 +116,7 @@ class ListLegendStrategy(
                 text = textToShow,
 
                 // Text Features
-                fontSize = fontSize,
-                fontWeight = fontWeight,
-                color = textColor
+                style = style.copy(color = textColor)
             )
         }
     }

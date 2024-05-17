@@ -22,32 +22,37 @@ import dev.anirban.charts.circular.legend.CircularLegendStrategy
 import dev.anirban.charts.circular.data.CircularDataStrategy
 import dev.anirban.charts.circular.foreground.CircularForegroundStrategy
 
+
 /**
- * This class is the sub - class of [BasicCircularStrategy] class which is the root parent class of the
- * circular charts.
+ * This class is the sub - class of [BasicCircularStrategy] class which is the root parent class.
  *
- * This class in general provides an implementation for a donut chart which has its color conventions
- * in the same row as itself.
+ * This class in general provides an implementation for a donut chart which has its legends
+ * under the plot.
  *
- * @param circularCenter This is the implementation which draws the center of the circle
- * @param circularData This is the data class implementation which handles the data
- * @param circularDecoration This is the decorations for the Circular Chart
- * @param circularForeground This is the implementation which draws the foreground of the chart
- * @param circularColorConvention This is the color Convention implementation of the chart
+ * For other implementations see [BasicCircularStrategy], [DonutRowChartStrategy]
+ *
+ * @param circularCenter This is the strategy to draw the center of the chart.
+ * @param circularData This is the strategy to store and manipulate the circular chart data.
+ * @param circularDecoration This contains the details of the decorations for the color and
+ * all those color related Stuff
+ * @param circularForeground This is the strategy to draw the main plot or the foreground of
+ * the chart.
+ * @param circularLegend This strategy draws the legends for the Chart
  */
 class DonutColumnChartStrategy(
     override val circularCenter: CircularCenterStrategy,
     override val circularData: CircularDataStrategy,
     override val circularDecoration: CircularDecoration,
     override val circularForeground: CircularForegroundStrategy,
-    override val circularColorConvention: CircularLegendStrategy
+    override val circularLegend: CircularLegendStrategy
 ) : BasicCircularStrategy(
     circularCenter,
     circularData,
     circularDecoration,
     circularForeground,
-    circularColorConvention
+    circularLegend
 ) {
+
 
     /**
      * This is the Build Function which starts composing the Charts and composes the Charts
@@ -94,7 +99,7 @@ class DonutColumnChartStrategy(
             ) {
 
                 // Calling all the necessary functions
-                super.DrawColorConventions()
+                super.DrawLegends()
             }
         }
     }
@@ -121,7 +126,7 @@ class DonutColumnChartStrategy(
         @Composable
         fun DonutChartColumn(
             modifier: Modifier = Modifier,
-            circularCenter: CircularCenterStrategy = NoCenterStrategy(),
+            circularCenter: CircularCenterStrategy = NoCenterStrategy,
             circularData: CircularDataStrategy,
             circularDecoration: CircularDecoration = CircularDecoration.donutChartDecorations(),
             circularForeground: CircularForegroundStrategy = DonutForegroundStrategy(),
@@ -131,7 +136,7 @@ class DonutColumnChartStrategy(
             circularData = circularData,
             circularForeground = circularForeground,
             circularDecoration = circularDecoration,
-            circularColorConvention = circularColorConvention
+            circularLegend = circularColorConvention
         ).Build(modifier = modifier)
     }
 }

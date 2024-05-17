@@ -1,12 +1,15 @@
 package dev.anirban.charts.circular.data
 
+
 /**
- * This class is the implementation of [CircularDataStrategy] class which is responsible for
- * providing the implementation of business login and calculation logic behind the chart
+ * This class is the implementation of [CircularDataStrategy] class which provides a strategy for
+ * calculating [sweepAngles] for a circular chart when the target and achieved values are provided.
  *
- * @param unit This is the SI Unit text
+ * For other implementations visit [ListDataStrategy]
  *
- * @property sweepAngles This is the list of sweep angles which could be calculated
+ * @param target This is the target to be achieved.
+ * @param achieved This is the value achieved
+ * @param unit This is the unit of the item in [itemsList]
  */
 class TargetDataStrategy(
     target: Float,
@@ -14,17 +17,30 @@ class TargetDataStrategy(
     override val unit: String
 ) : CircularDataStrategy {
 
+
+    /**
+     * This is the list of items which are shown in the readings
+     */
     override val itemsList: List<Pair<String, Float>> = listOf(
         Pair("Achieved", achieved),
         Pair("Target", target)
     )
-    override var sweepAngles: MutableList<Float> = mutableListOf()
 
-    var percentage = achieved / target
-        private set
 
     /**
-     * This function calculates the sweep Angles
+     * This is the list of sweep angles calculated using [itemsList] and are used to draw plot
+     */
+    override var sweepAngles: MutableList<Float> = mutableListOf()
+
+
+    /**
+     * This is the achieved percentage.
+     */
+    private var percentage = achieved / target
+
+
+    /**
+     * This function performs the calculation logic in the class
      */
     override fun doCalculations() {
 

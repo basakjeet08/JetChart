@@ -6,16 +6,21 @@ import dev.anirban.charts.circular.decoration.CircularDecoration
 
 
 /**
- * This interface needs to be implemented by all the classes which wants to make different
- * implementations for drawing the readings in the chart
+ * This is the strategy for the creation of the foreground of the circular chart and this class
+ * should be extended for the implementation to work with the library.
  *
  * Implementations for this interface are :- [DonutForegroundStrategy],
  * [DonutTargetForegroundStrategy]
- *
- * @property drawForeground This function draws the foreground using its own implementation
  */
 interface CircularForegroundStrategy {
 
+
+    /**
+     * This function draws the foreground according to the strategy
+     *
+     * @param circularData This is the data of the chart
+     * @param decoration This is the decoration of the chart
+     */
     fun DrawScope.drawForeground(
         circularData: CircularDataStrategy,
         decoration: CircularDecoration

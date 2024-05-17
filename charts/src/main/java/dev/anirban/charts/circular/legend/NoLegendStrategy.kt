@@ -6,18 +6,19 @@ import dev.anirban.charts.circular.data.CircularDataStrategy
 
 
 /**
- * This class is the implementation of [CircularLegendStrategy] which provides the
- * implementations for drawing the color conventions in the canvas
+ * This class is the implementation of [CircularLegendStrategy] which provides a strategy to draw
+ * no legends for the circular chart. This also serves as a default implementation.
+ *
+ * For other implementation see [GridLegendStrategy], [ListLegendStrategy]
  */
 class NoLegendStrategy : CircularLegendStrategy {
 
 
     /**
-     * This function draws the color conventions in the canvas. However in this particular case
-     * there is no color convention to be drawn
+     * This function draws the desired color Convention
      *
-     * @param circularData This object contains the data of the graph
-     * @param decoration THis object contains the decorations of the graph
+     * @param circularData This is the data of the chart
+     * @param decoration This is the decoration of the chart
      */
     @Composable
     override fun DrawColorConventions(

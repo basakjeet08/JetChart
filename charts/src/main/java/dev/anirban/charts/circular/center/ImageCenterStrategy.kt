@@ -13,24 +13,29 @@ import dev.anirban.charts.circular.data.CircularDataStrategy
 
 
 /**
- * This class is the implementation of [CircularCenterStrategy] which focuses on providing an
- * implementation to draw an image on the Chart
+ * This class is the implementation of [CircularCenterStrategy] which focuses on providing a
+ * strategy for positioning an image in the center of a circular chart.
  *
- * This Class in particular is the implementation to draw texts
+ * This Class in particular is the implementation to draw an image
  *
- * @param
+ * For other implementations see [CustomCenterStrategy], [TextCenterStrategy], [NoCenterStrategy]
+ *
+ * @param modifier The modifier to be applied to the image.
+ * @param image The image to be displayed in the center of the circular chart.
+ * @param contentDescription The content description for the image.
  */
 class ImageCenterStrategy(
+    private val modifier: Modifier = Modifier,
     private val image: ImageVector = Icons.Default.Check,
     private val contentDescription: String? = null
 ) : CircularCenterStrategy {
 
 
     /**
-     * This function draws an Image (by default a Tick Mark) in the center of the chart
+     * This function draws composable function in the center of the chart
      *
-     * @param circularData This object contains the data of the graph
-     * @param decoration THis object contains the decorations of the graph
+     * @param circularData Data related to the circular chart.
+     * @param decoration Decorations for the chart.
      */
     @Composable
     override fun DrawCenter(
@@ -41,7 +46,7 @@ class ImageCenterStrategy(
         Icon(
             imageVector = image,
             contentDescription = contentDescription,
-            modifier = Modifier.size(24.dp)
+            modifier = modifier.size(24.dp)
         )
     }
 }

@@ -9,39 +9,45 @@ import dev.anirban.charts.circular.legend.CircularLegendStrategy
 import dev.anirban.charts.circular.data.CircularDataStrategy
 import dev.anirban.charts.circular.foreground.CircularForegroundStrategy
 
+
 /**
- * This is the interface which is implemented by the [BasicCircularStrategy] Class which is the root class
- * of all the circular Chart Classes
+ * This provides a strategy prototype for the Circular Charts implementation and needs to be
+ * implemented by any class which wants to create its own Circular chart strategy.
  *
+ * For implementations see [BasicCircularStrategy]
  */
 interface CircularChartStrategy {
 
+
     /**
-     * This is the implementation to draw the Center of the Circular Charts
+     * This is the strategy to draw the center of the chart.
      */
     val circularCenter: CircularCenterStrategy
 
+
     /**
-     * This is the implementation of the circular Data to be kept for the chart and the operations
-     * to be done on them
+     * This is the strategy to store and manipulate the circular chart data.
      */
     val circularData: CircularDataStrategy
+
 
     /**
      * This contains the details of the decorations for the color and all those color related Stuff
      */
     val circularDecoration: CircularDecoration
 
+
     /**
-     * This is the implementation to draw the Foreground of the Chart and draws the main plotting for
-     * the chart
+     * This is the strategy to draw the main plot or the foreground of the chart.
      */
     val circularForeground: CircularForegroundStrategy
 
+
     /**
-     * This implementation draws the Color Conventions for the Chart
+     * This strategy draws the legends for the Chart
      */
-    val circularColorConvention: CircularLegendStrategy
+    val circularLegend: CircularLegendStrategy
+
 
     /**
      * This function draws the center of the Chart
@@ -49,21 +55,25 @@ interface CircularChartStrategy {
     @Composable
     fun DrawCenter()
 
+
     /**
      * This function calculates the data for the Chart
      */
     fun doCalculations()
+
 
     /**
      * This function draws the main plots and the foreground of the Chart
      */
     fun DrawScope.drawForeground()
 
+
     /**
-     * This function draws the Color Convention of the Chart
+     * This function draws the legends of the Chart
      */
     @Composable
-    fun DrawColorConventions()
+    fun DrawLegends()
+
 
     /**
      * This is the Build Function which starts composing the Charts and composes the Charts
