@@ -106,6 +106,7 @@ class CircularDonutChartColumn(
      */
     companion object {
 
+
         /**
          * This function creates an object of the [CircularDonutChartColumn] which draws a basic
          * donut chart with its color conventions drawn at bottom
@@ -125,14 +126,12 @@ class CircularDonutChartColumn(
             circularDecoration: CircularDecoration = CircularDecoration.donutChartDecorations(),
             circularForeground: CircularForegroundInterface = CircularDonutForeground(),
             circularColorConvention: CircularLegendInterface = CircularGridLegend()
-        ) {
-            CircularDonutChartColumn(
-                circularCenter = circularCenter,
-                circularData = circularData,
-                circularForeground = circularForeground,
-                circularDecoration = circularDecoration,
-                circularColorConvention = circularColorConvention
-            ).Build(modifier = modifier)
-        }
+        ) = CircularDonutChartColumn(
+            circularCenter = circularCenter,
+            circularData = circularData,
+            circularForeground = circularForeground,
+            circularDecoration = circularDecoration,
+            circularColorConvention = circularColorConvention
+        ).Build(modifier = modifier)
     }
 }

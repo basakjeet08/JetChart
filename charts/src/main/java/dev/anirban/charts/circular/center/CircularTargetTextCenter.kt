@@ -10,8 +10,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.anirban.charts.circular.decoration.CircularDecoration
 import dev.anirban.charts.circular.data.CircularDataInterface
-import dev.anirban.charts.circular.data.CircularDonutTargetData
-import java.text.DecimalFormat
 
 
 /**
@@ -24,6 +22,7 @@ import java.text.DecimalFormat
  * @param fontWeight This Defines the weight of the font
  */
 class CircularTargetTextCenter(
+    private val textToShow: String = "Dummy Text",
     private val fontSize: TextUnit = 12.sp,
     private val fontWeight: FontWeight = FontWeight.W500
 ) : CircularCenterInterface {
@@ -41,12 +40,9 @@ class CircularTargetTextCenter(
         decoration: CircularDecoration
     ) {
 
-        // Percentage to be shown
-        val percentage = (circularData as CircularDonutTargetData).percentage * 100
-
         // Item and Value
         Text(
-            text = "${DecimalFormat("#.##").format(percentage)} %",
+            text = textToShow,
 
             modifier = Modifier.padding(vertical = 4.dp),
 
