@@ -12,21 +12,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.unit.dp
-import dev.anirban.charts.circular.CircularChart
-import dev.anirban.charts.circular.center.CircularNoCenter
-import dev.anirban.charts.circular.legend.CircularListLegend
+import dev.anirban.charts.circular.BasicCircularStrategy
+import dev.anirban.charts.circular.center.NoCenterStrategy
+import dev.anirban.charts.circular.legend.ListLegendStrategy
 import dev.anirban.charts.circular.decoration.CircularDecoration
-import dev.anirban.charts.circular.foreground.CircularDonutForeground
-import dev.anirban.charts.circular.foreground.CircularDonutTargetForeground
-import dev.anirban.charts.circular.center.CircularCenterInterface
-import dev.anirban.charts.circular.legend.CircularLegendInterface
-import dev.anirban.charts.circular.data.CircularDataInterface
-import dev.anirban.charts.circular.data.CircularDonutTargetData
-import dev.anirban.charts.circular.foreground.CircularForegroundInterface
+import dev.anirban.charts.circular.foreground.DonutForegroundStrategy
+import dev.anirban.charts.circular.foreground.DonutTargetForegroundStrategy
+import dev.anirban.charts.circular.center.CircularCenterStrategy
+import dev.anirban.charts.circular.legend.CircularLegendStrategy
+import dev.anirban.charts.circular.data.CircularDataStrategy
+import dev.anirban.charts.circular.data.TargetDataStrategy
+import dev.anirban.charts.circular.foreground.CircularForegroundStrategy
 
 
 /**
- * This class is the sub - class of [CircularChart] class which is the root parent class of the
+ * This class is the sub - class of [BasicCircularStrategy] class which is the root parent class of the
  * circular charts.
  *
  * This class in general provides an implementation for a donut chart which has its color conventions
@@ -38,13 +38,13 @@ import dev.anirban.charts.circular.foreground.CircularForegroundInterface
  * @param circularForeground This is the implementation which draws the foreground of the chart
  * @param circularColorConvention This is the color Convention implementation of the chart
  */
-open class CircularDonutChartRow(
-    override val circularCenter: CircularCenterInterface,
-    override val circularData: CircularDataInterface,
+open class DonutRowChartStrategy(
+    override val circularCenter: CircularCenterStrategy,
+    override val circularData: CircularDataStrategy,
     override val circularDecoration: CircularDecoration,
-    override val circularForeground: CircularForegroundInterface,
-    override val circularColorConvention: CircularLegendInterface
-) : CircularChart(
+    override val circularForeground: CircularForegroundStrategy,
+    override val circularColorConvention: CircularLegendStrategy
+) : BasicCircularStrategy(
     circularCenter,
     circularData,
     circularDecoration,
@@ -110,13 +110,13 @@ open class CircularDonutChartRow(
     }
 
     /**
-     * Builder Composable Functions which makes the objects of [CircularDonutChartRow] and these are
+     * Builder Composable Functions which makes the objects of [DonutRowChartStrategy] and these are
      * actually called by the users to make charts
      */
     companion object {
 
         /**
-         * This function creates an object of the [CircularDonutChartRow] which draws a basic
+         * This function creates an object of the [DonutRowChartStrategy] which draws a basic
          * donut chart with its color conventions drawn at side
          *
          * @param modifier THis is made so that modifications can be passed from the parent function
@@ -129,12 +129,12 @@ open class CircularDonutChartRow(
         @Composable
         fun DonutChartRow(
             modifier: Modifier = Modifier,
-            circularCenter: CircularCenterInterface = CircularNoCenter(),
-            circularData: CircularDataInterface,
+            circularCenter: CircularCenterStrategy = NoCenterStrategy(),
+            circularData: CircularDataStrategy,
             circularDecoration: CircularDecoration = CircularDecoration.donutChartDecorations(),
-            circularForeground: CircularForegroundInterface = CircularDonutForeground(),
-            circularColorConvention: CircularLegendInterface = CircularListLegend()
-        ) = CircularDonutChartRow(
+            circularForeground: CircularForegroundStrategy = DonutForegroundStrategy(),
+            circularColorConvention: CircularLegendStrategy = ListLegendStrategy()
+        ) = DonutRowChartStrategy(
             circularCenter = circularCenter,
             circularData = circularData,
             circularDecoration = circularDecoration,
@@ -144,7 +144,7 @@ open class CircularDonutChartRow(
 
 
         /**
-         * This function creates an object of the [CircularDonutChartRow] which draws a basic
+         * This function creates an object of the [DonutRowChartStrategy] which draws a basic
          * donut chart with its color conventions drawn at side but the data is in the form of
          * Target and Achieved
          *
@@ -158,12 +158,12 @@ open class CircularDonutChartRow(
         @Composable
         fun TargetDonutChart(
             modifier: Modifier = Modifier,
-            circularCenter: CircularCenterInterface = CircularNoCenter(),
-            circularData: CircularDonutTargetData,
+            circularCenter: CircularCenterStrategy = NoCenterStrategy(),
+            circularData: TargetDataStrategy,
             circularDecoration: CircularDecoration = CircularDecoration.targetChartColor(),
-            circularForeground: CircularForegroundInterface = CircularDonutTargetForeground(),
-            circularColorConvention: CircularLegendInterface = CircularListLegend()
-        ) = CircularDonutChartRow(
+            circularForeground: CircularForegroundStrategy = DonutTargetForegroundStrategy(),
+            circularColorConvention: CircularLegendStrategy = ListLegendStrategy()
+        ) = DonutRowChartStrategy(
             circularCenter = circularCenter,
             circularData = circularData,
             circularDecoration = circularDecoration,

@@ -2,11 +2,11 @@ package dev.anirban.charts.circular.center
 
 import androidx.compose.runtime.Composable
 import dev.anirban.charts.circular.decoration.CircularDecoration
-import dev.anirban.charts.circular.data.CircularDataInterface
+import dev.anirban.charts.circular.data.CircularDataStrategy
 
 
 /**
- * This class is the implementation of [CircularCenterInterface] which focuses on providing an
+ * This class is the implementation of [CircularCenterStrategy] which focuses on providing an
  * opportunity to the developer to provide his own custom implementation for the Center
  *
  * This Class in particular is the implementation to draw texts
@@ -14,9 +14,9 @@ import dev.anirban.charts.circular.data.CircularDataInterface
  * @param body This contains the Composable function passed by the Dev to draw his custom
  * implementation for the Circle Chart Center
  */
-class CircularCustomCenter(
+class CustomCenterStrategy(
     private val body: @Composable () -> Unit
-) : CircularCenterInterface {
+) : CircularCenterStrategy {
 
 
     /**
@@ -27,7 +27,7 @@ class CircularCustomCenter(
      */
     @Composable
     override fun DrawCenter(
-        circularData: CircularDataInterface,
+        circularData: CircularDataStrategy,
         decoration: CircularDecoration
     ) = body()
 }

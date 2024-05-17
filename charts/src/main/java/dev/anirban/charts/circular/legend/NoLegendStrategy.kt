@@ -2,14 +2,14 @@ package dev.anirban.charts.circular.legend
 
 import androidx.compose.runtime.Composable
 import dev.anirban.charts.circular.decoration.CircularDecoration
-import dev.anirban.charts.circular.data.CircularDataInterface
+import dev.anirban.charts.circular.data.CircularDataStrategy
 
 
 /**
- * This class is the implementation of [CircularLegendInterface] which provides the
+ * This class is the implementation of [CircularLegendStrategy] which provides the
  * implementations for drawing the color conventions in the canvas
  */
-class CircularNoLegend : CircularLegendInterface {
+class NoLegendStrategy : CircularLegendStrategy {
 
 
     /**
@@ -21,7 +21,7 @@ class CircularNoLegend : CircularLegendInterface {
      */
     @Composable
     override fun DrawColorConventions(
-        circularData: CircularDataInterface,
+        circularData: CircularDataStrategy,
         decoration: CircularDecoration
     ) = Unit
 }

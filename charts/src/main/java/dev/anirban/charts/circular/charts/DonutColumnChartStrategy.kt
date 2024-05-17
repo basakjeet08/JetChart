@@ -12,18 +12,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.unit.dp
-import dev.anirban.charts.circular.CircularChart
-import dev.anirban.charts.circular.center.CircularNoCenter
-import dev.anirban.charts.circular.legend.CircularGridLegend
+import dev.anirban.charts.circular.BasicCircularStrategy
+import dev.anirban.charts.circular.center.NoCenterStrategy
+import dev.anirban.charts.circular.legend.GridLegendStrategy
 import dev.anirban.charts.circular.decoration.CircularDecoration
-import dev.anirban.charts.circular.foreground.CircularDonutForeground
-import dev.anirban.charts.circular.center.CircularCenterInterface
-import dev.anirban.charts.circular.legend.CircularLegendInterface
-import dev.anirban.charts.circular.data.CircularDataInterface
-import dev.anirban.charts.circular.foreground.CircularForegroundInterface
+import dev.anirban.charts.circular.foreground.DonutForegroundStrategy
+import dev.anirban.charts.circular.center.CircularCenterStrategy
+import dev.anirban.charts.circular.legend.CircularLegendStrategy
+import dev.anirban.charts.circular.data.CircularDataStrategy
+import dev.anirban.charts.circular.foreground.CircularForegroundStrategy
 
 /**
- * This class is the sub - class of [CircularChart] class which is the root parent class of the
+ * This class is the sub - class of [BasicCircularStrategy] class which is the root parent class of the
  * circular charts.
  *
  * This class in general provides an implementation for a donut chart which has its color conventions
@@ -35,13 +35,13 @@ import dev.anirban.charts.circular.foreground.CircularForegroundInterface
  * @param circularForeground This is the implementation which draws the foreground of the chart
  * @param circularColorConvention This is the color Convention implementation of the chart
  */
-class CircularDonutChartColumn(
-    override val circularCenter: CircularCenterInterface,
-    override val circularData: CircularDataInterface,
+class DonutColumnChartStrategy(
+    override val circularCenter: CircularCenterStrategy,
+    override val circularData: CircularDataStrategy,
     override val circularDecoration: CircularDecoration,
-    override val circularForeground: CircularForegroundInterface,
-    override val circularColorConvention: CircularLegendInterface
-) : CircularChart(
+    override val circularForeground: CircularForegroundStrategy,
+    override val circularColorConvention: CircularLegendStrategy
+) : BasicCircularStrategy(
     circularCenter,
     circularData,
     circularDecoration,
@@ -101,14 +101,14 @@ class CircularDonutChartColumn(
 
 
     /**
-     * Builder Composable Functions which makes the objects of [CircularDonutChartColumn] and these are
+     * Builder Composable Functions which makes the objects of [DonutColumnChartStrategy] and these are
      * actually called by the users to make charts
      */
     companion object {
 
 
         /**
-         * This function creates an object of the [CircularDonutChartColumn] which draws a basic
+         * This function creates an object of the [DonutColumnChartStrategy] which draws a basic
          * donut chart with its color conventions drawn at bottom
          *
          * @param modifier This is for modifications to be passed from the Parent Function
@@ -121,12 +121,12 @@ class CircularDonutChartColumn(
         @Composable
         fun DonutChartColumn(
             modifier: Modifier = Modifier,
-            circularCenter: CircularCenterInterface = CircularNoCenter(),
-            circularData: CircularDataInterface,
+            circularCenter: CircularCenterStrategy = NoCenterStrategy(),
+            circularData: CircularDataStrategy,
             circularDecoration: CircularDecoration = CircularDecoration.donutChartDecorations(),
-            circularForeground: CircularForegroundInterface = CircularDonutForeground(),
-            circularColorConvention: CircularLegendInterface = CircularGridLegend()
-        ) = CircularDonutChartColumn(
+            circularForeground: CircularForegroundStrategy = DonutForegroundStrategy(),
+            circularColorConvention: CircularLegendStrategy = GridLegendStrategy()
+        ) = DonutColumnChartStrategy(
             circularCenter = circularCenter,
             circularData = circularData,
             circularForeground = circularForeground,

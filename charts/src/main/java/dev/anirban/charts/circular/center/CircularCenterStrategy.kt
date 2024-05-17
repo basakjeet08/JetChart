@@ -2,15 +2,15 @@ package dev.anirban.charts.circular.center
 
 import androidx.compose.runtime.Composable
 import dev.anirban.charts.circular.decoration.CircularDecoration
-import dev.anirban.charts.circular.data.CircularDataInterface
+import dev.anirban.charts.circular.data.CircularDataStrategy
 
 /**
  * This interface implements a function to draw the center of the circular chart
  *
- * Different Implementations for the interface are [CircularNoCenter],
- * [CircularTargetTextCenter]
+ * Different Implementations for the interface are [NoCenterStrategy],
+ * [TextCenterStrategy]
  */
-interface CircularCenterInterface {
+interface CircularCenterStrategy {
 
     /**
      * This function draws composable function in the center of the chart
@@ -20,7 +20,7 @@ interface CircularCenterInterface {
      */
     @Composable
     fun DrawCenter(
-        circularData: CircularDataInterface,
+        circularData: CircularDataStrategy,
         decoration: CircularDecoration
     )
 }

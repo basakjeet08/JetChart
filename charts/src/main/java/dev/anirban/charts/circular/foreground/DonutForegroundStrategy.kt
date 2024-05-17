@@ -4,10 +4,10 @@ import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
 import dev.anirban.charts.circular.decoration.CircularDecoration
-import dev.anirban.charts.circular.data.CircularDataInterface
+import dev.anirban.charts.circular.data.CircularDataStrategy
 
 /**
- * This class implements the [CircularForegroundInterface] which is responsible for making the
+ * This class implements the [CircularForegroundStrategy] which is responsible for making the
  * foreground reading of the chart
  *
  * @param radiusMultiplier This is the multiplier to radius of the circle to make the Arcs a bit
@@ -15,11 +15,11 @@ import dev.anirban.charts.circular.data.CircularDataInterface
  * @param strokeWidth This is the width of the stroke of the Arc
  * @param startAngle This defines the starting angle of the Chart Arc
  */
-class CircularDonutForeground(
+class DonutForegroundStrategy(
     private val radiusMultiplier: Float = 1.4f,
     private val strokeWidth: Float = 45f,
     private val startAngle: Float = 270f
-) : CircularForegroundInterface {
+) : CircularForegroundStrategy {
 
     /**
      * This is the function which draws all the readings
@@ -28,7 +28,7 @@ class CircularDonutForeground(
      * @param decoration This is the decoration of the chart
      */
     override fun DrawScope.drawForeground(
-        circularData: CircularDataInterface,
+        circularData: CircularDataStrategy,
         decoration: CircularDecoration
     ) {
 

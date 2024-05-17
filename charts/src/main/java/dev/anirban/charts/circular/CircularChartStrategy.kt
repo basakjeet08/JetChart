@@ -3,29 +3,29 @@ package dev.anirban.charts.circular
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.drawscope.DrawScope
-import dev.anirban.charts.circular.center.CircularCenterInterface
+import dev.anirban.charts.circular.center.CircularCenterStrategy
 import dev.anirban.charts.circular.decoration.CircularDecoration
-import dev.anirban.charts.circular.legend.CircularLegendInterface
-import dev.anirban.charts.circular.data.CircularDataInterface
-import dev.anirban.charts.circular.foreground.CircularForegroundInterface
+import dev.anirban.charts.circular.legend.CircularLegendStrategy
+import dev.anirban.charts.circular.data.CircularDataStrategy
+import dev.anirban.charts.circular.foreground.CircularForegroundStrategy
 
 /**
- * This is the interface which is implemented by the [CircularChart] Class which is the root class
+ * This is the interface which is implemented by the [BasicCircularStrategy] Class which is the root class
  * of all the circular Chart Classes
  *
  */
-interface CircularChartInterface {
+interface CircularChartStrategy {
 
     /**
      * This is the implementation to draw the Center of the Circular Charts
      */
-    val circularCenter: CircularCenterInterface
+    val circularCenter: CircularCenterStrategy
 
     /**
      * This is the implementation of the circular Data to be kept for the chart and the operations
      * to be done on them
      */
-    val circularData: CircularDataInterface
+    val circularData: CircularDataStrategy
 
     /**
      * This contains the details of the decorations for the color and all those color related Stuff
@@ -36,12 +36,12 @@ interface CircularChartInterface {
      * This is the implementation to draw the Foreground of the Chart and draws the main plotting for
      * the chart
      */
-    val circularForeground: CircularForegroundInterface
+    val circularForeground: CircularForegroundStrategy
 
     /**
      * This implementation draws the Color Conventions for the Chart
      */
-    val circularColorConvention: CircularLegendInterface
+    val circularColorConvention: CircularLegendStrategy
 
     /**
      * This function draws the center of the Chart

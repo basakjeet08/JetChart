@@ -18,20 +18,20 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.anirban.charts.circular.decoration.CircularDecoration
-import dev.anirban.charts.circular.data.CircularDataInterface
+import dev.anirban.charts.circular.data.CircularDataStrategy
 import java.text.DecimalFormat
 
 /**
- * This class is the implementation of [CircularLegendInterface] which provides the
+ * This class is the implementation of [CircularLegendStrategy] which provides the
  * implementations for drawing the color conventions in the canvas
  *
  * @param fontSize This defines the size of the font
  * @param fontWeight This Defines the weight of the font
  */
-class CircularListLegend(
+class ListLegendStrategy(
     private val fontSize: TextUnit = 14.sp,
     private val fontWeight: FontWeight = FontWeight.W400
-) : CircularLegendInterface {
+) : CircularLegendStrategy {
 
     /**
      * This function draws the color conventions in the canvas
@@ -41,7 +41,7 @@ class CircularListLegend(
      */
     @Composable
     override fun DrawColorConventions(
-        circularData: CircularDataInterface,
+        circularData: CircularDataStrategy,
         decoration: CircularDecoration
     ) {
 

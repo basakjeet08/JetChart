@@ -9,21 +9,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import dev.anirban.charts.circular.decoration.CircularDecoration
-import dev.anirban.charts.circular.data.CircularDataInterface
+import dev.anirban.charts.circular.data.CircularDataStrategy
 
 
 /**
- * This class is the implementation of [CircularCenterInterface] which focuses on providing an
+ * This class is the implementation of [CircularCenterStrategy] which focuses on providing an
  * implementation to draw an image on the Chart
  *
  * This Class in particular is the implementation to draw texts
  *
  * @param
  */
-class CircularImageCenter(
+class ImageCenterStrategy(
     private val image: ImageVector = Icons.Default.Check,
     private val contentDescription: String? = null
-) : CircularCenterInterface {
+) : CircularCenterStrategy {
 
 
     /**
@@ -34,7 +34,7 @@ class CircularImageCenter(
      */
     @Composable
     override fun DrawCenter(
-        circularData: CircularDataInterface,
+        circularData: CircularDataStrategy,
         decoration: CircularDecoration
     ) {
 

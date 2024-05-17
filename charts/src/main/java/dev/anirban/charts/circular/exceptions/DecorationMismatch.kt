@@ -1,10 +1,10 @@
 package dev.anirban.charts.circular.exceptions
 
 import dev.anirban.charts.circular.decoration.CircularDecoration
-import dev.anirban.charts.circular.data.CircularDataInterface
+import dev.anirban.charts.circular.data.CircularDataStrategy
 
 /**
  * This class is used to throw an exception when the [CircularDecoration.colorList] size is lesser
- * than the [CircularDataInterface.itemsList] size
+ * than the [CircularDataStrategy.itemsList] size
  */
-class CircularDecorationMismatch(message: String?) : Exception(message)
+class DecorationMismatch(message: String?) : Exception(message)

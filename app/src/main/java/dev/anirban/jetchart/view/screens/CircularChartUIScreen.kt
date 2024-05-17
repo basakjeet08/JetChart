@@ -18,12 +18,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.anirban.charts.circular.CircularChart
-import dev.anirban.charts.circular.charts.CircularDonutChartColumn
-import dev.anirban.charts.circular.charts.CircularDonutChartRow
-import dev.anirban.charts.circular.data.CircularDonutListData
-import dev.anirban.charts.circular.data.CircularDonutTargetData
-import dev.anirban.charts.circular.foreground.CircularDonutTargetForeground
+import dev.anirban.charts.circular.BasicCircularStrategy
+import dev.anirban.charts.circular.charts.DonutColumnChartStrategy
+import dev.anirban.charts.circular.charts.DonutRowChartStrategy
+import dev.anirban.charts.circular.data.ListDataStrategy
+import dev.anirban.charts.circular.data.TargetDataStrategy
+import dev.anirban.charts.circular.foreground.DonutTargetForegroundStrategy
 import dev.anirban.jetchart.view.components.CustomButton
 import dev.anirban.jetchart.view.components.CustomCard
 
@@ -49,8 +49,8 @@ fun CircularChartUIScreen() {
             item {
                 CustomCard(title = " Row Donut Chart") {
 
-                    CircularDonutChartRow.DonutChartRow(
-                        circularData = CircularDonutListData(
+                    DonutRowChartStrategy.DonutChartRow(
+                        circularData = ListDataStrategy(
                             itemsList = listOf(
                                 Pair("Fruit", 1500.0f),
                                 Pair("Junk Food", 300.0f),
@@ -67,8 +67,8 @@ fun CircularChartUIScreen() {
             item {
                 CustomCard(title = "Column Donut Chart") {
 
-                    CircularDonutChartColumn.DonutChartColumn(
-                        circularData = CircularDonutListData(
+                    DonutColumnChartStrategy.DonutChartColumn(
+                        circularData = ListDataStrategy(
                             itemsList = listOf(
                                 Pair("Study", 450f),
                                 Pair("Sport", 180f),
@@ -86,8 +86,8 @@ fun CircularChartUIScreen() {
             item {
                 CustomCard(title = "Target Donut Chart") {
 
-                    CircularDonutChartRow.TargetDonutChart(
-                        circularData = CircularDonutTargetData(
+                    DonutRowChartStrategy.TargetDonutChart(
+                        circularData = TargetDataStrategy(
                             target = 4340f,
                             achieved = 2823f,
                             unit = "m"
@@ -111,14 +111,14 @@ fun CircularChartUIScreen() {
                                 horizontalAlignment = Alignment.CenterHorizontally
                             ) {
 
-                                CircularChart.DonutChartImage(
+                                BasicCircularStrategy.DonutChartImage(
                                     modifier = Modifier.size(55.dp),
-                                    circularData = CircularDonutTargetData(
+                                    circularData = TargetDataStrategy(
                                         target = 100f,
                                         achieved = 81f,
                                         unit = ""
                                     ),
-                                    circularForeground = CircularDonutTargetForeground(strokeWidth = 10f)
+                                    circularForeground = DonutTargetForegroundStrategy(strokeWidth = 10f)
                                 )
 
                                 Text(

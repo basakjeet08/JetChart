@@ -1,7 +1,7 @@
 package dev.anirban.charts.circular.foreground
 
 import androidx.compose.ui.graphics.drawscope.DrawScope
-import dev.anirban.charts.circular.data.CircularDataInterface
+import dev.anirban.charts.circular.data.CircularDataStrategy
 import dev.anirban.charts.circular.decoration.CircularDecoration
 
 
@@ -9,15 +9,15 @@ import dev.anirban.charts.circular.decoration.CircularDecoration
  * This interface needs to be implemented by all the classes which wants to make different
  * implementations for drawing the readings in the chart
  *
- * Implementations for this interface are :- [CircularDonutForeground],
- * [CircularDonutTargetForeground]
+ * Implementations for this interface are :- [DonutForegroundStrategy],
+ * [DonutTargetForegroundStrategy]
  *
  * @property drawForeground This function draws the foreground using its own implementation
  */
-interface CircularForegroundInterface {
+interface CircularForegroundStrategy {
 
     fun DrawScope.drawForeground(
-        circularData: CircularDataInterface,
+        circularData: CircularDataStrategy,
         decoration: CircularDecoration
     )
 }

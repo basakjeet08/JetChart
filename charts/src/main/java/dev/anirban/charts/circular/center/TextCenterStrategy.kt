@@ -9,11 +9,11 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.anirban.charts.circular.decoration.CircularDecoration
-import dev.anirban.charts.circular.data.CircularDataInterface
+import dev.anirban.charts.circular.data.CircularDataStrategy
 
 
 /**
- * This class is the implementation of [CircularCenterInterface] which focuses on providing an
+ * This class is the implementation of [CircularCenterStrategy] which focuses on providing an
  * implementation to draw something on the center of the Circular Chart
  *
  * This Class in particular is the implementation to draw texts
@@ -21,11 +21,11 @@ import dev.anirban.charts.circular.data.CircularDataInterface
  * @param fontSize This defines the size of the font
  * @param fontWeight This Defines the weight of the font
  */
-class CircularTargetTextCenter(
-    private val textToShow: String = "Dummy Text",
+class TextCenterStrategy(
+    private val textToShow: String,
     private val fontSize: TextUnit = 12.sp,
     private val fontWeight: FontWeight = FontWeight.W500
-) : CircularCenterInterface {
+) : CircularCenterStrategy {
 
 
     /**
@@ -36,7 +36,7 @@ class CircularTargetTextCenter(
      */
     @Composable
     override fun DrawCenter(
-        circularData: CircularDataInterface,
+        circularData: CircularDataStrategy,
         decoration: CircularDecoration
     ) {
 

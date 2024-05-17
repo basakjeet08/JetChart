@@ -1,18 +1,18 @@
 package dev.anirban.charts.circular.data
 
 /**
- * This class is the implementation of [CircularDataInterface] class which is responsible for
+ * This class is the implementation of [CircularDataStrategy] class which is responsible for
  * providing the implementation of business login and calculation logic behind the chart
  *
  * @param unit This is the SI Unit text
  *
  * @property sweepAngles This is the list of sweep angles which could be calculated
  */
-class CircularDonutTargetData(
+class TargetDataStrategy(
     target: Float,
     achieved: Float,
     override val unit: String
-) : CircularDataInterface {
+) : CircularDataStrategy {
 
     override val itemsList: List<Pair<String, Float>> = listOf(
         Pair("Achieved", achieved),

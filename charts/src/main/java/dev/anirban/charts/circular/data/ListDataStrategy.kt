@@ -1,7 +1,7 @@
 package dev.anirban.charts.circular.data
 
 /**
- * This class is the implementation of [CircularDataInterface] class which is responsible for
+ * This class is the implementation of [CircularDataStrategy] class which is responsible for
  * providing the implementation of business login and calculation logic behind the chart
  *
  * @param itemsList This is the List of items to be shown in the chart
@@ -9,10 +9,10 @@ package dev.anirban.charts.circular.data
  *
  * @property sweepAngles This is the list of sweep angles which could be calculated
  */
-class CircularDonutListData(
+class ListDataStrategy(
     override val itemsList: List<Pair<String, Float>>,
     override val unit: String
-) : CircularDataInterface {
+) : CircularDataStrategy {
 
     override var sweepAngles: MutableList<Float> = mutableListOf()
 
