@@ -7,4 +7,4 @@ import dev.anirban.charts.linear.data.LinearDataStrategy
  * is less than the list of observations or the data set [LinearDataStrategy.linearDataSets]
  */
 
-class DataMismatchStrategy(message: String?) : Exception(message)
+class DataMismatch(message: String?) : Exception(message)
