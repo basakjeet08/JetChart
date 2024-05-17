@@ -8,6 +8,7 @@ import androidx.compose.runtime.setValue
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import dev.anirban.jetchart.data.repo.CircularMockDataRepo
 import dev.anirban.jetchart.data.repo.LinearMockDataRepo
 import dev.anirban.jetchart.view.screens.CircularChartUIScreen
 import dev.anirban.jetchart.view.screens.HomeScreen
@@ -44,7 +45,14 @@ fun MainNavGraph(navHostController: NavHostController) {
 
 
         composable(CIRCULAR_CHART_UI_ROUTE) {
-            CircularChartUIScreen()
+
+            var circularData by remember {
+                mutableStateOf(CircularMockDataRepo.generateMockResponse())
+            }
+
+            CircularChartUIScreen(circularMockData = circularData) {
+                circularData = CircularMockDataRepo.generateMockResponse()
+            }
         }
     }
 }

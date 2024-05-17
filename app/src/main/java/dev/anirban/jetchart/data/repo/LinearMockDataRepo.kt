@@ -1,7 +1,7 @@
 package dev.anirban.jetchart.data.repo
 
-import dev.anirban.jetchart.data.model.LinearMockObservation
-import dev.anirban.jetchart.data.model.LinearMockResponse
+import dev.anirban.jetchart.data.model.linear.LinearMockObservation
+import dev.anirban.jetchart.data.model.linear.LinearMockResponse
 
 
 /**

@@ -1,4 +1,4 @@
-package dev.anirban.jetchart.data.model
+package dev.anirban.jetchart.data.model.linear
 
 import dev.anirban.charts.linear.data.LinearDataSet
 

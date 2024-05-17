@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,17 +21,46 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.anirban.charts.circular.BasicCircularStrategy
-import dev.anirban.charts.circular.center.TextCenterStrategy
+import dev.anirban.charts.circular.center.ImageCenterStrategy
 import dev.anirban.charts.circular.charts.DonutColumnChartStrategy
 import dev.anirban.charts.circular.charts.DonutRowChartStrategy
 import dev.anirban.charts.circular.data.ListDataStrategy
 import dev.anirban.charts.circular.data.TargetDataStrategy
 import dev.anirban.charts.circular.foreground.DonutTargetForegroundStrategy
+import dev.anirban.jetchart.data.model.circular.CircularMockResponse
 import dev.anirban.jetchart.view.components.CustomButton
 import dev.anirban.jetchart.view.components.CustomCard
 
+
 @Composable
-fun CircularChartUIScreen() {
+fun CircularChartUIScreen(
+    circularMockData: CircularMockResponse,
+    onReloadClick: () -> Unit
+) {
+
+    val dataSet1 = ListDataStrategy(
+        itemsList = circularMockData.dataSet1.itemList,
+        unit = circularMockData.dataSet1.unit
+    )
+
+    val dataSet2 = ListDataStrategy(
+        itemsList = circularMockData.dataSet2.itemList,
+        unit = circularMockData.dataSet2.unit
+    )
+
+    val dataSet3 = TargetDataStrategy(
+        achieved = circularMockData.dataSet3.achieved,
+        target = circularMockData.dataSet3.target,
+        unit = circularMockData.dataSet3.unit
+    )
+
+    val dataSet4 = circularMockData.dataSet4.map {
+        TargetDataStrategy(
+            achieved = it.achieved,
+            target = it.target,
+            unit = it.unit
+        )
+    }
 
     // Column Composable
     Column(
@@ -49,17 +80,7 @@ fun CircularChartUIScreen() {
             // Design Pattern Same row Donut Chart
             item {
                 CustomCard(title = " Row Donut Chart") {
-
-                    DonutRowChartStrategy.DonutChartRow(
-                        circularData = ListDataStrategy(
-                            itemsList = listOf(
-                                Pair("Fruit", 1500.0f),
-                                Pair("Junk Food", 300.0f),
-                                Pair("Protein", 500.0f)
-                            ),
-                            unit = "Kcal"
-                        )
-                    )
+                    DonutRowChartStrategy.DonutChartRow(circularData = dataSet1)
                 }
             }
 
@@ -68,17 +89,7 @@ fun CircularChartUIScreen() {
             item {
                 CustomCard(title = "Column Donut Chart") {
 
-                    DonutColumnChartStrategy.DonutChartColumn(
-                        circularData = ListDataStrategy(
-                            itemsList = listOf(
-                                Pair("Study", 450f),
-                                Pair("Sport", 180f),
-                                Pair("Social", 30f),
-                                Pair("Others", 60f)
-                            ),
-                            unit = "Min"
-                        )
-                    )
+                    DonutColumnChartStrategy.DonutChartColumn(circularData = dataSet2)
                 }
             }
 
@@ -87,16 +98,7 @@ fun CircularChartUIScreen() {
             item {
                 CustomCard(title = "Target Donut Chart") {
 
-                    DonutRowChartStrategy.TargetDonutChart(
-                        circularData = TargetDataStrategy(
-                            target = 4340f,
-                            achieved = 2823f,
-                            unit = "m"
-                        ),
-                        circularCenter = TextCenterStrategy(
-                            text = ((2823f / 4340f) * 100f).toString()
-                        )
-                    )
+                    DonutRowChartStrategy.TargetDonutChart(circularData = dataSet3)
                 }
             }
 
@@ -106,27 +108,35 @@ fun CircularChartUIScreen() {
                 CustomCard(title = "Weekly Progress") {
                     Row {
 
-                        listOf("M", "T", "W", "T", "F", "S", "S").forEach {
+                        listOf("M", "T", "W", "T", "F", "S", "S").forEachIndexed { index, week ->
 
                             Column(
-                                modifier = Modifier
-                                    .weight(1f),
+                                modifier = Modifier.weight(1f),
                                 verticalArrangement = Arrangement.Center,
                                 horizontalAlignment = Alignment.CenterHorizontally
                             ) {
 
-                                BasicCircularStrategy.DonutChartImage(
-                                    modifier = Modifier.size(55.dp),
-                                    circularData = TargetDataStrategy(
-                                        target = 100f,
-                                        achieved = 81f,
-                                        unit = ""
-                                    ),
-                                    circularForeground = DonutTargetForegroundStrategy(strokeWidth = 10f)
-                                )
+                                if (circularMockData.dataSet4[index].achieved > circularMockData.dataSet4[index].target)
+                                    BasicCircularStrategy.DonutChartImage(
+                                        modifier = Modifier.size(55.dp),
+                                        circularData = dataSet4[index],
+                                        circularForeground = DonutTargetForegroundStrategy(
+                                            strokeWidth = 10f
+                                        ),
+                                        circularCenter = ImageCenterStrategy(image = Icons.Filled.Check)
+                                    )
+                                else
+                                    BasicCircularStrategy.DonutChartImage(
+                                        modifier = Modifier.size(55.dp),
+                                        circularData = dataSet4[index],
+                                        circularForeground = DonutTargetForegroundStrategy(
+                                            strokeWidth = 10f
+                                        )
+                                    )
+
 
                                 Text(
-                                    text = it,
+                                    text = week,
 
                                     // Text Features
                                     textAlign = TextAlign.Start,
@@ -146,7 +156,7 @@ fun CircularChartUIScreen() {
         CustomButton(
             modifier = Modifier,
             text = "Reload Data Set",
-            onClick = {}
+            onClick = onReloadClick
         )
     }
 }

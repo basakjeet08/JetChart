@@ -11,17 +11,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.unit.dp
-import dev.anirban.charts.circular.center.ImageCenterStrategy
 import dev.anirban.charts.circular.legend.NoLegendStrategy
 import dev.anirban.charts.circular.exceptions.DecorationMismatch
 import dev.anirban.charts.circular.foreground.DonutTargetForegroundStrategy
 import dev.anirban.charts.circular.center.CircularCenterStrategy
+import dev.anirban.charts.circular.center.NoCenterStrategy
 import dev.anirban.charts.circular.legend.CircularLegendStrategy
 import dev.anirban.charts.circular.data.CircularDataStrategy
 import dev.anirban.charts.circular.data.TargetDataStrategy
 import dev.anirban.charts.circular.exceptions.CircularExceptionStrategy
 import dev.anirban.charts.circular.foreground.CircularForegroundStrategy
 import dev.anirban.charts.circular.decoration.CircularDecoration
+
 
 /**
  * This class extends from the [CircularChartStrategy] which means its the root level class and it
@@ -175,7 +176,7 @@ open class BasicCircularStrategy(
         @Composable
         fun DonutChartImage(
             modifier: Modifier = Modifier,
-            circularCenter: CircularCenterStrategy = ImageCenterStrategy(),
+            circularCenter: CircularCenterStrategy = NoCenterStrategy,
             circularData: TargetDataStrategy,
             circularDecoration: CircularDecoration = CircularDecoration.targetChartColor(),
             circularForeground: CircularForegroundStrategy = DonutTargetForegroundStrategy(),

@@ -1,4 +1,4 @@
-package dev.anirban.jetchart.data.model
+package dev.anirban.jetchart.data.model.linear
 
 data class LinearMockResponse(
     val dataSet1: List<LinearMockObservation>,
