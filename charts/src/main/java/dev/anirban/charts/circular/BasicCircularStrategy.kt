@@ -3,22 +3,30 @@ package dev.anirban.charts.circular
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import dev.anirban.charts.circular.legend.NoLegendStrategy
 import dev.anirban.charts.circular.exceptions.DecorationMismatch
 import dev.anirban.charts.circular.foreground.DonutTargetForegroundStrategy
 import dev.anirban.charts.circular.center.CircularCenterStrategy
+import dev.anirban.charts.circular.center.ImageCenterStrategy
 import dev.anirban.charts.circular.center.NoCenterStrategy
 import dev.anirban.charts.circular.legend.CircularLegendStrategy
 import dev.anirban.charts.circular.data.CircularDataStrategy
 import dev.anirban.charts.circular.data.ListDataStrategy
+import dev.anirban.charts.circular.data.TargetDataStrategy
 import dev.anirban.charts.circular.exceptions.CircularExceptionStrategy
 import dev.anirban.charts.circular.foreground.CircularForegroundStrategy
 import dev.anirban.charts.circular.decoration.CircularDecoration
@@ -218,6 +226,56 @@ open class BasicCircularStrategy(
             circularForeground = circularForeground,
             circularLegend = legend
         ).Build(modifier = modifier)
+
+
+        @Composable
+        fun WeeklyProgressChart(
+            modifier: Modifier = Modifier,
+            weeklyData: List<TargetDataStrategy>,
+            circularCenter: CircularCenterStrategy = ImageCenterStrategy(),
+        ) {
+            Row(modifier = modifier) {
+
+                listOf("M", "T", "W", "T", "F", "S", "S").forEachIndexed { index, week ->
+
+                    Column(
+                        modifier = Modifier.weight(1f),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+
+                        if (weeklyData[index].itemsList[0].second > weeklyData[index].itemsList[1].second)
+                            BasicDonutTargetChart(
+                                modifier = Modifier.size(55.dp),
+                                circularData = weeklyData[index],
+                                circularForeground = DonutTargetForegroundStrategy(
+                                    strokeWidth = 10f
+                                ),
+                                circularCenter = circularCenter
+                            )
+                        else
+                            BasicDonutTargetChart(
+                                modifier = Modifier.size(55.dp),
+                                circularData = weeklyData[index],
+                                circularForeground = DonutTargetForegroundStrategy(
+                                    strokeWidth = 10f
+                                )
+                            )
+
+
+                        Text(
+                            text = week,
+
+                            // Text Features
+                            textAlign = TextAlign.Start,
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.W600,
+                            color = MaterialTheme.colorScheme.onSurface,
+                        )
+                    }
+                }
+            }
+        }
 
 
         /**
