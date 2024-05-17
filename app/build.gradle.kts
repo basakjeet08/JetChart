@@ -67,5 +67,8 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+    // Navigation Dependency
+    implementation(libs.androidx.navigation)
+
     implementation(project(":charts"))
 }

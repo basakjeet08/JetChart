@@ -4,46 +4,54 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
+
 /**
  * This is one of the implementations of the [LinearDecoration] which mostly contains the
  * decorations stuff like colors and all
  *
  * @param textColor this is the text color for all the margins and other things
  * @param plotPrimaryColor THis is the plot color for all the plotted Lines in the graph
- * @param plotSecondaryColor These are color for all the circle points in the graph
  */
 class LinearDecoration(
     val textColor: Color,
-    val plotPrimaryColor: List<Color>,
-    val plotSecondaryColor: List<Color>
+    val plotPrimaryColor: List<Color>
 ) {
+
 
     /**
      * These function are used to make an object of [LinearDecoration]
      */
     companion object {
 
-        private val colorYellow = Color(0xFFE2B93B)
-        private val colorBlue = Color(0xFF0088FF)
-        private val colorRed = Color(0xFFEC407A)
+        private val colorPurple = Color(0xFF7979FE)
+        private val colorRed = Color(0xFFFC3B75)
+        private val colorBlue = Color(0xFF3AAAFE)
         private val colorGreen = Color(0xFF2AD200)
-        private val colorCyan = Color(0xFF00BCD4)
+        private val colorYellow = Color(0xFFE2B93B)
+
 
         /**
          * Provides [LinearDecoration] Object for the Line Charts
          *
          * Needs a Composable function to get the color from the material Theme since its
          * a composable function
+         *
+         * @param textColor this is the text color for all the margins and other things
+         * @param plotPrimaryColor THis is the plot color for all the plotted Lines in the graph
          */
         @Composable
         fun lineDecorationColors(
             textColor: Color = MaterialTheme.colorScheme.onSurface,
-            plotPrimaryColor: List<Color> = listOf(colorBlue, colorGreen, Color.Yellow),
-            plotSecondaryColor: List<Color> = listOf(colorYellow, colorRed, Color.Red)
+            plotPrimaryColor: List<Color> = listOf(
+                colorPurple,
+                colorRed,
+                colorBlue,
+                colorGreen,
+                colorYellow
+            )
         ) = LinearDecoration(
             textColor = textColor,
-            plotPrimaryColor = plotPrimaryColor,
-            plotSecondaryColor = plotSecondaryColor
+            plotPrimaryColor = plotPrimaryColor
         )
 
         /**
@@ -51,16 +59,23 @@ class LinearDecoration(
          *
          * Needs a Composable function to get the color from the material Theme since its
          * a composable function
+         *
+         * @param textColor this is the text color for all the margins and other things
+         * @param plotPrimaryColor THis is the plot color for all the plotted Lines in the graph
          */
         @Composable
         fun barDecorationColors(
             textColor: Color = MaterialTheme.colorScheme.onSurface,
-            plotPrimaryColor: List<Color> = listOf(colorBlue, colorCyan),
-            plotSecondaryColor: List<Color> = emptyList()
+            plotPrimaryColor: List<Color> = listOf(
+                colorPurple,
+                colorRed,
+                colorBlue,
+                colorGreen,
+                colorYellow
+            )
         ) = LinearDecoration(
             textColor = textColor,
-            plotPrimaryColor = plotPrimaryColor,
-            plotSecondaryColor = plotSecondaryColor
+            plotPrimaryColor = plotPrimaryColor
         )
     }
 }
