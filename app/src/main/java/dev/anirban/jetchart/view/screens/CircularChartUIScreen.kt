@@ -9,7 +9,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.PlaceholderVerticalAlign.Companion.TextCenter
 import androidx.compose.ui.unit.dp
 import dev.anirban.charts.circular.BasicCircularStrategy.Companion.WeeklyProgressChart
 import dev.anirban.charts.circular.center.TextCenterStrategy
