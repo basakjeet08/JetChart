@@ -18,10 +18,11 @@ import dev.anirban.charts.circular.center.CircularCenterStrategy
 import dev.anirban.charts.circular.center.NoCenterStrategy
 import dev.anirban.charts.circular.legend.CircularLegendStrategy
 import dev.anirban.charts.circular.data.CircularDataStrategy
-import dev.anirban.charts.circular.data.TargetDataStrategy
+import dev.anirban.charts.circular.data.ListDataStrategy
 import dev.anirban.charts.circular.exceptions.CircularExceptionStrategy
 import dev.anirban.charts.circular.foreground.CircularForegroundStrategy
 import dev.anirban.charts.circular.decoration.CircularDecoration
+import dev.anirban.charts.circular.foreground.DonutForegroundStrategy
 
 
 /**
@@ -171,22 +172,80 @@ open class BasicCircularStrategy(
          * @param circularData This is the data class implementation which handles the data
          * @param circularDecoration This is the decorations for the Circular Chart
          * @param circularForeground This is the implementation which draws the foreground of the chart
-         * @param circularColorConvention This is the color Convention implementation of the chart
+         * @param legend This is the color Convention implementation of the chart
          */
         @Composable
-        fun DonutChartImage(
+        fun BasicDonutChart(
             modifier: Modifier = Modifier,
-            circularCenter: CircularCenterStrategy = NoCenterStrategy,
-            circularData: TargetDataStrategy,
+            circularCenter: NoCenterStrategy = NoCenterStrategy,
+            circularData: ListDataStrategy,
             circularDecoration: CircularDecoration = CircularDecoration.targetChartColor(),
-            circularForeground: CircularForegroundStrategy = DonutTargetForegroundStrategy(),
-            circularColorConvention: CircularLegendStrategy = NoLegendStrategy()
+            circularForeground: DonutForegroundStrategy = DonutForegroundStrategy(),
+            legend: CircularLegendStrategy = NoLegendStrategy
         ) = BasicCircularStrategy(
             circularCenter = circularCenter,
             circularData = circularData,
             circularDecoration = circularDecoration,
             circularForeground = circularForeground,
-            circularLegend = circularColorConvention
+            circularLegend = legend
+        ).Build(modifier = modifier)
+
+
+        /**
+         * This function creates an object of the [BasicCircularStrategy] which draws a basic
+         * donut chart with its color conventions drawn at side but the data is in the form of
+         * Target and Achieved
+         *
+         * @param modifier THis is made so that modifications can be passed from the parent function
+         * @param circularCenter This is the implementation which draws the center of the circle
+         * @param circularData This is the data class implementation which handles the data
+         * @param circularDecoration This is the decorations for the Circular Chart
+         * @param circularForeground This is the implementation which draws the foreground of the chart
+         * @param legend This is the color Convention implementation of the chart
+         */
+        @Composable
+        fun BasicDonutTargetChart(
+            modifier: Modifier = Modifier,
+            circularCenter: CircularCenterStrategy = NoCenterStrategy,
+            circularData: CircularDataStrategy,
+            circularDecoration: CircularDecoration = CircularDecoration.targetChartColor(),
+            circularForeground: DonutTargetForegroundStrategy = DonutTargetForegroundStrategy(),
+            legend: NoLegendStrategy = NoLegendStrategy
+        ) = BasicCircularStrategy(
+            circularCenter = circularCenter,
+            circularData = circularData,
+            circularDecoration = circularDecoration,
+            circularForeground = circularForeground,
+            circularLegend = legend
+        ).Build(modifier = modifier)
+
+
+        /**
+         * This function creates an object of the [BasicCircularStrategy] which draws a basic
+         * donut chart with its color conventions drawn at side but the data is in the form of
+         * Target and Achieved
+         *
+         * @param modifier THis is made so that modifications can be passed from the parent function
+         * @param circularCenter This is the implementation which draws the center of the circle
+         * @param circularData This is the data class implementation which handles the data
+         * @param circularDecoration This is the decorations for the Circular Chart
+         * @param circularForeground This is the implementation which draws the foreground of the chart
+         * @param legend This is the color Convention implementation of the chart
+         */
+        @Composable
+        fun CustomBasicDonutChart(
+            modifier: Modifier = Modifier,
+            circularCenter: CircularCenterStrategy = NoCenterStrategy,
+            circularData: CircularDataStrategy,
+            circularDecoration: CircularDecoration = CircularDecoration.targetChartColor(),
+            circularForeground: CircularForegroundStrategy = DonutTargetForegroundStrategy(),
+            legend: CircularLegendStrategy = NoLegendStrategy
+        ) = BasicCircularStrategy(
+            circularCenter = circularCenter,
+            circularData = circularData,
+            circularDecoration = circularDecoration,
+            circularForeground = circularForeground,
+            circularLegend = legend
         ).Build(modifier = modifier)
     }
 }

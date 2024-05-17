@@ -98,7 +98,7 @@ fun CircularChartUIScreen(
             item {
                 CustomCard(title = "Target Donut Chart") {
 
-                    DonutRowChartStrategy.TargetDonutChart(circularData = dataSet3)
+                    DonutRowChartStrategy.TargetDonutChartRow(circularData = dataSet3)
                 }
             }
 
@@ -117,7 +117,7 @@ fun CircularChartUIScreen(
                             ) {
 
                                 if (circularMockData.dataSet4[index].achieved > circularMockData.dataSet4[index].target)
-                                    BasicCircularStrategy.DonutChartImage(
+                                    BasicCircularStrategy.BasicDonutTargetChart(
                                         modifier = Modifier.size(55.dp),
                                         circularData = dataSet4[index],
                                         circularForeground = DonutTargetForegroundStrategy(
@@ -126,7 +126,7 @@ fun CircularChartUIScreen(
                                         circularCenter = ImageCenterStrategy(image = Icons.Filled.Check)
                                     )
                                 else
-                                    BasicCircularStrategy.DonutChartImage(
+                                    BasicCircularStrategy.BasicDonutTargetChart(
                                         modifier = Modifier.size(55.dp),
                                         circularData = dataSet4[index],
                                         circularForeground = DonutTargetForegroundStrategy(

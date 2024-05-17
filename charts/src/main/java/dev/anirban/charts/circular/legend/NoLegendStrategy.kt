@@ -11,7 +11,7 @@ import dev.anirban.charts.circular.data.CircularDataStrategy
  *
  * For other implementation see [GridLegendStrategy], [ListLegendStrategy]
  */
-class NoLegendStrategy : CircularLegendStrategy {
+object NoLegendStrategy : CircularLegendStrategy {
 
 
     /**
