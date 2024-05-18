@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import dev.anirban.charts.linear.BasicLinearStrategy
 import dev.anirban.charts.linear.data.LinearDataSet
 import dev.anirban.charts.linear.data.BasicDataStrategy
-import dev.anirban.charts.util.Coordinate.Companion.toCoordinateSet
+import dev.anirban.charts.linear.data.Coordinate.Companion.toCoordinateSet
 import dev.anirban.jetchart.data.model.linear.LinearMockResponse
 import dev.anirban.jetchart.view.components.CustomButton
 import dev.anirban.jetchart.view.components.CustomCard

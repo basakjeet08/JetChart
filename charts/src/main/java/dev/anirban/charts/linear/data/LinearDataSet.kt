@@ -1,7 +1,6 @@
 package dev.anirban.charts.linear.data
 
-import dev.anirban.charts.util.Coordinate
-import dev.anirban.charts.util.Coordinate.Companion.toCoordinateSet
+import dev.anirban.charts.linear.data.Coordinate.Companion.toCoordinateSet
 
 
 /**
