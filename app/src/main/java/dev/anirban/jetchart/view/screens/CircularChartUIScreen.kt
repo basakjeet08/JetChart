@@ -68,7 +68,7 @@ fun CircularChartUIScreen(
 
             // Design Pattern Same row Donut Chart
             item {
-                CustomCard(title = " Row Donut Chart") {
+                CustomCard(title = "Donut Plot Row") {
                     DonutRowChartStrategy.DonutChartRow(circularData = dataSet1)
                 }
             }
@@ -76,7 +76,7 @@ fun CircularChartUIScreen(
 
             // Design Pattern Different row Donut Chart
             item {
-                CustomCard(title = "Column Donut Chart") {
+                CustomCard(title = "Donut Plot Column") {
 
                     DonutColumnChartStrategy.DonutChartColumn(circularData = dataSet2)
                 }
@@ -85,7 +85,7 @@ fun CircularChartUIScreen(
 
             // Design Pattern Target Achieved Donut Chart
             item {
-                CustomCard(title = "Target Donut Chart") {
+                CustomCard(title = "Target Donut Plot Row") {
 
 
                     with(circularMockData.dataSet3) {
@@ -103,7 +103,7 @@ fun CircularChartUIScreen(
 
             // weekly Progress Graph
             item {
-                CustomCard(title = "Weekly Progress") {
+                CustomCard(title = "Weekly Progress Plot") {
 
                     WeeklyProgressChart(weeklyData = dataSet4)
                 }
