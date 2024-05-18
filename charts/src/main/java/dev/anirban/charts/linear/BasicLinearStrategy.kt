@@ -206,7 +206,7 @@ open class BasicLinearStrategy(
          * legend in the graph
          */
         @Composable
-        fun LineChart(
+        fun LinePlot(
             modifier: Modifier = Modifier,
             labelDrawer: StringLabelStrategy = StringLabelStrategy(),
             decoration: LinearDecoration = LinearDecoration.lineDecorationColors(),
@@ -236,7 +236,7 @@ open class BasicLinearStrategy(
          * the legend in the graph
          */
         @Composable
-        fun GradientChart(
+        fun GradientPlot(
             modifier: Modifier = Modifier,
             labelDrawer: StringLabelStrategy = StringLabelStrategy(),
             decoration: LinearDecoration = LinearDecoration.lineDecorationColors(),
@@ -264,7 +264,7 @@ open class BasicLinearStrategy(
          * the legend in the graph
          */
         @Composable
-        fun BarChart(
+        fun BarPlot(
             modifier: Modifier = Modifier,
             labelDrawer: StringLabelStrategy = StringLabelStrategy(),
             decoration: LinearDecoration = LinearDecoration.barDecorationColors(),
@@ -294,7 +294,7 @@ open class BasicLinearStrategy(
          * the legend in the graph
          */
         @Composable
-        fun CustomLinearChart(
+        fun CustomLinearPlot(
             modifier: Modifier = Modifier,
             labelDrawer: LinearLabelStrategy = StringLabelStrategy(),
             decoration: LinearDecoration = LinearDecoration.lineDecorationColors(),
