@@ -1,4 +1,4 @@
-package dev.anirban.charts.util
+package dev.anirban.charts.linear.data
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.geometry.Offset

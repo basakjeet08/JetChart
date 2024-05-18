@@ -31,7 +31,7 @@ import dev.anirban.charts.circular.foreground.DonutTargetForegroundStrategy
  * This class in general provides an implementation for a donut chart which has its legends
  * under the plot.
  *
- * For other implementations see [BasicCircularStrategy], [DonutRowChartStrategy]
+ * For other implementations see [BasicCircularStrategy], [DonutRowPlotStrategy]
  *
  * @param circularCenter This is the strategy to draw the center of the chart.
  * @param circularData This is the strategy to store and manipulate the circular chart data.
@@ -41,7 +41,7 @@ import dev.anirban.charts.circular.foreground.DonutTargetForegroundStrategy
  * the chart.
  * @param circularLegend This strategy draws the legends for the Chart
  */
-class DonutColumnChartStrategy(
+class DonutColumnPlotStrategy(
     override val circularCenter: CircularCenterStrategy,
     override val circularData: CircularDataStrategy,
     override val circularDecoration: CircularDecoration,
@@ -108,14 +108,14 @@ class DonutColumnChartStrategy(
 
 
     /**
-     * Builder Composable Functions which makes the objects of [DonutColumnChartStrategy] and these are
+     * Builder Composable Functions which makes the objects of [DonutColumnPlotStrategy] and these are
      * actually called by the users to make charts
      */
     companion object {
 
 
         /**
-         * This function creates an object of the [DonutColumnChartStrategy] which draws a basic
+         * This function creates an object of the [DonutColumnPlotStrategy] which draws a basic
          * donut chart with its color conventions drawn at bottom
          *
          * @param modifier This is for modifications to be passed from the Parent Function
@@ -126,14 +126,14 @@ class DonutColumnChartStrategy(
          * @param legend This is the color Convention implementation of the chart
          */
         @Composable
-        fun DonutChartColumn(
+        fun DonutPlotColumn(
             modifier: Modifier = Modifier,
             circularCenter: NoCenterStrategy = NoCenterStrategy,
             circularData: CircularDataStrategy,
             circularDecoration: CircularDecoration = CircularDecoration.donutChartDecorations(),
             circularForeground: DonutForegroundStrategy = DonutForegroundStrategy(),
             legend: GridLegendStrategy = GridLegendStrategy()
-        ) = DonutColumnChartStrategy(
+        ) = DonutColumnPlotStrategy(
             circularCenter = circularCenter,
             circularData = circularData,
             circularForeground = circularForeground,
@@ -143,7 +143,7 @@ class DonutColumnChartStrategy(
 
 
         /**
-         * This function creates an object of the [DonutColumnChartStrategy] which draws a basic
+         * This function creates an object of the [DonutColumnPlotStrategy] which draws a basic
          * donut chart with its color conventions drawn at bottom
          *
          * @param modifier This is for modifications to be passed from the Parent Function
@@ -154,14 +154,14 @@ class DonutColumnChartStrategy(
          * @param legend This is the color Convention implementation of the chart
          */
         @Composable
-        fun TargetDonutChartColumn(
+        fun TargetDonutPlotColumn(
             modifier: Modifier = Modifier,
             circularCenter: NoCenterStrategy = NoCenterStrategy,
             circularData: TargetDataStrategy,
             circularDecoration: CircularDecoration = CircularDecoration.donutChartDecorations(),
             circularForeground: DonutTargetForegroundStrategy = DonutTargetForegroundStrategy(),
             legend: GridLegendStrategy = GridLegendStrategy()
-        ) = DonutColumnChartStrategy(
+        ) = DonutColumnPlotStrategy(
             circularCenter = circularCenter,
             circularData = circularData,
             circularForeground = circularForeground,
@@ -171,7 +171,7 @@ class DonutColumnChartStrategy(
 
 
         /**
-         * This function creates an object of the [DonutColumnChartStrategy] which draws a basic
+         * This function creates an object of the [DonutColumnPlotStrategy] which draws a basic
          * donut chart with its color conventions drawn at bottom
          *
          * @param modifier This is for modifications to be passed from the Parent Function
@@ -182,14 +182,14 @@ class DonutColumnChartStrategy(
          * @param legend This is the color Convention implementation of the chart
          */
         @Composable
-        fun CustomDonutChartColumn(
+        fun CustomDonutPlotColumn(
             modifier: Modifier = Modifier,
             circularCenter: CircularCenterStrategy = NoCenterStrategy,
             circularData: CircularDataStrategy,
             circularDecoration: CircularDecoration = CircularDecoration.donutChartDecorations(),
             circularForeground: CircularForegroundStrategy = DonutForegroundStrategy(),
             legend: CircularLegendStrategy = GridLegendStrategy()
-        ) = DonutColumnChartStrategy(
+        ) = DonutColumnPlotStrategy(
             circularCenter = circularCenter,
             circularData = circularData,
             circularForeground = circularForeground,

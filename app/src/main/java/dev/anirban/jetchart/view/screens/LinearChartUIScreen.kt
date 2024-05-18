@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import dev.anirban.charts.linear.BasicLinearStrategy
 import dev.anirban.charts.linear.data.LinearDataSet
 import dev.anirban.charts.linear.data.BasicDataStrategy
-import dev.anirban.charts.util.Coordinate.Companion.toCoordinateSet
+import dev.anirban.charts.linear.data.Coordinate.Companion.toCoordinateSet
 import dev.anirban.jetchart.data.model.linear.LinearMockResponse
 import dev.anirban.jetchart.view.components.CustomButton
 import dev.anirban.jetchart.view.components.CustomCard
@@ -87,9 +87,9 @@ fun LinearChartUIScreen(
 
             // Design Pattern Single Line Chart
             item {
-                CustomCard(title = "Single Line Chart") {
+                CustomCard(title = "Normal Line Plot with 1 Dataset") {
 
-                    BasicLinearStrategy.LineChart(
+                    BasicLinearStrategy.LinePlot(
                         linearData = BasicDataStrategy(
                             linearDataSets = linearDataSet1,
                             xAxisLabels = xReadingMarker
@@ -100,9 +100,9 @@ fun LinearChartUIScreen(
 
             // Design Pattern Double Line Chart
             item {
-                CustomCard(title = "Double Line Chart") {
+                CustomCard(title = "Normal Line Plot with 2 Dataset") {
 
-                    BasicLinearStrategy.LineChart(
+                    BasicLinearStrategy.LinePlot(
                         linearData = BasicDataStrategy(
                             linearDataSets = linearDataSet2,
                             xAxisLabels = xReadingMarker
@@ -113,9 +113,9 @@ fun LinearChartUIScreen(
 
             // Design Pattern Multiple Line Chart
             item {
-                CustomCard(title = "Multiple Line Chart") {
+                CustomCard(title = "Normal Line Plot with 3 Dataset") {
 
-                    BasicLinearStrategy.LineChart(
+                    BasicLinearStrategy.LinePlot(
                         linearData = BasicDataStrategy(
                             linearDataSets = linearDataSet3,
                             xAxisLabels = xReadingMarker
@@ -127,9 +127,9 @@ fun LinearChartUIScreen(
 
             // Design Pattern Multiple Line Chart
             item {
-                CustomCard(title = "Multiple Line Chart") {
+                CustomCard(title = "Normal Line Plot with 4 Dataset") {
 
-                    BasicLinearStrategy.LineChart(
+                    BasicLinearStrategy.LinePlot(
                         linearData = BasicDataStrategy(
                             linearDataSets = linearDataSet4,
                             xAxisLabels = xReadingMarker
@@ -141,9 +141,9 @@ fun LinearChartUIScreen(
 
             // Design Pattern String Marker Gradient Line Chart
             item {
-                CustomCard(title = "Gradient List using Plot Object") {
+                CustomCard(title = "Gradient Plot") {
 
-                    BasicLinearStrategy.GradientChart(
+                    BasicLinearStrategy.GradientPlot(
                         linearData = BasicDataStrategy(
                             linearDataSets = linearDataSet5,
                             xAxisLabels = xReadingMarker,
@@ -156,8 +156,8 @@ fun LinearChartUIScreen(
 
             // Design Pattern String Marker Line Chart
             item {
-                CustomCard(title = "Solo Custom Label Chart") {
-                    BasicLinearStrategy.LineChart(
+                CustomCard(title = "String Label Line Plot with 1 Dataset") {
+                    BasicLinearStrategy.LinePlot(
                         linearData = BasicDataStrategy(
                             linearDataSets = linearDataSet6,
                             xAxisLabels = xReadingMarker,
@@ -169,8 +169,8 @@ fun LinearChartUIScreen(
 
             // Design Pattern String Marker Line Chart
             item {
-                CustomCard(title = "Double Custom Label Chart") {
-                    BasicLinearStrategy.LineChart(
+                CustomCard(title = "String Label Line Plot with 2 Dataset") {
+                    BasicLinearStrategy.LinePlot(
                         linearData = BasicDataStrategy(
                             linearDataSets = linearDataSet7,
                             xAxisLabels = xReadingMarker,
@@ -182,8 +182,8 @@ fun LinearChartUIScreen(
 
             // Design Pattern String Marker Line Chart
             item {
-                CustomCard(title = "Multiple Custom Label Chart") {
-                    BasicLinearStrategy.LineChart(
+                CustomCard(title = "String Label Line Plot with 3 Dataset") {
+                    BasicLinearStrategy.LinePlot(
                         linearData = BasicDataStrategy(
                             linearDataSets = linearDataSet8,
                             xAxisLabels = xReadingMarker,
@@ -195,8 +195,8 @@ fun LinearChartUIScreen(
 
             // Design Pattern String Marker Line Chart
             item {
-                CustomCard(title = "Multiple Custom Label Chart") {
-                    BasicLinearStrategy.LineChart(
+                CustomCard(title = "String Label Line Plot with 4 Dataset") {
+                    BasicLinearStrategy.LinePlot(
                         linearData = BasicDataStrategy(
                             linearDataSets = linearDataSet9,
                             xAxisLabels = xReadingMarker,
@@ -209,9 +209,9 @@ fun LinearChartUIScreen(
 
             // Design Pattern Bar Chart
             item {
-                CustomCard(title = "Bar Chart") {
+                CustomCard(title = "Bar Plot") {
 
-                    BasicLinearStrategy.BarChart(
+                    BasicLinearStrategy.BarPlot(
                         linearData = BasicDataStrategy(
                             linearDataSets = linearDataSet1,
                             xAxisLabels = xReadingMarker
@@ -222,9 +222,9 @@ fun LinearChartUIScreen(
 
             // Design Pattern Bar Chart
             item {
-                CustomCard(title = "Bar Chart") {
+                CustomCard(title = "String Bar Plot") {
 
-                    BasicLinearStrategy.BarChart(
+                    BasicLinearStrategy.BarPlot(
                         linearData = BasicDataStrategy(
                             linearDataSets = linearDataSet6,
                             xAxisLabels = xReadingMarker,

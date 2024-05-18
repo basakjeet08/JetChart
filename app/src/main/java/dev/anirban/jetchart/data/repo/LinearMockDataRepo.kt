@@ -13,7 +13,8 @@ object LinearMockDataRepo {
     private val titles: List<String> = listOf("Amazon", "Flipkart", "Facebook", "Netflix")
     private var observationCount = 0
     private val xAxisLabel = listOf("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul")
-    private val yAxisLabel = mutableListOf("Excellent", "Good", "Average", "Bad", "Worst")
+    private val yAxisLabel = mutableListOf("Worst", "Bad", "Average", "Good", "Excellent")
+
 
     fun generateLinearMockDataResponse(): LinearMockResponse {
 
