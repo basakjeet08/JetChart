@@ -6,7 +6,6 @@ import android.graphics.Typeface
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.unit.sp
-import dev.anirban.charts.util.Coordinate
 
 
 /**
@@ -69,6 +68,7 @@ class BasicDataStrategy(
             true -> {
 
                 numOfYLabels = yAxisLabels.size
+                yAxisLabels = yAxisLabels.reversed().toMutableList()
 
                 // Storing the maximum Label and minimum Label of Y Axis
                 maxYLabel = yAxisLabels.size - 1

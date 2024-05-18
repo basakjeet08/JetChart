@@ -34,7 +34,7 @@ import dev.anirban.charts.circular.foreground.DonutForegroundStrategy
 
 
 /**
- * This class extends from the [CircularChartStrategy] which means its the root level class and it
+ * This class extends from the [CircularPlotStrategy] which means its the root level class and it
  * also implements [CircularExceptionStrategy] implementation which provides an implementation for
  * handling all the Exceptions
  *
@@ -52,7 +52,7 @@ open class BasicCircularStrategy(
     override val circularDecoration: CircularDecoration,
     override val circularForeground: CircularForegroundStrategy,
     override val circularLegend: CircularLegendStrategy
-) : CircularChartStrategy, CircularExceptionStrategy {
+) : CircularPlotStrategy, CircularExceptionStrategy {
 
 
     /**
@@ -183,7 +183,7 @@ open class BasicCircularStrategy(
          * @param legend This is the color Convention implementation of the chart
          */
         @Composable
-        fun BasicDonutChart(
+        fun BasicDonutPlot(
             modifier: Modifier = Modifier,
             circularCenter: NoCenterStrategy = NoCenterStrategy,
             circularData: ListDataStrategy,
@@ -212,7 +212,7 @@ open class BasicCircularStrategy(
          * @param legend This is the color Convention implementation of the chart
          */
         @Composable
-        fun BasicDonutTargetChart(
+        fun BasicDonutTargetPlot(
             modifier: Modifier = Modifier,
             circularCenter: CircularCenterStrategy = NoCenterStrategy,
             circularData: CircularDataStrategy,
@@ -229,7 +229,7 @@ open class BasicCircularStrategy(
 
 
         @Composable
-        fun WeeklyProgressChart(
+        fun WeeklyProgressPlot(
             modifier: Modifier = Modifier,
             weeklyData: List<TargetDataStrategy>,
             circularCenter: CircularCenterStrategy = ImageCenterStrategy(),
@@ -245,7 +245,7 @@ open class BasicCircularStrategy(
                     ) {
 
                         if (weeklyData[index].itemsList[0].second > weeklyData[index].itemsList[1].second)
-                            BasicDonutTargetChart(
+                            BasicDonutTargetPlot(
                                 modifier = Modifier.size(55.dp),
                                 circularData = weeklyData[index],
                                 circularForeground = DonutTargetForegroundStrategy(
@@ -254,7 +254,7 @@ open class BasicCircularStrategy(
                                 circularCenter = circularCenter
                             )
                         else
-                            BasicDonutTargetChart(
+                            BasicDonutTargetPlot(
                                 modifier = Modifier.size(55.dp),
                                 circularData = weeklyData[index],
                                 circularForeground = DonutTargetForegroundStrategy(
@@ -291,7 +291,7 @@ open class BasicCircularStrategy(
          * @param legend This is the color Convention implementation of the chart
          */
         @Composable
-        fun CustomBasicDonutChart(
+        fun CustomBasicDonutPlot(
             modifier: Modifier = Modifier,
             circularCenter: CircularCenterStrategy = NoCenterStrategy,
             circularData: CircularDataStrategy,

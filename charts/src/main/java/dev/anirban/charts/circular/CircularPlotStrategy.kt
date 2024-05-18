@@ -16,7 +16,7 @@ import dev.anirban.charts.circular.foreground.CircularForegroundStrategy
  *
  * For implementations see [BasicCircularStrategy]
  */
-interface CircularChartStrategy {
+interface CircularPlotStrategy {
 
 
     /**

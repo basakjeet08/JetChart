@@ -10,10 +10,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import dev.anirban.charts.circular.BasicCircularStrategy.Companion.WeeklyProgressChart
+import dev.anirban.charts.circular.BasicCircularStrategy.Companion.WeeklyProgressPlot
 import dev.anirban.charts.circular.center.TextCenterStrategy
-import dev.anirban.charts.circular.charts.DonutColumnChartStrategy
-import dev.anirban.charts.circular.charts.DonutRowChartStrategy
+import dev.anirban.charts.circular.charts.DonutColumnPlotStrategy
+import dev.anirban.charts.circular.charts.DonutRowPlotStrategy
 import dev.anirban.charts.circular.data.ListDataStrategy
 import dev.anirban.charts.circular.data.TargetDataStrategy
 import dev.anirban.jetchart.data.model.circular.CircularMockResponse
@@ -68,29 +68,29 @@ fun CircularChartUIScreen(
 
             // Design Pattern Same row Donut Chart
             item {
-                CustomCard(title = " Row Donut Chart") {
-                    DonutRowChartStrategy.DonutChartRow(circularData = dataSet1)
+                CustomCard(title = "Donut Plot Row") {
+                    DonutRowPlotStrategy.DonutPlotRow(circularData = dataSet1)
                 }
             }
 
 
             // Design Pattern Different row Donut Chart
             item {
-                CustomCard(title = "Column Donut Chart") {
+                CustomCard(title = "Donut Plot Column") {
 
-                    DonutColumnChartStrategy.DonutChartColumn(circularData = dataSet2)
+                    DonutColumnPlotStrategy.DonutPlotColumn(circularData = dataSet2)
                 }
             }
 
 
             // Design Pattern Target Achieved Donut Chart
             item {
-                CustomCard(title = "Target Donut Chart") {
+                CustomCard(title = "Target Donut Plot Row") {
 
 
                     with(circularMockData.dataSet3) {
                         val percentage = DecimalFormat("#.##").format(achieved / target * 100)
-                        DonutRowChartStrategy.TargetDonutChartRow(
+                        DonutRowPlotStrategy.TargetDonutPlotRow(
                             circularData = dataSet3,
                             circularCenter = TextCenterStrategy(
                                 text = "$percentage %"
@@ -103,9 +103,9 @@ fun CircularChartUIScreen(
 
             // weekly Progress Graph
             item {
-                CustomCard(title = "Weekly Progress") {
+                CustomCard(title = "Weekly Progress Plot") {
 
-                    WeeklyProgressChart(weeklyData = dataSet4)
+                    WeeklyProgressPlot(weeklyData = dataSet4)
                 }
             }
         }
