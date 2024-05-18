@@ -159,7 +159,12 @@ fun LinearChartUIScreen(
                 CustomCard(title = "Solo Custom Label Chart") {
                     BasicLinearStrategy.LineChart(
                         linearData = BasicDataStrategy(
-                            linearDataSets = linearDataSet6,
+                            linearDataSets = listOf(
+                                LinearDataSet(
+                                    title = "Anirban",
+                                    markers = listOf(0f, 1f, 2f, 3f, 4f).toCoordinateSet()
+                                )
+                            ),
                             xAxisLabels = xReadingMarker,
                             yAxisLabels = yReadingMarker.toMutableList()
                         )

@@ -69,6 +69,7 @@ class BasicDataStrategy(
             true -> {
 
                 numOfYLabels = yAxisLabels.size
+                yAxisLabels = yAxisLabels.reversed().toMutableList()
 
                 // Storing the maximum Label and minimum Label of Y Axis
                 maxYLabel = yAxisLabels.size - 1
