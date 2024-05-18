@@ -15,7 +15,7 @@ import dev.anirban.charts.linear.plots.LinearPlotterStrategy
  *
  * Implementations for this interface are :- [BasicLinearStrategy]
  */
-interface LinearChartStrategy {
+interface LinearPlotStrategy {
 
 
     /**
@@ -63,20 +63,20 @@ interface LinearChartStrategy {
 
     /**
      * This function draws the various labels and the Axis Lines of the graph according to the
-     * [LinearChartStrategy.labelDrawer] implementation.
+     * [LinearPlotStrategy.labelDrawer] implementation.
      */
     fun DrawScope.drawLabels()
 
 
     /**
-     * This function draws the plots of the graph according to the [LinearChartStrategy.plot]
+     * This function draws the plots of the graph according to the [LinearPlotStrategy.plot]
      * implementation.
      */
     fun DrawScope.drawPlot()
 
 
     /**
-     * This function draws the legends of the graph according to the [LinearChartStrategy.legendDrawer]
+     * This function draws the legends of the graph according to the [LinearPlotStrategy.legendDrawer]
      * implementation
      */
     @Composable

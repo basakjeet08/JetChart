@@ -34,7 +34,7 @@ import dev.anirban.charts.circular.foreground.DonutForegroundStrategy
 
 
 /**
- * This class extends from the [CircularChartStrategy] which means its the root level class and it
+ * This class extends from the [CircularPlotStrategy] which means its the root level class and it
  * also implements [CircularExceptionStrategy] implementation which provides an implementation for
  * handling all the Exceptions
  *
@@ -52,7 +52,7 @@ open class BasicCircularStrategy(
     override val circularDecoration: CircularDecoration,
     override val circularForeground: CircularForegroundStrategy,
     override val circularLegend: CircularLegendStrategy
-) : CircularChartStrategy, CircularExceptionStrategy {
+) : CircularPlotStrategy, CircularExceptionStrategy {
 
 
     /**

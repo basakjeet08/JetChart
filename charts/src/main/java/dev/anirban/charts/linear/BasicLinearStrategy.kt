@@ -50,7 +50,7 @@ open class BasicLinearStrategy(
     override val linearData: LinearDataStrategy,
     override val plot: LinearPlotterStrategy,
     override val legendDrawer: LinearLegendStrategy
-) : LinearChartStrategy, LinearExceptionStrategy {
+) : LinearPlotStrategy, LinearExceptionStrategy {
 
 
     /**
@@ -96,7 +96,7 @@ open class BasicLinearStrategy(
 
     /**
      * This function draws the various labels and the Axis Lines of the graph according to the
-     * [LinearChartStrategy.labelDrawer] implementation.
+     * [LinearPlotStrategy.labelDrawer] implementation.
      */
     override fun DrawScope.drawLabels() {
         labelDrawer.apply {
@@ -108,7 +108,7 @@ open class BasicLinearStrategy(
     }
 
     /**
-     * This function draws the plots of the graph according to the [LinearChartStrategy.plot]
+     * This function draws the plots of the graph according to the [LinearPlotStrategy.plot]
      * implementation.
      */
     override fun DrawScope.drawPlot() {
@@ -121,7 +121,7 @@ open class BasicLinearStrategy(
     }
 
     /**
-     * This function draws the legends of the graph according to the [LinearChartStrategy.legendDrawer]
+     * This function draws the legends of the graph according to the [LinearPlotStrategy.legendDrawer]
      * implementation
      */
     @Composable
