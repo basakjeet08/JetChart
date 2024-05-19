@@ -18,7 +18,7 @@ JetChart is a light chart library for Android, which is currently under developm
 
 ## Screenshots
 
-![Dark Theme](https://github.com/basakjeet08/JetChart/assets/24616267/4ba4849f-51d3-40c5-a395-2cdaa7249d3f)
+![Dark Theme cover](https://github.com/basakjeet08/JetChart/assets/24616267/f00e969b-94bf-4ce2-be92-8e5055e2ad51)
 
 ## Installation
 
